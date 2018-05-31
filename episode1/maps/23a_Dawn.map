@@ -1,0 +1,55 @@
+border_size=1
+usage=map
+
+Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym
+Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym^Bydc, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym
+Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Cmy, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym^Bydc, Btym, Btym, Btym, Btym^Bydc, Btym, Btym, Btym, Btym, Btym, Btym
+Brym, Btym, Btym, Btym, Btym, Btym, Brym^Lymp, Cmy, 1 Brym, Cmy, Brym^Lymp, Btym, Btym, Btym, Btym, Btym, Cmy, Btym, Btym, Btym, Cmy, Btym, Btym, Btym, Btym, Btym, Btym
+Brym, Btym, Btym, Btym, Brym, Brym, Brym, Brym, Btyb^Bryl, Brym, Brym, Brym, Brym, Brym^Bryl, Brym, Cmy, Brym, Cmy, Brym, Cmy, Brym, Cmy, Brym, Brym^Bryl, Brym, Brym^Vymb, Brym
+Brym, Brym, Brym, Brym^Vymb, Brym, Btyb, Brym, Brym, Btym, Btyb, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Fynt, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym
+Brym, Brym, Brym^Vymb, Brym, Brym, Btym, Brym, Cmy, Cmy, Btym, Brym, Brym, Btyb^Bryl, Brym, Cmy, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Cmy, Brym, Brym, Brym, Brym
+Brym, Brym, Brym, Brym, Brym^Vymb, Btym, Brym, Cmy, Brym, Brym, Cmy, Brym^Bryl, Btym, Cmy, Btym^Sy|, Cmy, Brym^Bryl, Btyb, Brym^Bryl, Btyb, Brym^Bryl, Cmy, Btym, Cmy, Cmy, Cmy, Cmy
+Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Cmy, Cmy, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym^Sy|, Btym
+Brym, Btyb, Btyb, Btyb, Btyb, Btyb, Brym^Bryl, Cmy, Btym, Btym, Btym, Btym, Btym, Btym, Cmy, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Cmy, Btym, Btym, Btym^Sy|, Btym
+Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Uzw^Es, Uzw^Es, Uzw, Brym, Brym^Bryl, Urb, Urb, Btym, Brym, Btym, Brym, Brym, Cmy, Brym, Cmy, Cmy, Cmy
+Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Uzw, Urb, Urb, Wwb, Urb, Brym, Urb, Brym^Es, Urb, Urb, Brym^Vymb, Brym, Brym, Brym, Cmy, Brym^Vymb, Cmy, 2 Kmy, Cmy
+Brym, Btym, Btym, Btym, Btym, Btym, Uzw^Es, Uzw^Es, Cay, Cmy, Cmy, Brym^Es, Brym, Brym, Brym^Fynt, Brym, Brym, Brym^Es, Brym^Es, Brym^Es, Uzw^Edb, Brym, Cmy, Brym, Brym, Cmy, Cmy
+Brym, Btym, Btym, Btym, Uzw, Wwb, Wwb, Urb^Es, Urb^Dr, Kay, Cmy, Brym, Brym, Urb, Uzw^Edb, Brym^Es, Uzw^Es, Uzw, Urb^Es, Urb, Cay, Uzw^Es, Brym, Cmy, Cmy, Brym^Vymb, Brym
+Brym, Brym^Es, Brym^Es, Urb^Edb, Uzw^Vhcr, Wwb^Edb, Uzw^Edb, Uzw^Edb, Uzw, Cay, Urb, Brym^Es, Btyb, Uzw, Brym^Es, Uzw^Edb, Cay, Urb, Btyb, Brym, Btyb, Urb^Edb, Btyb, Brym, Brym, Cmy, Cmy
+Brym, Brym, Brym^Es, Urb, Brym, Uzw^Ecf, Brym^Es, Brym^Es, Btyb, Uzw^Edb, Uzw^Edb, Uzw, Btym, Brym, Brym^Vymb, Urb, Btym, Brym, Btym, Btyb, Btym, Brym, Btym, Brym, Brym, Brym, Brym
+Btym, Brym, Btym^Sy|, Brym, Brym, Btyb, Brym^Bryu, Brym, Btym, Brym, Brym^Lymp, Brym, Btym, Brym, Brym^Lymp, Brym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Brym^Bryl, Brym
+Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym
+Brym, Btym, Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Urb^Lymp, Urb, Btyb, Btym, Btyb, Urb, Wwb, Uzw^Bryu, Dby^Edb, Btym, Btym
+Brym, Urb, Urb^Es, Urb, Brym^Es, Btym, Brym^Es, Urb^Bryu, Urb^Vhcr, Wwb, Wwb, Urb, Urb, Urb^Bryu, Uzw^Edb, Uzw^Edb, Wwb^Edb, Uzw^Es, Btym, Urb^Bryl, Btym, Dby, Wwb, Wwb^Edb, Dby^Ecf, Uzw, Urb
+Uzw, Urb^Es, Uzw^Edb, Uzw, Brym^Es, Urb, Urb, Urb^Es, Uzw, Wwb, Uzw^Es, Uzw^Es, Wwb, Uzw^Dr, Dby, Uzw^Vhcr, Wwb, Wwb, Btym, Cay, Btym, Dby, Uzw^Edb, Urb^Vhcr, Wwb, Urb^Dr, Uzw^Es
+Uzw, Uzw^Ecf, Uzw^Edb, Urb, Uzw^Edb, Uzw^Edb, Cay, Urb^Dr, Cay, Uzw^Ecf, Urb, Wwb, Wwb^Edb, Cay, Wwb^Edb, Wwb^Edb, Dby^Ecf, Wwb^Edb, Wwb^Es, Btym^Sy|, Urb^Edb, Urb, Brym^Es, Urb^Es, Uzw^Es, Wwb, Uzw
+Brym^Es, Brym^Es, Urb, Urb^Es, Wwb^Edb, Wwb, Cay, Kay, Urb^Edb, Uzw, Urb, Uzw^Vhcr, Dby^Ecf, Cay, Wwb, Dby, Uzw, Wwb^Edb, Urb, Wwb^Es, Uzw^Es, Brym^Es, Brym, Brym^Es, Brym, Uzw, Btyb^Bryl
+Brym, Brym^Es, Urb^Es, Uzw^Vhcr, Wwb, Wwb, Urb^Dr, Cay, Uzw^Edb, Uzw, Uzw^Edb, Uzw^Edb, Uzw^Edb, Dby, Uzw^Es, Wwb, Btyb, Urb^Es, Cay, Urb, Cay, Brym, Brym^Bryu, Cay, Brym^Sy|, Brym, Btym
+Uzw, Uzw^Bryu, Urb^Dr, Uzw^Ecf, Urb^Edb, Urb^Edb, Urb^Edb, Uzw, Urb, Brym^Es, Brym, Uzw^Edb, Btyb, Brym^Es, Cay, Brym^Bryu, Btym, Brym, Btym^Sy|, Cay, Btym, Cay, Btym, Btym, Brym^Sy|, Btym, Btym
+Uzw, Urb, Urb, Uzw^Edb, Brym^Es, Brym^Es, Urb, Urb^Vymb, Brym, Brym, Cay, Brym, Btym, Brym^Bryl, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym, Brym, Btym, Btym
+Brym, Btyb^Bryl, Uzw, Uzw^Edb, Brym^Es, Brym, Brym, Brym, Cay, Brym^Lymp, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym, Btym, Uzw^Vhcr, Btym, Uzw^Bryl, Btym, Urb, Urb, Urb^Edb, Brym^Es, Brym
+Brym, Btym, Brym, Uzw, Brym, Brym, Brym, Cay, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Wwb, Urb^Vhcr, Urb^Edb, Uzw^Edb, Uzw^Edb, Uzw^Es, Uzw^Es, Uzw, Uzw^Ecf, Uzw, Uzw, Urb^Edb, Brym^Es
+Brym, Btym, Btym, Brym^Lymp, Btym, Cay, Btym, Btym, Btym, Btym, Urb, Urb^Vhcr, Urb, Wwb, Wwb^Edb, Uzw, Uzw^Edb, Wwb^Edb, Wwb, Urb, Wwb^Edb, Urb^Es, Wwb, Uzw^Vhcr, Urb^Bryu, Urb, Urb
+Brym, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Urb^Bryu, Uzw^Es, Uzw^Ecf, Urb^Es, Wwb, Urb^Edb, Dby^Ecf, Btyb, Urb, Wwb, Chr, Wwb^Edb, Wwb^Edb, Urb^Dr, Wwb^Edb, Wwb, Urb, Uzw, Urb
+Wwb, Btym, Dby^Es, Btym, Uzw^Bryu, Btym^Sy|, Urb, Wwb, Wwb, Uzw, Urb^Edb, Wwb, Wwb, Dby, Dby^Dr, Btym, Cay^Es, Uzw^Edb, Urb^Es, Khr, Chr, Urb, Uzw^Edb, Wwb^Edb, Uzw^Ecf, Uzw^Vhcr, Uzw
+Wwb, Wwb, Urb^Vhcr, Dby^Edb, Wwb^Edb, Urb^Edb, Uzw^Dr, Wwb, Chr, Khr, Chr, Wwb^Edb, Wwb^Edb, Wwb, Urb, Cay, Btym, Uzw^Edb, Uzw, Chr, Wwb, Wwb, Dby^Dr, Uzw, Wwb, Uzw, Urb
+Uzw, Urb^Es, Uzw^Edb, Wwb, Wwb, Dby, Dby^Ecf, Wwb, Urb^Es, Chr, Wwb, Dby^Ecf, Uzw^Vhcr, Uzw^Edb, Uzw, Btym^Sy|, Urb, Urb, Uzw^Edb, Wwb^Edb, Wwb^Edb, Dby^Ecf, Uzw^Edb, Urb^Vhcr, Wwb^Edb, Urb, Urb
+Urb, Urb^Bryl, Uzw^Dr, Wwb^Edb, Wwb^Edb, Dby^Vhcr, Wwb^Edb, Uzw, Uzw, Wwb, Wwb^Edb, Dby, Urb^Edb, Urb, Brym^Dr, Cay^Es, Brym^Es, Urb, Urb, Urb^Edb, Urb, Urb, Uzw, Wwb^Edb, Uzw, Uzw, Uzw
+Cay, Urb^Es, Urb, Uzw^Edb, Uzw^Es, Wwb^Edb, Uzw^Edb, Uzw^Edb, Urb, Wwb^Edb, Urb, Uzw^Dr, Urb, Urb, Brym^Es, Brym^Es, Brym, Brym^Es, Uzw, Uzw, Urb, Uzw, Kay, Urb^Bryl, Urb, Urb, Cay
+Btym, Cay^Es, Kay^Es, Cay^Es, Cay, Cay^Edb, Kay^Es, Cay, Cay^Es, Cay, Brym^Bryu, Brym^Es, Brym, Btyb, Brym, Btyb, Brym^Bryu, Cay, Cay^Es, Cay, Kay^Es, Cay, Cay, Cay, Cay, Cay, Btym
+Btym, Btym, Btym, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym, Btym, Cay^Es, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym, Btym
+Uzw, Btym, Btym, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym^Sy|, Btym, Btym, Rr
+Hh, Uzw^Ecf, Wwb^Edb, Wwb^Edb, Wwb, Wwb, Dby, Wwb^Edb, Wwb^Edb, Wwb, Uzw^Edb, Btym, Urb^Dr, Btym, Cay^Es, Btym, Cay^Es, Wwb, Wwb^Edb, Uzw, Wwb, Wwb, Dby^Es, Uzw^Edb, Uzw, Rr, Hh
+Hh, Dby^Edb, Dby^Es, Wwb, Uzw^Ecf, Wwb, Uzw^Es, Dby^Edb, Uzw^Ecf, Wwb, Wwb, Uzw^Edb, Dby, Urb^Edb, Dby^Edb, Dby, Dby, Wwb, Dby^Edb, Dby^Edb, Wwb^Edb, Dby^Ecf, Hh^Es, Uzw^Es, Hh^Es, Hh, Mm
+Mm, Mm, Mm, Mm, Hh^Edb, Hh, Hh^Es, Uzw, Uzw^Es, Wwb, Wwb, Dby, Wwb, Uzw^Ecf, Wwb^Edb, Wwb, Wwb, Hh^Es, Mm^Es, Uzw^Ecf, Uzw^Edb, Uzw, Mm, Hh^Edb, Mm, Hh^Edb, Hh
+Mm, Mm, Mm, Mm, Hh^Dr, Hh^Es, Hh, Hh^Es, Uzw^Edb, Uzw^Edb, Uzw^Ecf, Uzw, Wwb^Edb, Wwb^Edb, Wwb^Edb, Wwb, Hh^Es, Hh^Es, Mm, Hh^Es, Mm, Hh^Edb, Hh^Dr, Hh^Edb, Mm, Mm, Hh
+Mm, Hh, Mm, Mm, Hh^Dr, Mm, Mm, Hh^Es, Hh^Edb, Uzw, Rr, Uzw, Uzw, Uzw^Edb, Uzw^Edb, Uzw, Hh^Edb, Hh^Es, Mm, Mm, Mm, Mm, Mm, Hh^Dr, Mm, Mm, Mm
+Mm, Mm, Hh, Mm, Mm, Mm, Mm, Hh^Dr, Hh^Es, Hh^Edb, Hh, Rr, Rrc, Rrc, Rrc, Rrc, Rr, Hh^Es, Hh, Hh^Dr, Mm, Mm, Mm, Mm^Vud, Mm, Mm, Mm
+Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Hh, Rr, Rr, Rrc, Rrc, Rrc, Rr, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm
+Mm, Mm, Mm, Mm, Uh^Vud, Mm, Mm, Mm, Hh, Hh^Edb, Hh^Edb, Hh, Mm, Rrc, Rrc, Rrc, Rrc, Mm, Mm, Mm, Mm, Mm^Vud, Mm, Mm, Mm^Vud, Mm, Mm
+Mm, Mm^Vud, Mm, Mm, Cydy, Uh, Hhd^Es, Hhd^Es, Mm, Mm, Mm, Hh^Es, Mm, Mm, Rr, Rrc, Rrc, Rr, Rr, Mm, Uh, Mm, Cydy, Mm, Qlf, Mm, Mm
+Mm^Xm, Mm, Qlf, Cydy, Kydy, Cydy, Uh, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Rrc, Rrc, Rrc, Rr, Hhd, Uh^Es, Cydy, Kydy, Cydy, Qlf, Mm, Mm^Xm
+Mm^Xm, Mm^Xm, Mv, Cydy, Cydy, Cydy, Uh, Uh^Vud, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Rrc, Rrc, Rr, Mm, Mm, Cydy, Cydy, Cydy, Mv, Mm^Xm, Mm^Xm
+Mm^Xm, Mm, Mm, Mm, Qlf, Qlf, Mm, Mm, Mm^Vud, Mm, Mm, Mm, Mm, Mm, Mm, Rr, Rr, Rr, Mm, Mm, Mm, Mm^Vud, Qlf, Mm, Mm, Mm, Mm^Xm
+Mm^Xm, Mm^Xm, Mm^Xm, Qlf, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Rr, Rr, Rr, Mm, Mm, Mm, Qlf, Mm, Mm^Xm, Mm^Xm, Mm, Mm^Xm
+Mm^Xm, Mm^Xm, Mm^Xm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Mm, Rr, Rr, Rr, Hh, Mm, Mm, Mm^Xm, Mm^Xm, Mm^Xm, Mm^Xm, Mm^Xm, Mm

@@ -1,0 +1,55 @@
+border_size=1
+usage=map
+
+Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Cha, Cha, Ai, Ms, Ms, Ms, Ai, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Rrc, Rrc, Cha, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Cha, Cha, Cha, Cha, Ms, Ms, Ms, Ms, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Rrc, Cha, Aa^Fyak, Cha, Rrc, Rrc, Rrc, Rrc, Cha, Rrc, Rrc, Rrc, Rrc, Cha, Cha, Ms, Ms, Ms, Ms, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Rrc, Cha, Cha, Cha, Rrc, Rrc, Rrc, Cha, 2 Kha, Cha, Rrc, Rrc, Rrc, Cha, Cha, Cha, Ms, Ms, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Cha, Cha, Cha, Rrc, Rrc, Rrc, Rrc, Cha, Cha, Ms, Ms, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Rrc, Rrc, Cha, Cha, Cha, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Cha, Cha, Ms, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Rrc, Rrc, Cha, 3 Kha, Cha, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Cha, Cha, Cha, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Rrc, Rrc, Rrc, Cha, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Kha, Cha, Cha, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Cha, Cha, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Cha, Cha, Cha, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Cha, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Rrc, Cha, Rrc^Gye, Rrc^Gye, Cha, Cha, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Cha, Cha, Cha, Rrc, Rrc, Rrc, Rrc, Rrc, Cha, Kha, Cha, Rrc^Gye, Rrc^Gye, Cha, Cha, Rrc^Gye, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ms, Cha, Cha, Cha, Cha, Cha, Cha, Cha, Cha, Cha, Cha, Cha, Cha, Rrc^Gye, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ha, Ha, Ha, Cha, Cha, Cha, Cha, Cha, Ai, Cha, Ai, Cha, Ai, Ai, Ai, Rr, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ha, Ha, Ha, Ha, Ha, Ha, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ms, Ms, Ha, Ha, Ms, Ha, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ms, Ms, Ms, Ms, Ms, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ms, Ms, Ms, Ms, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ms, Ms, Ms, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai^Vct, Ce, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ms, Ms, Ms, Ms, Ms, Ms, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ce, 5 Ke, Ce, Ai^Vct, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ce, Ce, Ce, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai^Vct, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai^Vct, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ce, Ce, Ce, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ce, 6 Ke, Ce, Ai^Vct, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai^Vct, Ce, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai^Vct, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ce, Ce, Ce, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ce, 4 Ke, Ce, Ai^Vct, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai^Vct, Ce, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ce, Ce, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, 1 Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ke, Ce, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Rr, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai
+Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Ai, Rr, Rr, Ai, Ai, Ai, Ai, Ai
