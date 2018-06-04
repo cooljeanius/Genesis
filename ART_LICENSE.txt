@@ -8,23 +8,11 @@ projectiles/icicles-ne-1.png
 projectiles/icicles-ne-1.png
 projectiles/icicles-ne-1.png
 
-The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-SA v4.0
+The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-ND v4.0
+All of the images in the directory:
+units/demons/blue/
 
-units/demons/illusory-angel.png
-units/demons/ephemeral-angel.png
-units/demons/incubus.png
-units/demons/blue.png
-units/demons/blue-male.png
-units/demons/dreamwalker.png
-units/demons/dreamwalker-male.png
-units/demons/dreamweaver.png
-units/demons/dreamweaver-male.png
-units/demons/apparition.png
-units/demons/apparition-male.png
-units/demons/nightmare.png
-units/demons/nightmare-male.png
-units/demons/shadow.png
-units/demons/shadow-male.png
+The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-SA v4.0
 units/demons/inferno.png
 units/demons/inferno-female.png
 units/demons/windlasher.png
