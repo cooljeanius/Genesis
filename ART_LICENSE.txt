@@ -14,8 +14,6 @@ units/demons/blue/
 units/demons/red/
 
 The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-SA v4.0
-units/demons/inferno.png
-units/demons/inferno-female.png
 units/demons/windlasher.png
 units/demons/windlasher-female.png
 units/demons/galerunner.png
@@ -48,8 +46,6 @@ units/demons/sword-dancer.png
 units/demons/sword-dancer-female.png
 units/demons/bladestorm.png
 units/demons/bladestorm-female.png
-units/demons/fire.png
-units/demons/fire-female.png
 units/demons/fiend.png
 units/demons/fiend-female.png
 units/demons/berserker.png
