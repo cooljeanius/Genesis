@@ -1,7 +1,13 @@
 
 ---
--- Turns a unit four times
+-- Turns a unit X times
 -- Only affects the first unit matching the filter
+-- [multi_turn_unit]
+--     [filter]
+--         ... SUF ...
+--     [/filter]
+--     times={X}
+-- [/multi_turn_unit]
 ---
 function invert_direction(dir)
     if dir == "s" then
@@ -20,7 +26,7 @@ function invert_direction(dir)
 
     return dir
 end
-function wesnoth.wml_actions.turn_unit_four(cfg)
+function wesnoth.wml_actions.multi_turn_unit(cfg)
     local suf = helper.get_child(cfg, "filter") or
         helper.wml_error("[set_facing] Missing unit filter")
 
@@ -31,7 +37,9 @@ function wesnoth.wml_actions.turn_unit_four(cfg)
 
     facing=units[1].facing
 
-    for i = 0,3,1
+	local times = cfg.times
+	
+    for i = 1,times,1
         do
             facing = invert_direction(facing)
             units[1].facing = facing
