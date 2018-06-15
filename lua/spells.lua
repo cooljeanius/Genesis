@@ -1,8 +1,8 @@
-yumi_spell_radius=0
+yumi_spell_radius=5
 
 yumi_spells = {"Ethereal Blast","Void Blast", "Cancel"}
 yumi_spell_images = {"attacks/faerie-fire.png","attacks/dark-missile.png","attacks/blank-attack.png"}
-yumi_spell_radii = {1,1,1}
+yumi_spell_radii = {1,1,100}
 
 function wesnoth.wml_actions.void_blast_spell()
     wesnoth.play_sound("shaxthal-energy-prelude.ogg")
@@ -48,19 +48,19 @@ function wesnoth.wml_actions.yumi_spell_menu()
         end
         wesnoth.set_dialog_callback(select, "list")
         
-        if wesnoth.match_location("$x1","$y1",{"filter_adjacent_location", {radius=yumi_spell_radius,
-                    {"filter",{id="Yumi"}}
-                }}) then
-                
-                
+        local x = wesnoth.get_variable("x1")
+        local y = wesnoth.get_variable("y1")
+        local count = 0
+        
+        for i,v in ipairs(yumi_spell_radii) do
+            if wesnoth.match_location(x,y,{{"filter_adjacent_location", {radius=v,
+                       {"filter",{id="Yumi"}}}}}) then
+                wesnoth.set_dialog_value(yumi_spells[i], "list", i, "label")
+                wesnoth.set_dialog_value(yumi_spell_images[i], "list", i, "icon")
+            end
+            count = count + 1
         end
-        for i,v in ipairs(yumi_spells) do
-            wesnoth.set_dialog_value(v, "list", i, "label")
-        end
-        for i,v in ipairs(yumi_spell_images) do
-            wesnoth.set_dialog_value(v, "list", i, "icon")
-        end
-        wesnoth.set_dialog_value(2, "list")
+        wesnoth.set_dialog_value(count, "list")
         select()
     end
 
@@ -77,7 +77,7 @@ function wesnoth.wml_actions.yumi_spell_menu()
         wesnoth.wml_actions.void_blast_spell()
     end
     
-    --wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
+    wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
 end
 
 function wesnoth.wml_actions.refresh_spell_menu_yumi(cfg)
