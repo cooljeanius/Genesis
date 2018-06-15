@@ -47,6 +47,13 @@ function wesnoth.wml_actions.yumi_spell_menu()
             local i = wesnoth.get_dialog_value "list"
         end
         wesnoth.set_dialog_callback(select, "list")
+        
+        if wesnoth.match_location("$x1","$y1",{"filter_adjacent_location", {radius=yumi_spell_radius,
+                    {"filter",{id="Yumi"}}
+                }}) then
+                
+                
+        end
         for i,v in ipairs(yumi_spells) do
             wesnoth.set_dialog_value(v, "list", i, "label")
         end
@@ -94,6 +101,5 @@ end
 
 function wesnoth.wml_actions.add_void_blast_yumi(cfg)
     yumi_spell_radius=5
-    void_blast=1
     wesnoth.wml_actions.refresh_spell_menu_yumi(cfg)
 end
