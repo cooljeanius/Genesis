@@ -1,8 +1,21 @@
 yumi_spell_radius=5
+yumi_mana=0
+yumi_mana_gain = 1
+yumi_max_mana = 10
 
 yumi_spells = {"Ethereal Blast","Void Blast", "Cancel"}
 yumi_spell_images = {"attacks/faerie-fire.png","attacks/dark-missile.png","attacks/blank-attack.png"}
-yumi_spell_radii = {1,1,100}
+yumi_spell_radii = {1,10,100}
+yumi_spell_costs = {2,2,0}
+yumi_spell_discovered = {0,0,1}
+
+-- mana gain
+local on_event = wesnoth.require("lua/on_event.lua")
+on_event("new turn", function(context)
+    if yumi_mana < yumi_max_mana then
+        yumi_mana = yumi_mana + yumi_mana_gain
+    end
+end)
 
 function wesnoth.wml_actions.void_blast_spell()
     wesnoth.play_sound("shaxthal-energy-prelude.ogg")
@@ -13,8 +26,44 @@ function wesnoth.wml_actions.void_blast_spell()
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Yumi"}}
     }
+
+    yumi_mana = yumi_mana - yumi_spell_costs[2]
 end
 
+-- check whether a spell is castable
+-- includes location checks, whether a unit exists there, and whether you have found the spell yet
+function check_spell_castable_yumi(x,y,radi,cost,spell_name,discov)
+    local a = wesnoth.match_location(x,y,{
+                {"filter_adjacent_location", {radius=radi,
+                    {"filter",{id="Yumi"}}
+                }}
+            })
+    local b = true
+    if spell_name=="Ethereal Blast" or spell_name=="Void Blast" then
+        local yumi = wesnoth.get_unit("Yumi")
+        b = wesnoth.match_location(x,y,{
+                {"filter",{
+                    {"filter_side",{
+                        {"enemy_of",{side = yumi.side}}
+                    }}
+                }}
+            })
+    end
+    local c = true
+    if cost > yumi_mana then
+        c = false
+    end
+
+    local d = true
+
+    if discov == 0 then
+        d = false
+    end
+
+    return a and b and c and d
+end
+
+-- main spell menu dialog setup
 function wesnoth.wml_actions.yumi_spell_menu()
 
     local helper = wesnoth.require "lua/helper.lua"
@@ -41,25 +90,27 @@ function wesnoth.wml_actions.yumi_spell_menu()
         T.column { T.image { id = "image" } }
       } }
     }
-    
+
     local function preshow()
         local function select()
             local i = wesnoth.get_dialog_value "list"
         end
         wesnoth.set_dialog_callback(select, "list")
-        
+
         local x = wesnoth.get_variable("x1")
         local y = wesnoth.get_variable("y1")
         local count = 0
-        
+
         for i,v in ipairs(yumi_spell_radii) do
-            if wesnoth.match_location(x,y,{{"filter_adjacent_location", {radius=v,
-                       {"filter",{id="Yumi"}}}}}) then
-                wesnoth.set_dialog_value(yumi_spells[i], "list", i, "label")
+            local b = check_spell_castable_yumi(x,y,v,yumi_spell_costs[i],yumi_spells[i],yumi_spell_discovered[i])
+
+            if b==true then
+                wesnoth.set_dialog_value(string.format("%s (%d mana)",yumi_spells[i],yumi_spell_costs[i]), "list", i, "label")
                 wesnoth.set_dialog_value(yumi_spell_images[i], "list", i, "icon")
             end
             count = count + 1
         end
+        wesnoth.set_dialog_value(yumi_spells[count], "list", count, "label")
         wesnoth.set_dialog_value(count, "list")
         select()
     end
@@ -70,16 +121,16 @@ function wesnoth.wml_actions.yumi_spell_menu()
     end
 
     local r = wesnoth.show_dialog(dialog, preshow, postshow)
-    
+
     if li==1 then
         wesnoth.wml_actions.void_blast_spell()
     elseif li==2 then
         wesnoth.wml_actions.void_blast_spell()
     end
-    
-    wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
+
 end
 
+-- refresh the spell menu every time you add a new spell
 function wesnoth.wml_actions.refresh_spell_menu_yumi(cfg)
     local yumi = wesnoth.get_unit("Yumi")
 
@@ -99,7 +150,11 @@ function wesnoth.wml_actions.refresh_spell_menu_yumi(cfg)
     }
 end
 
+-- discover the void_blast spell
 function wesnoth.wml_actions.add_void_blast_yumi(cfg)
-    yumi_spell_radius=5
+    yumi_spell_discovered[2] = 1
+    if yumi_spell_radii[2] > yumi_spell_radius then
+        yumi_spell_radius = yumi_spell_radii[2]
+    end
     wesnoth.wml_actions.refresh_spell_menu_yumi(cfg)
 end
