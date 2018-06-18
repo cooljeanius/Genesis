@@ -12,6 +12,7 @@ The next list of art images in the add-on's "images" directory are drawn by nema
 All of the images in the directories:
 units/demons/blue/
 units/demons/red/
+units/demons/fiend/
 
 The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-SA v4.0
 units/demons/windlasher.png
