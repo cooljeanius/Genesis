@@ -47,10 +47,6 @@ units/demons/sword-dancer.png
 units/demons/sword-dancer-female.png
 units/demons/bladestorm.png
 units/demons/bladestorm-female.png
-units/demons/fiend.png
-units/demons/fiend-female.png
-units/demons/berserker.png
-units/demons/berserker-female.png
 
 The next list of art images in the add-on's "images" directory are drawn by (or modified from, with permission) Iris Morelle (shadowm/ShikadiQueen) and are licensed under CC BY-NC-ND v4.0
 units/fae/yumi.png
