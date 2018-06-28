@@ -30,15 +30,15 @@ end
 local on_event = wesnoth.require("lua/on_event.lua")
 on_event("new turn", function(context)
 
-    local yumi_mana = wesnoth.get_variable("yumi_spell_params.yumi_mana")
-    local yumi_mana_gain = wesnoth.get_variable("yumi_spell_params.yumi_mana_gain")
+    --local yumi_mana = wesnoth.get_variable("yumi_spell_params.yumi_mana")
+    --local yumi_mana_gain = wesnoth.get_variable("yumi_spell_params.yumi_mana_gain")
 
-    if yumi_mana < wesnoth.get_variable("yumi_spell_params.yumi_max_mana") then
-        wesnoth.set_variable("yumi_spell_params.yumi_mana", yumi_mana + yumi_mana_gain)
-        local yumi = wesnoth.get_unit("Yumi")
+    --if yumi_mana < wesnoth.get_variable("yumi_spell_params.yumi_max_mana") then
+    --    wesnoth.set_variable("yumi_spell_params.yumi_mana", yumi_mana + yumi_mana_gain)
+    --    local yumi = wesnoth.get_unit("Yumi")
     
-        wesnoth.float_label(yumi.x,yumi.y,string.format("<span color='#0000ff'>+%d mana</span>",yumi_mana_gain))
-    end  
+    --    wesnoth.float_label(yumi.x,yumi.y,string.format("<span color='#0000ff'>+%d mana</span>",yumi_mana_gain))
+    --end  
 end)
 
 -- check whether a spell is castable
