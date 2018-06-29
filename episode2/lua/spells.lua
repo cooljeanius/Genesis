@@ -224,6 +224,13 @@ function check_spell_castable_esther(x,y,radi,cost,spell_name)
                     }}
                 }}
             })
+	elseif spell_name=="Sunlight Spark" then
+		local esther = wesnoth.get_unit("Esther")
+        b = wesnoth.match_location(x,y,{
+                {"filter",{id="Esther",
+                    {"filter_location",{time_of_day="lawful"}}
+                }}
+            })
     end
     local c = true
     if cost > wesnoth.get_variable("esther_spell_params.esther_mana") then
@@ -291,7 +298,7 @@ function wesnoth.wml_actions.infuse_spell()
     local infuse_bonus = wesnoth.get_variable("aryel_spell_params.infuse_bonus")
 
     wesnoth.wml_actions.heal_unit {
-        animate="yes",amount=3 + infuse_bonus*aryel_spell_power,
+        animate="yes",amount=(3 + infuse_bonus)*aryel_spell_power,
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Aryel"}}
     }
@@ -320,6 +327,22 @@ function wesnoth.wml_actions.firebolt_spell()
 
     if firebolt_bonus < wesnoth.get_variable("esther_spell_params.firebolt_max_bonus") then
         wesnoth.set_variable("esther_spell_params.firebolt_bonus", firebolt_bonus + 0.1)
+    end
+end
+
+function wesnoth.wml_actions.sunlight_spark_spell()
+    local esther_spell_power = wesnoth.get_variable("esther_spell_params.esther_spell_power")
+    local sunlight_spark_bonus = wesnoth.get_variable("esther_spell_params.sunlight_spark_bonus")
+
+    wesnoth.wml_actions.heal_unit {
+        animate="yes",amount=(7 + sunlight_spark_bonus)*esther_spell_power,
+        {"filter",{x="$x1",y="$y1"}}
+    }
+
+    wesnoth.set_variable("esther_spell_params.esther_mana", wesnoth.get_variable("esther_spell_params.esther_mana") - 4)
+
+    if sunlight_spark_bonus < wesnoth.get_variable("esther_spell_params.sunlight_spark_max_bonus") then
+        wesnoth.set_variable("esther_spell_params.sunlight_spark_bonus", sunlight_spark_bonus + 0.5)
     end
 end
 ------------- YUMI ------------
@@ -793,6 +816,9 @@ function wesnoth.wml_actions.esther_spell_menu()
         if esther_spell_params[li].esther_spells=="Firebolt" then
             wesnoth.wml_actions.firebolt_spell()
         end
+		if esther_spell_params[li].esther_spells=="Sunlight Spark" then
+            wesnoth.wml_actions.sunlight_spark_spell()
+        end
     end
 end
 
@@ -933,6 +959,12 @@ function wesnoth.wml_actions.esther_spell_help()
             wesnoth.show_message_dialog({
                  title = "Firebolt",
                  message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: 3</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy. Each cast increases the damage of this spell by <span color='#ff0000'>0.1</span>, up to a maximum of <span color='#ff0000'>%d</span>.",math.floor(wesnoth.get_variable("esther_spell_params.firebolt_bonus")+4.4),math.floor(wesnoth.get_variable("esther_spell_params.firebolt_max_bonus")+4)),
+                 portrait = "attacks/fireball.png",
+            })
+		elseif esther_spell_params[li].esther_spells=="Sunlight Spark" then
+            wesnoth.show_message_dialog({
+                 title = "Sunlight Spark",
+                 message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: -</span> \nEsther heals <span color='#ff0000'>%d</span> hitpoints. Each cast increases the healing from this spell by <span color='#ff0000'>0.5</span>, up to a maximum of <span color='#ff0000'>%d</span>. Can only be cast during the day.",math.floor(wesnoth.get_variable("esther_spell_params.sunlight_spark_bonus")+7.4),math.floor(wesnoth.get_variable("esther_spell_params.sunlight_spark_max_bonus")+7)),
                  portrait = "attacks/fireball.png",
             })
         end
@@ -1330,7 +1362,7 @@ function wesnoth.wml_actions.spell_menu()
         })
         
         -- make menu items for Aryel available
-        if a == true then
+        if a == true and wesnoth.get_variable("enable_aryel")==1 then
             wesnoth.set_dialog_value("Cast Spell (Aryel)", "list", 2, "label")
             wesnoth.set_dialog_value("units/fae/aryel.png", "list", 2, "icon")
             wesnoth.set_dialog_markup(true,"list", 2, "label")
@@ -1350,7 +1382,7 @@ function wesnoth.wml_actions.spell_menu()
         })
 
         -- make menu items for Esther available
-        if b == true then
+        if b == true and wesnoth.get_variable("enable_esther")==1 then
             wesnoth.set_dialog_value("Cast Spell (Esther)", "list", 4, "label")
             wesnoth.set_dialog_value("units/fae/esther.png", "list", 4, "icon")
             wesnoth.set_dialog_markup(true,"list", 4, "label")
@@ -1370,7 +1402,7 @@ function wesnoth.wml_actions.spell_menu()
         })
 
         -- make menu items for Yumi available
-        if e == true then
+        if e == true and wesnoth.get_variable("enable_yumi")==1 then
             wesnoth.set_dialog_value("Cast Spell (Yumi)", "list", 10, "label")
             wesnoth.set_dialog_value("units/fae/yumi.png", "list", 10, "icon")
             wesnoth.set_dialog_markup(true,"list", 10, "label")
@@ -1488,6 +1520,22 @@ function wesnoth.wml_actions.add_firebolt_esther(cfg)
 
     wesnoth.set_variable("esther_spell_params.firebolt_bonus",0.0)
     wesnoth.set_variable("esther_spell_params.firebolt_max_bonus",3.0)
+
+    wesnoth.wml_actions.refresh_spell_menu(cfg)
+end
+
+function wesnoth.wml_actions.add_sunlight_spark_esther(cfg)
+    wesnoth.wml_actions.set_variables {name = "esther_spell_params", mode = "append",
+        {"value",{esther_spells = "Sunlight Spark",esther_spell_images = "attacks/magic-missile.png",
+        esther_spell_radii = 0,esther_spell_costs = 4}},
+    }
+
+    if 0 > wesnoth.get_variable("esther_spell_params.esther_spell_radius") then
+        wesnoth.set_variable("esther_spell_params.esther_spell_radius",0)
+    end
+
+    wesnoth.set_variable("esther_spell_params.sunlight_spark_bonus",0.0)
+    wesnoth.set_variable("esther_spell_params.sunlight_spark_max_bonus",7.0)
 
     wesnoth.wml_actions.refresh_spell_menu(cfg)
 end
