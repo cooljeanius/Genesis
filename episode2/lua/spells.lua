@@ -265,7 +265,7 @@ function wesnoth.wml_actions.malefice_spell()
     local malefice_bonus = wesnoth.get_variable("aryel_spell_params.malefice_bonus")
 
     wesnoth.wml_actions.harm_unit {fire_event="yes",
-        animate="yes",amount=3 + malefice_bonus*aryel_spell_power,delay="50",experience="yes",damage_type="arcane",variable="damage",
+        animate="yes",amount=(3 + malefice_bonus)*aryel_spell_power,delay="50",experience="yes",damage_type="arcane",variable="damage",
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Aryel"}},
         {"primary_attack",{name="eviscerate"}},
@@ -281,8 +281,8 @@ function wesnoth.wml_actions.malefice_spell()
     
     wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") - 5)
 
-    if not wesnoth.match_unit(unit, {x="$x1",y="$y1"}) then
-        wesnoth.set_variable("aryel_spell_params.malefice_bonus", malefice_bonus + 0.5)
+    if not wesnoth.wml_conditionals.have_unit { x = "$x1", y = "$y1" } then
+        wesnoth.set_variable("aryel_spell_params.malefice_bonus", malefice_bonus + 0.2)
     end
 end
 
@@ -296,7 +296,7 @@ function wesnoth.wml_actions.infuse_spell()
         {"filter_second",{id="Aryel"}}
     }
 
-    wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") - 4)
+    wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") - 3)
 
     if infuse_bonus < wesnoth.get_variable("aryel_spell_params.infuse_max_bonus") then
         wesnoth.set_variable("aryel_spell_params.infuse_bonus", infuse_bonus + 0.1)
@@ -309,7 +309,7 @@ function wesnoth.wml_actions.firebolt_spell()
     local firebolt_bonus = wesnoth.get_variable("esther_spell_params.firebolt_bonus")
 
     wesnoth.wml_actions.harm_unit {fire_event="yes",
-        animate="yes",amount=4 + firebolt_bonus*esther_spell_power,delay="50",experience="yes",damage_type="fire",
+        animate="yes",amount=(4 + firebolt_bonus)*esther_spell_power,delay="50",experience="yes",damage_type="fire",
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Esther"}},
         {"primary_attack",{name="infernal blast"}},
@@ -1475,7 +1475,7 @@ function wesnoth.wml_actions.add_malefice_aryel(cfg)
     wesnoth.wml_actions.refresh_spell_menu(cfg)
 end
 ----------- ESTHER --------------
--- discover firebolt
+
 function wesnoth.wml_actions.add_firebolt_esther(cfg)
     wesnoth.wml_actions.set_variables {name = "esther_spell_params", mode = "append",
         {"value",{esther_spells = "Firebolt",esther_spell_images = "attacks/fireball.png",
@@ -1493,7 +1493,7 @@ function wesnoth.wml_actions.add_firebolt_esther(cfg)
 end
 
 ------------ YUMI ----------------
--- discover siphon
+
 function wesnoth.wml_actions.add_siphon_yumi(cfg)
     wesnoth.wml_actions.set_variables {name = "yumi_spell_params", mode = "append",
         {"value",{yumi_spells = "Siphon",yumi_spell_images = "attacks/faerie-fire.png",
@@ -1509,7 +1509,6 @@ function wesnoth.wml_actions.add_siphon_yumi(cfg)
     wesnoth.wml_actions.refresh_spell_menu(cfg)
 end
 
--- discover void_blast
 function wesnoth.wml_actions.add_void_blast_yumi(cfg)
     wesnoth.wml_actions.set_variables {name = "yumi_spell_params", mode = "append",
         {"value",{yumi_spells = "Void Blast",yumi_spell_images = "attacks/dark-missile.png",
