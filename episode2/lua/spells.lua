@@ -174,16 +174,17 @@ end)
 -- check whether a spell is castable
 -- includes location checks, whether a unit exists there, and whether you have found the spell yet
 function check_spell_castable_aryel(x,y,radi,cost,spell_name)
-    local a = wesnoth.match_location(x,y,{id="Aryel",
-                {"or",{
-                    {"filter_adjacent_location", {radius=radi,
-                        {"filter",{id="Aryel"}}
-                    }}
+    local aryel = wesnoth.get_unit("Aryel")
+    local a = true
+    if spell_name=="Infuse" or spell_name=="Malefice" or spell_name=="Eldritch Bolt" or spell_name=="Harvest Soul" or spell_name=="Blood Bind" then
+        a = wesnoth.match_location(x,y,{
+                {"filter_adjacent_location", {radius=radi,
+                    {"filter",{id="Aryel"}}
                 }}
             })
+    end
     local b = true
-    if spell_name=="Malefice" then
-        local aryel = wesnoth.get_unit("Aryel")
+    if spell_name=="Malefice" or spell_name=="Eldritch Bolt" or spell_name=="Blood Bind" then
         b = wesnoth.match_location(x,y,{
                 {"filter",{
                     {"filter_side",{
@@ -192,7 +193,6 @@ function check_spell_castable_aryel(x,y,radi,cost,spell_name)
                 }}
             })
     elseif spell_name=="Infuse" then
-        local aryel = wesnoth.get_unit("Aryel")
         b = wesnoth.match_location(x,y,{
                 {"filter",{
                     {"filter_side",{
@@ -200,23 +200,38 @@ function check_spell_castable_aryel(x,y,radi,cost,spell_name)
                     }}
                 }}
             })
+    elseif spell_name=="Harvest Soul" then
+        local aryel = wesnoth.get_unit("Aryel")
+        b = wesnoth.match_location(x,y,{
+                {"filter",{type="Ghost,Wraith,Shadow,Spectre,Nightgaunt,Eldritch Form",
+                    {"filter_side",{
+                        {"allied_with",{side = aryel.side}}
+                    }}
+                }}
+            })        
     end
     local c = true
     if cost > wesnoth.get_variable("aryel_spell_params.aryel_mana") then
         c = false
     end
 
-    return a and b and c
+    local d = true
+    if spell_name=="Blood Bind" then
+        d = (aryel.hitpoints > 6)
+    end
+    
+    return a and b and c and d
 end
 
 function check_spell_castable_esther(x,y,radi,cost,spell_name)
-    local a = wesnoth.match_location(x,y,{id="Esther",
-                {"or",{
-                    {"filter_adjacent_location", {radius=radi,
-                        {"filter",{id="Esther"}}
-                    }}
+    local a = true
+    if spell_name == "Firebolt" or spell_name=="Ember Spear" or spell_name=="Lightning Bolt" then
+        a = wesnoth.match_location(x,y,{
+                {"filter_adjacent_location", {radius=radi,
+                    {"filter",{id="Esther"}}
                 }}
             })
+    end
     local b = true
     if spell_name=="Firebolt" or spell_name=="Ember Spear" or spell_name=="Lightning Bolt" then
         local esther = wesnoth.get_unit("Esther")
@@ -228,17 +243,8 @@ function check_spell_castable_esther(x,y,radi,cost,spell_name)
                 }}
             })
 	elseif spell_name=="Sunlight Spark" then
-		local esther = wesnoth.get_unit("Esther")
-        b = wesnoth.match_location(x,y,{
-                {"filter",{id="Esther",
-                    {"filter_location",{time_of_day="lawful"}}
-                }}
-            })
-    elseif spell_name=="Ardent Flare" or spell_name=="Blazing Star" then
-		local esther = wesnoth.get_unit("Esther")
-        b = wesnoth.match_location(x,y,{
-                {"filter",{id="Esther"}}
-            })
+        local tod = wesnoth.get_time_of_day({x,y,true})
+        b = tod.lawful_bonus > 0
     end
     local c = true
     if cost > wesnoth.get_variable("esther_spell_params.esther_mana") then
@@ -250,13 +256,15 @@ end
 function check_spell_castable_yumi(x,y,radi,cost,spell_name)
     
     local yumi = wesnoth.get_unit("Yumi")
-    local a = wesnoth.match_location(x,y,{id="Yumi",
-                {"or",{
-                    {"filter_adjacent_location", {radius=radi,
-                        {"filter",{id="Yumi"}}
-                    }}
+    local a = true
+    
+    if spell_name=="Siphon" or spell_name=="Void Blast" or spell_name== "Null Flare" then
+        a = wesnoth.match_location(x,y,{
+                {"filter_adjacent_location", {radius=radi,
+                    {"filter",{id="Yumi"}}
                 }}
             })
+    end
     local b = true
     if spell_name=="Siphon" or spell_name=="Void Blast" or spell_name== "Null Flare" then
         
@@ -268,15 +276,8 @@ function check_spell_castable_yumi(x,y,radi,cost,spell_name)
                 }}
             })
     elseif spell_name=="Ethereal Form" or spell_name=="Shadow Walk" then
-        b = wesnoth.match_location(x,y,{
-                {"filter",{id="Yumi",
-                    {"filter_location",{time_of_day="chaotic"}}
-                }}
-            })
-    elseif spell_name=="Astral Blood" then
-        b = wesnoth.match_location(x,y,{
-                {"filter",{id="Yumi"}}
-            })
+        local tod = wesnoth.get_time_of_day({x,y,true})
+        b = tod.lawful_bonus < 0
     end
     local c = true
     if cost > wesnoth.get_variable("yumi_spell_params.yumi_mana") then
@@ -338,6 +339,95 @@ function wesnoth.wml_actions.infuse_spell()
     end
 end
 
+function wesnoth.wml_actions.blood_bind_spell()
+    local aryel_spell_power = wesnoth.get_variable("aryel_spell_params.aryel_spell_power")
+    local aryel = wesnoth.get_unit("Aryel")
+    
+    local blood_bind_factor = wesnoth.get_variable("aryel_spell_params.blood_bind_factor")
+
+    wesnoth.wml_actions.harm_unit {fire_event="yes",
+        animate="yes",amount=6*blood_bind_factor*aryel_spell_power,delay="50",experience="yes",
+        {"filter",{x="$x1",y="$y1"}},
+        {"filter_second",{id="Aryel"}},
+        {"primary_attack",{name="blood boil"}},
+        {"secondary_attack",{name="blood boil"}}
+    }
+    
+    wesnoth.wml_actions.modify_unit {hitpoints=aryel.hitpoints-6,
+        {"filter",{id="Aryel"}}
+    }
+    
+    wesnoth.float_label(aryel.x,aryel.y,string.format("<span color='#ff0000'>-%d HP</span>",6))
+    
+    wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") - 1)
+    
+    if blood_bind_factor < wesnoth.get_variable("aryel_spell_params.blood_bind_max_factor") then
+        wesnoth.set_variable("aryel_spell_params.blood_bind_factor", blood_bind_factor + 0.1)
+    end
+end
+
+function wesnoth.wml_actions.harvest_soul_spell()
+    local aryel_spell_power = wesnoth.get_variable("aryel_spell_params.aryel_spell_power")
+
+    local x = wesnoth.get_variable("x1")
+    local y = wesnoth.get_variable("y1")
+    
+    local aryel = wesnoth.get_unit("Aryel")
+    local soul = wesnoth.get_unit(x,y)
+    
+    local HP = 0
+    local mana = 0
+    
+    if soul.type == "Eldritch Form" then
+        HP = 0
+        mana = 2
+    elseif soul.type == "Ghost" then
+        HP = 8
+        mana = 0
+    elseif soul.type == "Shadow" or soul.type == "Wraith" then
+        HP = 16
+        mana = 1
+    elseif soul.type == "Nightgaunt" or soul.type == "Spectre" then
+        HP = 24
+        mana = 2
+    end
+
+    wesnoth.wml_actions.heal_unit {
+        animate="yes",amount=HP*aryel_spell_power,
+        {"filter",{id="Aryel"}}
+    }
+    
+    wesnoth.float_label(aryel.x,aryel.y,string.format("<span color='#00ff00'>+%d HP</span>",math.floor(HP*aryel_spell_power)))
+    wesnoth.float_label(aryel.x,aryel.y,string.format("<span color='#0000ff'>%d mana</span>",mana))
+    
+    wesnoth.wml_actions.kill { x=x,y=y,animate="yes" }
+    
+    wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") + mana)
+end
+
+function wesnoth.wml_actions.eldritch_bolt_spell()
+    local aryel_spell_power = wesnoth.get_variable("aryel_spell_params.aryel_spell_power")
+    local eldritch_bonus = wesnoth.get_variable("aryel_spell_params.eldritch_bonus")
+
+    wesnoth.wml_actions.harm_unit {fire_event="yes",
+        animate="yes",amount=(7 + eldritch_bonus)*aryel_spell_power,delay="50",experience="yes",damage_type="arcane",
+        {"filter",{x="$x1",y="$y1"}},
+        {"filter_second",{id="Aryel"}},
+        {"primary_attack",{name="blood boil"}},
+        {"secondary_attack",{name="blood boil"}}
+    }
+
+    wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") - 6)
+
+    if not wesnoth.wml_conditionals.have_unit { x = "$x1", y = "$y1" } and eldritch_bonus < wesnoth.get_variable("aryel_spell_params.eldritch_max_bonus") then
+        wesnoth.set_variable("aryel_spell_params.eldritch_bonus", eldritch_bonus + 1)
+        local unit = wesnoth.create_unit { type = "Eldritch Form", hitpoints=10+eldritch_bonus, max_hitpoints=10+eldritch_bonus}
+        local x = wesnoth.get_variable("x1")
+        local y = wesnoth.get_variable("y1")
+        wesnoth.put_unit(x,y,unit)
+    end
+end
+
 ------------- ESTHER ----------------
 function wesnoth.wml_actions.firebolt_spell()
     local esther_spell_power = wesnoth.get_variable("esther_spell_params.esther_spell_power")
@@ -364,7 +454,7 @@ function wesnoth.wml_actions.sunlight_spark_spell()
 
     wesnoth.wml_actions.heal_unit {
         animate="yes",amount=(7 + sunlight_spark_bonus)*esther_spell_power,
-        {"filter",{x="$x1",y="$y1"}}
+        {"filter",{id="Esther"}}
     }
 
     wesnoth.set_variable("esther_spell_params.esther_mana", wesnoth.get_variable("esther_spell_params.esther_mana") - 4)
@@ -598,10 +688,12 @@ function wesnoth.wml_actions.shadow_walk_spell()
 end
 ----------------------------------------------- SPELL MENUS ----------------------------------------------------
 local T = helper.set_wml_tag_metatable {}
+
 local dialog = {
     T.tooltip { id = "tooltip_large" },
     T.helptip { id = "tooltip_large" },
     T.linked_group { id = "icon", fixed_width = true },
+    maximum_height=600,
     T.grid {
         T.row {
             grow_factor = 0,
@@ -693,251 +785,267 @@ local dialog = {
         }
     }
 }
+
+local function select()
+    local i = wesnoth.get_dialog_value "list"
+end
+
+local helper = wesnoth.require "lua/helper.lua"
+local title = ""
+local header_label = ""
+local header_icon = ""
+local spell_names = {"Cancel"}
+local spell_mana = {0}
+local spell_images = {"attacks/blank-attack.png"}
+local spell_menu = 0
+
+local function preshow()
+    wesnoth.set_dialog_callback(select, "list")
+    wesnoth.set_dialog_value(title, "title")
+    wesnoth.set_dialog_value(header_label, "list", 1, "label")
+    wesnoth.set_dialog_markup(true,"list", 1, "label")
+    wesnoth.set_dialog_value(header_icon, "list", 1, "icon")
+    
+    for i,v in ipairs(spell_names) do
+        if i == 1 then
+        else
+            if spell_menu==1 then
+                wesnoth.set_dialog_value(string.format("%s <span color='#0000ff'>(%d mana)</span>",spell_names[i],spell_mana[i]), "list", i, "label")
+            else
+                wesnoth.set_dialog_value(string.format("%s",spell_names[i]), "list", i, "label")
+            end
+            wesnoth.set_dialog_value(spell_images[i], "list", i, "icon")
+            wesnoth.set_dialog_markup(true,"list", i, "label")
+        end
+    end
+    wesnoth.set_dialog_value(1, "list")
+    select()
+end
+
 local li
 local function postshow()
     li = wesnoth.get_dialog_value "list"
 end
-local function select()
-    local i = wesnoth.get_dialog_value "list"
+
+local function dialog_var_cleanup()
+    li = 0
+    title = ""
+    header_label = ""
+    header_icon = ""
+    spell_names = {"Cancel"}
+    spell_mana = {0}
+    spell_images = {"attacks/blank-attack.png"}
+    spell_menu = 0
 end
-local helper = wesnoth.require "lua/helper.lua"
 
 --aryel spell menu
 function wesnoth.wml_actions.aryel_spell_menu()
-    local function preshow()
-        wesnoth.set_dialog_callback(select, "list")
-
-        local x = wesnoth.get_variable("x1")
-        local y = wesnoth.get_variable("y1")
-        local count = 1
-        
-        wesnoth.set_dialog_value("Spellcasting — Aryel", "title")
-        wesnoth.set_dialog_value(string.format("<span color='#0000ff'>Current Mana: %d</span>",wesnoth.get_variable("aryel_spell_params.aryel_mana")), "list", 1, "label")
-        wesnoth.set_dialog_markup(true,"list", 1, "label")
-        wesnoth.set_dialog_value("attacks/staff-elven-star.png", "list", 1, "icon")
-
-        local aryel_spell_params = helper.get_variable_array("aryel_spell_params")
-
-        for i,v in ipairs(aryel_spell_params) do
-            local b = check_spell_castable_aryel(x,y,aryel_spell_params[i].aryel_spell_radii,aryel_spell_params[i].aryel_spell_costs,aryel_spell_params[i].aryel_spells)
-
-            if i == 1 then
-            elseif b==true then
-                wesnoth.set_dialog_value(string.format("%s (%d mana)",aryel_spell_params[i].aryel_spells,aryel_spell_params[i].aryel_spell_costs), "list", i, "label")
-                wesnoth.set_dialog_value(aryel_spell_params[i].aryel_spell_images, "list", i, "icon")
-            end
-            count = count + 1
+    local x = wesnoth.get_variable("x1")
+    local y = wesnoth.get_variable("y1")
+    local aryel_spell_params = helper.get_variable_array("aryel_spell_params")
+    for i,v in ipairs(aryel_spell_params) do
+        local b = check_spell_castable_aryel(x,y,aryel_spell_params[i].aryel_spell_radii,aryel_spell_params[i].aryel_spell_costs,aryel_spell_params[i].aryel_spells)
+        if i == 1 then
+        elseif b==true then
+            table.insert(spell_names,aryel_spell_params[i].aryel_spells)
+            table.insert(spell_mana,aryel_spell_params[i].aryel_spell_costs)
+            table.insert(spell_images,aryel_spell_params[i].aryel_spell_images)
         end
-        wesnoth.set_dialog_value(1, "list")
-        select()
     end
+    
+    title = "Spellcasting - Aryel"
+    header_label = string.format("<span color='#0000ff'>Current Mana: %d</span>",wesnoth.get_variable("aryel_spell_params.aryel_mana"))
+    header_icon = "attacks/staff-elven-star.png"
+    spell_menu = 1
 
     local r = wesnoth.show_dialog(dialog, preshow, postshow)
-    local aryel_spell_params = helper.get_variable_array("aryel_spell_params")
-    local count = 1
-    for i,v in ipairs(aryel_spell_params) do
-        count = count + 1
-    end
 
-    if r == -1 and li < count then
-        if aryel_spell_params[li].aryel_spells=="Infuse" then
+    if r == -1 then
+        if spell_names[li]=="Infuse" then
             wesnoth.wml_actions.infuse_spell()
-        elseif aryel_spell_params[li].aryel_spells=="Malefice" then
+        elseif spell_names[li]=="Malefice" then
             wesnoth.wml_actions.malefice_spell()
+        elseif spell_names[li]=="Blood Bind" then
+            wesnoth.wml_actions.blood_bind_spell()
+        elseif spell_names[li]=="Harvest Soul" then
+            wesnoth.wml_actions.harvest_soul_spell()   
+        elseif spell_names[li]=="Eldritch Bolt" then
+            wesnoth.wml_actions.eldritch_bolt_spell()
         end
     end
+    
+    dialog_var_cleanup()
 end
 
 --aryel spell help
 function wesnoth.wml_actions.aryel_spell_help()
-    local function preshow()
-        wesnoth.set_dialog_callback(select, "list")
-
-        local x = wesnoth.get_variable("x1")
-        local y = wesnoth.get_variable("y1")
-        local count = 1
-
-        wesnoth.set_dialog_value("Spell Help — Aryel", "title")
-        wesnoth.set_dialog_value("<span color='#f08080'>Stats (Aryel)</span>", "list", 1, "label")
-        wesnoth.set_dialog_markup(true,"list", 1, "label")
-        wesnoth.set_dialog_value("units/fae/aryel.png~SCALE(60,60)", "list", 1, "icon")
-
-        local aryel_spell_params = helper.get_variable_array("aryel_spell_params")
-
-        for i,v in ipairs(aryel_spell_params) do
-            if i == 1 then
-            else
-                wesnoth.set_dialog_value(string.format("%s",aryel_spell_params[i].aryel_spells), "list", i, "label")
-                wesnoth.set_dialog_value(aryel_spell_params[i].aryel_spell_images, "list", i, "icon")
-            end
-            count = count + 1
+    local aryel_spell_params = helper.get_variable_array("aryel_spell_params")
+    
+    for i,v in ipairs(aryel_spell_params) do
+        if i == 1 then
+        else
+            table.insert(spell_names,aryel_spell_params[i].aryel_spells)
+            table.insert(spell_mana,aryel_spell_params[i].aryel_spell_costs)
+            table.insert(spell_images,aryel_spell_params[i].aryel_spell_images)
         end
-        wesnoth.set_dialog_value(1, "list")
-        select()
     end
+    
+    title = "Spell Help — Aryel"
+    header_label = "<span color='#f08080'>Stats (Aryel)</span>"
+    header_icon = "units/fae/aryel.png~SCALE(60,60)"
+    spell_menu = 0
 
     local r = wesnoth.show_dialog(dialog, preshow, postshow)
-    local aryel_spell_params = helper.get_variable_array("aryel_spell_params")
-    local count = 1
-    for i,v in ipairs(aryel_spell_params) do
-        count = count + 1
-    end
-
+    
     --wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
 
-    if r == -1 and li < count then
+    if r == -1 then
         if li == 1 then
             wesnoth.show_message_dialog({
                  title = "Character Statistics",
                  message = string.format("<span color='#0000ff'>Current Mana: %d</span> \n<span color='#00ffff'>Maximum Mana: %d</span> \n<span color='#85C1E9'>Mana Regen: %d</span>\n<span color='#F000FF'>Spell Power: %d</span>",wesnoth.get_variable("aryel_spell_params.aryel_mana"),wesnoth.get_variable("aryel_spell_params.aryel_max_mana"),wesnoth.get_variable("aryel_spell_params.aryel_mana_gain"),wesnoth.get_variable("aryel_spell_params.aryel_spell_power")),
-                 portrait = "units/fae/aryel.png",
+                 portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(units/fae/aryel.png~SCALE(144,144), 144, 200)",
             })
-        elseif aryel_spell_params[li].aryel_spells=="Infuse" then
+        elseif spell_names[li]=="Infuse" then
             wesnoth.show_message_dialog({
                  title = "Infuse",
                  message = string.format("<span color='#0000ff'>Mana cost: 3</span> \n<span color='#008000'>Cast radius: 3</span> \nHeals <span color='#ff0000'>%d</span> hitpoints to target ally. Each cast increases the healing of this spell by <span color='#ff0000'>0.1</span>, up to a maximum of <span color='#ff0000'>%d</span>.",math.floor(wesnoth.get_variable("aryel_spell_params.infuse_bonus")+3.4),math.floor(wesnoth.get_variable("aryel_spell_params.infuse_max_bonus")+3)),
-                 portrait = "attacks/touch-faerie.png",
+                 portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/touch-faerie.png~SCALE(120,120), 168, 212)",
             })
-        elseif aryel_spell_params[li].aryel_spells=="Malefice" then
+        elseif spell_names[li]=="Malefice" then
             wesnoth.show_message_dialog({
                  title = "Malefice",
                  message = string.format("<span color='#0000ff'>Mana cost: 5</span> \n<span color='#008000'>Cast radius: 1</span> \nDeals <span color='#ff0000'>%d</span> <span color='#00f2ff'>arcane</span> damage to target enemy. Killing an enemy unit with this spell increases its damage by <span color='#ff0000'>0.2</span>.",math.floor(wesnoth.get_variable("aryel_spell_params.malefice_bonus")+3.4)),
-                 portrait = "attacks/wail.png",
+                 portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/wail.png~SCALE(120,120), 168, 212)",
+            })
+        elseif spell_names[li]=="Blood Bind" then
+            wesnoth.show_message_dialog({
+                 title = "Blood Bind",
+                 message = string.format("<span color='#0000ff'>Mana cost: 1</span> \n<span color='#008000'>Cast radius: 5</span> \nDrains <span color='#ff0000'>6</span> health from Aryel to deal <span color='#ff0000'>%d</span> damage to target enemy. Each cast increases the amount of damage dealt, up to <span color='#ff0000'>%d</span>.",math.floor(wesnoth.get_variable("aryel_spell_params.blood_bind_factor")*6),math.floor(wesnoth.get_variable("aryel_spell_params.blood_bind_max_factor")*6)),
+                 portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/curse.png~SCALE(120,120), 168, 212)",
+            })
+        elseif spell_names[li]=="Harvest Soul" then
+            wesnoth.show_message_dialog({
+                 title = "Harvest Soul",
+                 message = string.format("<span color='#0000ff'>Mana cost: -</span> \n<span color='#008000'>Cast radius: 3</span> \nConsumes an allied spirit, regaining health and mana.\nEldritch Form: <span color='#0000ff'>2 mana</span>\nLevel 1: <span color='#00ff00'>8 health</span>\nLevel 2: <span color='#00ff00'>16 health</span> and <span color='#0000ff'>1 mana</span>\nLevel 3: <span color='#00ff00'>24 health</span> and <span color='#0000ff'>2 mana</span>\n"),
+                 portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/wail.png~SCALE(120,120), 168, 148)",
+            })
+        elseif spell_names[li]=="Eldritch Bolt" then
+            wesnoth.show_message_dialog({
+                 title = "Eldritch Bolt",
+                 message = string.format("<span color='#0000ff'>Mana cost: 6</span> \n<span color='#008000'>Cast radius: 1</span> \nDeals <span color='#ff0000'>7</span> <span color='#00f2ff'>arcane</span> damage to target enemy. Killing an enemy unit with this spell spawns an Eldritch Form with <span color='#ff0000'>%d</span> hitpoints.",math.floor(wesnoth.get_variable("aryel_spell_params.eldritch_bonus")+10)),
+                 portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/nightmare-bite.png~SCALE(120,120), 168, 212)",
             })
         end
     end
+    
+    dialog_var_cleanup()
 end
 
 -- spell menu esther
 function wesnoth.wml_actions.esther_spell_menu()
-    local function preshow()
-        wesnoth.set_dialog_callback(select, "list")
-
-        local x = wesnoth.get_variable("x1")
-        local y = wesnoth.get_variable("y1")
-        local count = 1
-        
-        wesnoth.set_dialog_value("Spellcasting — Esther", "title")
-        wesnoth.set_dialog_value(string.format("<span color='#0000ff'>Current Mana: %d</span>",wesnoth.get_variable("esther_spell_params.esther_mana")), "list", 1, "label")
-        wesnoth.set_dialog_markup(true,"list", 1, "label")
-        wesnoth.set_dialog_value("attacks/staff-elven-star.png", "list", 1, "icon")
-
-        local esther_spell_params = helper.get_variable_array("esther_spell_params")
-
-        for i,v in ipairs(esther_spell_params) do
-            local b = check_spell_castable_esther(x,y,esther_spell_params[i].esther_spell_radii,esther_spell_params[i].esther_spell_costs,esther_spell_params[i].esther_spells)
-            if i == 1 then
-            elseif b==true then
-                wesnoth.set_dialog_value(string.format("%s (%d mana)",esther_spell_params[i].esther_spells,esther_spell_params[i].esther_spell_costs), "list", i, "label")
-                wesnoth.set_dialog_value(esther_spell_params[i].esther_spell_images, "list", i, "icon")
-            end
-            count = count + 1
-        end
-        wesnoth.set_dialog_value(1, "list")
-        select()
-    end
-
-    local r = wesnoth.show_dialog(dialog, preshow, postshow)
+    
+    local x = wesnoth.get_variable("x1")
+    local y = wesnoth.get_variable("y1")
     local esther_spell_params = helper.get_variable_array("esther_spell_params")
-    local count = 1
     for i,v in ipairs(esther_spell_params) do
-        count = count + 1
+        local b = check_spell_castable_esther(x,y,esther_spell_params[i].esther_spell_radii,esther_spell_params[i].esther_spell_costs,esther_spell_params[i].esther_spells)
+        if i == 1 then
+        elseif b==true then
+            table.insert(spell_names,esther_spell_params[i].esther_spells)
+            table.insert(spell_mana,esther_spell_params[i].esther_spell_costs)
+            table.insert(spell_images,esther_spell_params[i].esther_spell_images)
+        end
     end
+    
+    title = "Spellcasting - Esther"
+    header_label = string.format("<span color='#0000ff'>Current Mana: %d</span>",wesnoth.get_variable("esther_spell_params.esther_mana"))
+    header_icon = "attacks/staff-elven-star.png"
+    spell_menu = 1
+    
+    local r = wesnoth.show_dialog(dialog, preshow, postshow)
 
-    --wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
+    --wesnoth.message(string.format("Button %d pressed. Item %s selected.", r, spell_names[li-1]))
 
-    if r == -1 and li < count then
-        if esther_spell_params[li].esther_spells=="Firebolt" then
+    if r == -1 then
+        if spell_names[li]=="Firebolt" then
             wesnoth.wml_actions.firebolt_spell()
-		elseif esther_spell_params[li].esther_spells=="Sunlight Spark" then
+		elseif spell_names[li]=="Sunlight Spark" then
             wesnoth.wml_actions.sunlight_spark_spell()
-        elseif esther_spell_params[li].esther_spells=="Ember Spear" then
+        elseif spell_names[li]=="Ember Spear" then
             wesnoth.wml_actions.ember_spear_spell()
-        elseif esther_spell_params[li].esther_spells=="Ardent Flare" then
+        elseif spell_names[li]=="Ardent Flare" then
             wesnoth.wml_actions.ardent_flare_spell()
-        elseif esther_spell_params[li].esther_spells=="Blazing Star" then
+        elseif spell_names[li]=="Blazing Star" then
             wesnoth.wml_actions.blazing_star_spell()
-        elseif esther_spell_params[li].esther_spells=="Lightning Bolt" then
+        elseif spell_names[li]=="Lightning Bolt" then
             wesnoth.wml_actions.lightning_bolt_spell()
         end
     end
+    
+    dialog_var_cleanup()
 end
 
 -- spell help for Esther
 function wesnoth.wml_actions.esther_spell_help()
-    local function preshow()
-        wesnoth.set_dialog_callback(select, "list")
-
-        local x = wesnoth.get_variable("x1")
-        local y = wesnoth.get_variable("y1")
-        local count = 1
-        
-        wesnoth.set_dialog_value("Spell Help — Esther", "title")
-        wesnoth.set_dialog_value("<span color='#ff5500'>Stats (Esther)</span>", "list", 1, "label")
-        wesnoth.set_dialog_markup(true,"list", 1, "label")
-        wesnoth.set_dialog_value("units/fae/esther.png~SCALE(60,60)", "list", 1, "icon")
-
-        local esther_spell_params = helper.get_variable_array("esther_spell_params")
-
-        for i,v in ipairs(esther_spell_params) do
-            if i == 1 then
-            else
-                wesnoth.set_dialog_value(string.format("%s",esther_spell_params[i].esther_spells), "list", i, "label")
-                wesnoth.set_dialog_value(esther_spell_params[i].esther_spell_images, "list", i, "icon")
-            end
-            count = count + 1
-        end
-        wesnoth.set_dialog_value(1, "list")
-        select()
-    end
-
-    local r = wesnoth.show_dialog(dialog, preshow, postshow)
     local esther_spell_params = helper.get_variable_array("esther_spell_params")
-    local count = 1
+    
     for i,v in ipairs(esther_spell_params) do
-        count = count + 1
+        if i == 1 then
+        else
+            table.insert(spell_names,esther_spell_params[i].esther_spells)
+            table.insert(spell_mana,esther_spell_params[i].esther_spell_costs)
+            table.insert(spell_images,esther_spell_params[i].esther_spell_images)
+        end
     end
-
+    
+    title = "Spell Help — Esther"
+    header_label = "<span color='#ff5500'>Stats (Esther)</span>"
+    header_icon = "units/fae/esther.png~SCALE(60,60)"
+    spell_menu = 0
+    
+    local r = wesnoth.show_dialog(dialog, preshow, postshow)
+    
     --wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
 
-    if r == -1 and li < count then
+    if r == -1 then
         if li == 1 then
             wesnoth.show_message_dialog({
                  title = "Character Statistics",
                  message = string.format("<span color='#0000ff'>Current Mana: %d</span> \n<span color='#00ffff'>Maximum Mana: %d</span> \n<span color='#85C1E9'>Mana Regen: %d</span>\n<span color='#F000FF'>Spell Power: %d</span>",wesnoth.get_variable("esther_spell_params.esther_mana"),wesnoth.get_variable("esther_spell_params.esther_max_mana"),wesnoth.get_variable("esther_spell_params.esther_mana_gain"),wesnoth.get_variable("esther_spell_params.esther_spell_power")),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(units/fae/esther.png~SCALE(144,144), 144, 200)",
             })
-        elseif esther_spell_params[li].esther_spells=="Firebolt" then
+        elseif spell_names[li]=="Firebolt" then
             wesnoth.show_message_dialog({
                  title = "Firebolt",
                  message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: 3</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy. Each cast increases the damage of this spell by <span color='#ff0000'>0.1</span>, up to a maximum of <span color='#ff0000'>%d</span>.",math.floor(wesnoth.get_variable("esther_spell_params.firebolt_bonus")+4.4),math.floor(wesnoth.get_variable("esther_spell_params.firebolt_max_bonus")+4)),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/fireball.png~SCALE(120,120), 168, 212)",
             })
-		elseif esther_spell_params[li].esther_spells=="Sunlight Spark" then
+		elseif spell_names[li]=="Sunlight Spark" then
             wesnoth.show_message_dialog({
                  title = "Sunlight Spark",
                  message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: -</span> \nEsther heals <span color='#ff0000'>%d</span> hitpoints. Each cast increases the healing from this spell by <span color='#ff0000'>0.5</span>, up to a maximum of <span color='#ff0000'>%d</span>. Can only be cast during the day.",math.floor(wesnoth.get_variable("esther_spell_params.sunlight_spark_bonus")+7.4),math.floor(wesnoth.get_variable("esther_spell_params.sunlight_spark_max_bonus")+7)),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/magic-missile.png~SCALE(120,120), 168, 212)",
             })
-        elseif esther_spell_params[li].esther_spells=="Ember Spear" then
+        elseif spell_names[li]=="Ember Spear" then
             wesnoth.show_message_dialog({
                  title = "Ember Spear",
                  message = string.format("<span color='#0000ff'>Mana cost: 3</span> \n<span color='#008000'>Cast radius: 2</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy and slows it. Each cast increases the damage of this spell by <span color='#ff0000'>0.1</span>, up to a maximum of <span color='#ff0000'>%d</span>.",math.floor(wesnoth.get_variable("esther_spell_params.ember_bonus")+2.4),math.floor(wesnoth.get_variable("esther_spell_params.ember_max_bonus")+2)),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/thunderstick.png~SCALE(120,120), 168, 212)",
             })
-        elseif esther_spell_params[li].esther_spells=="Ardent Flare" then
+        elseif spell_names[li]=="Ardent Flare" then
             wesnoth.show_message_dialog({
                  title = "Sunlight Spark",
                  message = string.format("<span color='#0000ff'>Mana cost: 6</span> \n<span color='#008000'>Cast radius: -</span> \nEsther gains <span color='#ff0000'>+25%%</span> damage for one turn."),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/flash-cannon.png~SCALE(120,120), 168, 224)",
             })
-        elseif esther_spell_params[li].esther_spells=="Blazing Star" then
+        elseif spell_names[li]=="Blazing Star" then
             wesnoth.show_message_dialog({
                  title = "Blazing Star",
                  message = string.format("<span color='#0000ff'>Mana cost: 6</span> \n<span color='#008000'>Cast radius: -</span> \nDecreases the damage of adjacent enemies by <span color='#ff0000'>-50%%</span> for one turn."),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/blazing-star.png~SCALE(120,120), 168, 224)",
             })
-        elseif esther_spell_params[li].esther_spells=="Lightning Bolt" then
+        elseif spell_names[li]=="Lightning Bolt" then
             wesnoth.show_message_dialog({
                  title = "Lightning Bolt",
                  message = string.format("<span color='#0000ff'>Mana cost: 7</span> \n<span color='#008000'>Cast radius: 4</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy and shocks it, reducing its resistances to magical attacks by <span color='#ff0000'>%d%%</span>. Each cast increases the damage of this spell by <span color='#ff0000'>0.3</span> and the resistance shredded by <span color='#ff0000'>1%%</span>, up to a maximum of <span color='#ff0000'>%d</span> damage and <span color='#ff0000'>50%%</span> resistance reduction.",math.floor(wesnoth.get_variable("esther_spell_params.lightning_bonus")+9.4),wesnoth.get_variable("esther_spell_params.lightning_shred"),math.floor(wesnoth.get_variable("esther_spell_params.lightning_max_bonus")+9)),
@@ -945,138 +1053,113 @@ function wesnoth.wml_actions.esther_spell_help()
             })
         end
     end
+
+    dialog_var_cleanup()
 end
 
 -- spell menu yumi
 function wesnoth.wml_actions.yumi_spell_menu()
-    local function preshow()
-        wesnoth.set_dialog_callback(select, "list")
+    local yumi_spell_params = helper.get_variable_array("yumi_spell_params")
 
-        local x = wesnoth.get_variable("x1")
-        local y = wesnoth.get_variable("y1")
-        local count = 1
-
-        wesnoth.set_dialog_value("Spellcasting — Yumi", "title")
-        wesnoth.set_dialog_value(string.format("<span color='#0000ff'>Current Mana: %d</span>",wesnoth.get_variable("yumi_spell_params.yumi_mana")), "list", 1, "label")
-        wesnoth.set_dialog_markup(true,"list", 1, "label")
-        wesnoth.set_dialog_value("attacks/staff-elven-star.png", "list", 1, "icon")
-
-        local yumi_spell_params = helper.get_variable_array("yumi_spell_params")
-
-        for i,v in ipairs(yumi_spell_params) do
-            local b = check_spell_castable_yumi(x,y,yumi_spell_params[i].yumi_spell_radii,yumi_spell_params[i].yumi_spell_costs,yumi_spell_params[i].yumi_spells)
-
-            if i == 1 then
-            elseif b==true then
-                wesnoth.set_dialog_value(string.format("%s (%d mana)",yumi_spell_params[i].yumi_spells,yumi_spell_params[i].yumi_spell_costs), "list", i, "label")
-                wesnoth.set_dialog_value(yumi_spell_params[i].yumi_spell_images, "list", i, "icon")
-            end
-            count = count + 1
+    local x = wesnoth.get_variable("x1")
+    local y = wesnoth.get_variable("y1")
+    
+    for i,v in ipairs(yumi_spell_params) do
+        local b = check_spell_castable_yumi(x,y,yumi_spell_params[i].yumi_spell_radii,yumi_spell_params[i].yumi_spell_costs,yumi_spell_params[i].yumi_spells)
+        if i == 1 then
+        elseif b==true then
+            table.insert(spell_names,yumi_spell_params[i].yumi_spells)
+            table.insert(spell_mana,yumi_spell_params[i].yumi_spell_costs)
+            table.insert(spell_images,yumi_spell_params[i].yumi_spell_images)
         end
-        wesnoth.set_dialog_value(1, "list")
-        select()
     end
+    
+    title = "Spellcasting - Yumi"
+    header_label = string.format("<span color='#0000ff'>Current Mana: %d</span>",wesnoth.get_variable("yumi_spell_params.yumi_mana"))
+    header_icon = "attacks/staff-elven-star.png"
+    spell_menu = 1
 
     local r = wesnoth.show_dialog(dialog, preshow, postshow)
-    local yumi_spell_params = helper.get_variable_array("yumi_spell_params")
-    local count = 1
-    for i,v in ipairs(yumi_spell_params) do
-        count = count + 1
-    end
 
-    if r == -1 and li < count then
-        if yumi_spell_params[li].yumi_spells=="Siphon" then
+    if r == -1 then
+        if spell_names[li]=="Siphon" then
             wesnoth.wml_actions.siphon_spell()
-        elseif yumi_spell_params[li].yumi_spells=="Void Blast" then
+        elseif spell_names[li]=="Void Blast" then
             wesnoth.wml_actions.void_blast_spell()
-        elseif yumi_spell_params[li].yumi_spells=="Ethereal Form" then
+        elseif spell_names[li]=="Ethereal Form" then
             wesnoth.wml_actions.ethereal_form_spell()
-        elseif yumi_spell_params[li].yumi_spells=="Astral Blood" then
+        elseif spell_names[li]=="Astral Blood" then
             wesnoth.wml_actions.astral_blood_spell()
-        elseif yumi_spell_params[li].yumi_spells=="Null Flare" then
+        elseif spell_names[li]=="Null Flare" then
             wesnoth.wml_actions.null_flare_spell()
-        elseif yumi_spell_params[li].yumi_spells=="Shadow Walk" then
+        elseif spell_names[li]=="Shadow Walk" then
             wesnoth.wml_actions.shadow_walk_spell()
         end
     end
+    
+    dialog_var_cleanup()
 end
 
 -- spell help for Yumi
 function wesnoth.wml_actions.yumi_spell_help()
-    local function preshow()
-        wesnoth.set_dialog_callback(select, "list")
-
-        local x = wesnoth.get_variable("x1")
-        local y = wesnoth.get_variable("y1")
-        local count = 1
-
-        wesnoth.set_dialog_value("Spell Help — Yumi", "title")
-        wesnoth.set_dialog_value("<span color='#f000ff'>Stats (Yumi)</span>", "list", 1, "label")
-        wesnoth.set_dialog_markup(true,"list", 1, "label")
-        wesnoth.set_dialog_value("units/fae/yumi.png~SCALE(60,60)", "list", 1, "icon")
-
-        local yumi_spell_params = helper.get_variable_array("yumi_spell_params")
-
-        for i,v in ipairs(yumi_spell_params) do
-            if i == 1 then
-            else
-                wesnoth.set_dialog_value(string.format("%s",yumi_spell_params[i].yumi_spells), "list", i, "label")
-                wesnoth.set_dialog_value(yumi_spell_params[i].yumi_spell_images, "list", i, "icon")
-            end
-            count = count + 1
+   local yumi_spell_params = helper.get_variable_array("yumi_spell_params")
+    
+    for i,v in ipairs(yumi_spell_params) do
+        if i == 1 then
+        else
+            table.insert(spell_names,yumi_spell_params[i].yumi_spells)
+            table.insert(spell_mana,yumi_spell_params[i].yumi_spell_costs)
+            table.insert(spell_images,yumi_spell_params[i].yumi_spell_images)
         end
-
-        wesnoth.set_dialog_value(1, "list")
-        select()
     end
+    
+    title = "Spell Help — Yumi"
+    header_label = "<span color='#8e44ad'>Stats (Yumi)</span>"
+    header_icon = "units/fae/yumi.png~SCALE(60,60)"
+    spell_menu = 0
 
     local r = wesnoth.show_dialog(dialog, preshow, postshow)
-    local yumi_spell_params = helper.get_variable_array("yumi_spell_params")
-    local count = 1
-    for i,v in ipairs(yumi_spell_params) do
-        count = count + 1
-    end
-
+    
     --wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
 
-    if r == -1 and li < count then
+    if r == -1 then
         if li == 1 then
             wesnoth.show_message_dialog({
                  title = "Character Statistics",
                  message = string.format("<span color='#0000ff'>Current Mana: %d</span> \n<span color='#00ffff'>Maximum Mana: %d</span> \n<span color='#85C1E9'>Mana Regen: %d</span>\n<span color='#F000FF'>Spell Power: %d</span>",wesnoth.get_variable("yumi_spell_params.yumi_mana"),wesnoth.get_variable("yumi_spell_params.yumi_max_mana"),wesnoth.get_variable("yumi_spell_params.yumi_mana_gain"),wesnoth.get_variable("yumi_spell_params.yumi_spell_power")),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(units/fae/yumi.png~SCALE(144,144), 144, 200)",
             })
-        elseif yumi_spell_params[li].yumi_spells=="Siphon" then
+        elseif spell_names[li]=="Siphon" then
             wesnoth.show_message_dialog({
                  title = "Siphon",
                  message = string.format("<span color='#0000ff'>Mana cost: 5</span> \n<span color='#008000'>Cast radius: 2</span> \nDeals <span color='#ff0000'>5</span> <span color='#00bfff'>arcane</span> damage to target enemy and heals for <span color='#008000'>%d%%</span> of the damage dealt. Each cast increases healing proportion by <span color='#008000'>1%%</span>, up to <span color='#008000'>100%%</span>.",wesnoth.get_variable("yumi_spell_params.siphon_spell_healing")*100),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/faerie-fire.png~SCALE(120,120), 168, 212)",
             })
-        elseif yumi_spell_params[li].yumi_spells=="Void Blast" then
+        elseif spell_names[li]=="Void Blast" then
             wesnoth.show_message_dialog({
                  title = "Void Blast",
                  message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: 4</span> \nDeals <span color='#ff0000'>%d</span> damage to target enemy. Each cast increases the damage of this spell by <span color='#ff0000'>0.1</span>, up to a maximum of <span color='#ff0000'>%d</span>. Damage doubled by Shadow Walk.",math.floor(wesnoth.get_variable("yumi_spell_params.void_damage_bonus")+5.4),math.floor(wesnoth.get_variable("yumi_spell_params.yumi_void_max_bonus")+5)),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/dark-missile.png~SCALE(120,120), 168, 212)",
             })
-        elseif yumi_spell_params[li].yumi_spells=="Ethereal Form" then
+        elseif spell_names[li]=="Ethereal Form" then
             wesnoth.show_message_dialog({
                  title = "Ethereal Form",
                  message = string.format("<span color='#0000ff'>Mana cost: 2</span> \n<span color='#008000'>Cast radius: -</span> \nTurns Yumi invisible for one turn. Can only be cast at night."),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/touch-faerie.png~SCALE(120,120), 168, 224)",
             })
-        elseif yumi_spell_params[li].yumi_spells=="Astral Blood" then
+        elseif spell_names[li]=="Astral Blood" then
             wesnoth.show_message_dialog({
                  title = "Astral Blood",
                  message = string.format("<span color='#0000ff'>Mana cost: -</span> \n<span color='#008000'>Cast radius: -</span> \nConverts <span color='#ff0000'>6</span> health to <span color='#0000ff'>1</span> mana. Health cost reduced to <span color='#ff0000'>4</span> by Shadow Walk."),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/thorns.png~SCALE(120,120), 168, 224)",
             })
-        elseif yumi_spell_params[li].yumi_spells=="Null Flare" then
+        elseif spell_names[li]=="Null Flare" then
             wesnoth.show_message_dialog({
                  title = "Null Flare",
                  message = string.format("<span color='#0000ff'>Mana cost: 5</span> \n<span color='#008000'>Cast radius: 3</span> \nDeals <span color='#ff0000'>%d</span> <span color='#0000ff'>cold</span> damage to target enemy and prevents them from moving or attacking for one turn. Each cast increases the damage of this spell by <span color='#ff0000'>0.2</span>, up to a maximum of <span color='#ff0000'>%d</span>. Damage doubled by Shadow Walk.",math.floor(wesnoth.get_variable("yumi_spell_params.null_damage_bonus")+4.4),math.floor(wesnoth.get_variable("yumi_spell_params.yumi_null_max_bonus")+4)),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/forest-chill.png~SCALE(120,120), 168, 200)",
             })
-        elseif yumi_spell_params[li].yumi_spells=="Shadow Walk" then
+        elseif spell_names[li]=="Shadow Walk" then
             wesnoth.show_message_dialog({
                  title = "Shadow Walk",
                  message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: -</span> \nTurns Yumi invisible for one turn and doubles movement, but removes her ability to attack. Allows Yumi to cast special spells and modifies the effects of others. Requires full movement and attacks. Can only be cast at night."),
@@ -1088,85 +1171,71 @@ end
 
 -- main spell menu dialog
 function wesnoth.wml_actions.spell_menu()
-    local function preshow()
-        wesnoth.set_dialog_callback(select, "list")
 
-        local x = wesnoth.get_variable("x1")
-        local y = wesnoth.get_variable("y1")
+    local x = wesnoth.get_variable("x1")
+    local y = wesnoth.get_variable("y1")
 
-        wesnoth.set_dialog_value("Spellcasting", "title")
-        wesnoth.set_dialog_value("<span color='#008000'>Spell Help</span>", "list", 1, "label")
-        wesnoth.set_dialog_markup(true,"list", 1, "label")
-        wesnoth.set_dialog_value("attacks/staff-elven-star.png", "list", 1, "icon")
+    local enable_aryel = wesnoth.get_variable("spell_params.enable_aryel")
+    local enable_esther = wesnoth.get_variable("spell_params.enable_esther")
+    local enable_kyoko = wesnoth.get_variable("spell_params.enable_kyoko")
+    local enable_talya = wesnoth.get_variable("spell_params.enable_talya")
+    local enable_yumi = wesnoth.get_variable("spell_params.enable_yumi")
 
-        local enable_aryel = wesnoth.get_variable("spell_params.enable_aryel")
-        local enable_esther = wesnoth.get_variable("spell_params.enable_esther")
-        local enable_kyoko = wesnoth.get_variable("spell_params.enable_kyoko")
-        local enable_talya = wesnoth.get_variable("spell_params.enable_talya")
-        local enable_yumi = wesnoth.get_variable("spell_params.enable_yumi")
-        
-        -- check if any spell is castable by aryel
-        local a = wesnoth.match_location(x,y,{
-            {"filter",{id="Aryel"}},
-            {"or",{
-                {"filter_adjacent_location", {radius=wesnoth.get_variable("aryel_spell_params.aryel_spell_radius"),
-                    {"filter",{id="Aryel"}}
-                }}
+    local a = wesnoth.match_location(x,y,{
+        {"filter",{id="Aryel"}},
+        {"or",{
+            {"filter_adjacent_location", {radius=wesnoth.get_variable("aryel_spell_params.aryel_spell_radius"),
+                {"filter",{id="Aryel"}}
             }}
-        })
-        
-        -- make menu items for Aryel available
-        if a == true and enable_aryel == 1 then
-            wesnoth.set_dialog_value("Cast Spell (Aryel)", "list", 2, "label")
-            wesnoth.set_dialog_value("units/fae/aryel.png~SCALE(60,60)", "list", 2, "icon")
-            wesnoth.set_dialog_markup(true,"list", 2, "label")
-            wesnoth.set_dialog_value("Spell Help (Aryel)", "list", 3, "label")
-            wesnoth.set_dialog_value("units/fae/aryel.png~SCALE(60,60)", "list", 3, "icon")
-            wesnoth.set_dialog_markup(true,"list", 3, "label")
-        end
-        
-        -- check if any spell is castable by esther
-        local b = wesnoth.match_location(x,y,{
-            {"filter",{id="Esther"}},
-            {"or",{
-                {"filter_adjacent_location", {radius=wesnoth.get_variable("esther_spell_params.esther_spell_radius"),
-                    {"filter",{id="Esther"}}
-                }}
-            }}
-        })
-
-        -- make menu items for Esther available
-        if b == true and enable_esther == 1 then
-            wesnoth.set_dialog_value("Cast Spell (Esther)", "list", 4, "label")
-            wesnoth.set_dialog_value("units/fae/esther.png~SCALE(60,60)", "list", 4, "icon")
-            wesnoth.set_dialog_markup(true,"list", 4, "label")
-            wesnoth.set_dialog_value("Spell Help (Esther)", "list", 5, "label")
-            wesnoth.set_dialog_value("units/fae/esther.png~SCALE(60,60)", "list", 5, "icon")
-            wesnoth.set_dialog_markup(true,"list", 5, "label")
-        end
-
-        -- check if any spell is castable by yumi
-        local e = wesnoth.match_location(x,y,{
-            {"filter",{id="Yumi"}},
-            {"or",{
-                {"filter_adjacent_location", {radius=wesnoth.get_variable("yumi_spell_params.yumi_spell_radius"),
-                    {"filter",{id="Yumi"}}
-                }}
-            }}
-        })
-
-        -- make menu items for Yumi available
-        if e == true and enable_yumi == 1 then
-            wesnoth.set_dialog_value("Cast Spell (Yumi)", "list", 10, "label")
-            wesnoth.set_dialog_value("units/fae/yumi.png~SCALE(60,60)", "list", 10, "icon")
-            wesnoth.set_dialog_markup(true,"list", 10, "label")
-            wesnoth.set_dialog_value("Spell Help (Yumi)", "list", 11, "label")
-            wesnoth.set_dialog_value("units/fae/yumi.png~SCALE(60,60)", "list", 11, "icon")
-            wesnoth.set_dialog_markup(true,"list", 11, "label")
-        end
-        wesnoth.set_dialog_value(1, "list")
-        select()
+        }}
+    })
+    
+    -- make menu items for Aryel available
+    if a == true and enable_aryel == 1 then
+        table.insert(spell_names,"<span color='#f08080'>Cast Spell (Aryel)</span>")
+        table.insert(spell_images,"units/fae/aryel.png~SCALE(60,60)")
+        table.insert(spell_names,"<span color='#f08080'>Spell Help (Aryel)</span>")
+        table.insert(spell_images,"units/fae/aryel.png~SCALE(60,60)")
     end
+    
+    local b = wesnoth.match_location(x,y,{
+        {"filter",{id="Esther"}},
+        {"or",{
+            {"filter_adjacent_location", {radius=wesnoth.get_variable("esther_spell_params.esther_spell_radius"),
+                {"filter",{id="Esther"}}
+            }}
+        }}
+    })
+
+    -- make menu items for Esther available
+    if b == true and enable_esther == 1 then
+        table.insert(spell_names,"<span color='#ff5500'>Cast Spell (Esther)</span>")
+        table.insert(spell_images,"units/fae/esther.png~SCALE(60,60)")
+        table.insert(spell_names,"<span color='#ff5500'>Spell Help (Esther)</span>")
+        table.insert(spell_images,"units/fae/esther.png~SCALE(60,60)")
+    end
+    
+    local e = wesnoth.match_location(x,y,{
+        {"filter",{id="Yumi"}},
+        {"or",{
+            {"filter_adjacent_location", {radius=wesnoth.get_variable("yumi_spell_params.yumi_spell_radius"),
+                {"filter",{id="Yumi"}}
+            }}
+        }}
+    })
+
+    -- make menu items for Yumi available
+    if e == true and enable_yumi == 1 then
+        table.insert(spell_names,"<span color='#8e44ad'>Cast Spell (Yumi)</span>")
+        table.insert(spell_images,"units/fae/yumi.png~SCALE(60,60)")
+        table.insert(spell_names,"<span color='#8e44ad'>Spell Help (Yumi)</span>")
+        table.insert(spell_images,"units/fae/yumi.png~SCALE(60,60)")
+    end
+    
+    title = "Spellcasting"
+    header_label = "<span color='#008000'>Spell Help</span>"
+    header_icon = "attacks/staff-elven-star.png"
+    spell_menu = 0
 
     local r = wesnoth.show_dialog(dialog, preshow, postshow)
     --wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
@@ -1178,20 +1247,28 @@ function wesnoth.wml_actions.spell_menu()
                  message = string.format("Right click on hexes close to hero units to cast spells. Each hero has a set amount of <span color='#0000ff'>mana</span> available to cast spells with, and regains some <span color='#0000ff'>mana</span> every turn. Only spells that are available to be cast on the selected location will appear. Spell effects are modified from their displayed base values by each hero's <span color='#F000FF'>spell power</span>. For more help, click on each hero's respective help menu."),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/staff-elven-star.png~SCALE(120,120), 168, 200)",
             })
-        elseif li==2 then
+        elseif spell_names[li]=="<span color='#f08080'>Cast Spell (Aryel)</span>" then
+            dialog_var_cleanup()
             wesnoth.wml_actions.aryel_spell_menu()
-        elseif li==3 then
+        elseif spell_names[li]=="<span color='#f08080'>Spell Help (Aryel)</span>" then
+            dialog_var_cleanup()
             wesnoth.wml_actions.aryel_spell_help()
-        elseif li==4 then
+        elseif spell_names[li]=="<span color='#ff5500'>Cast Spell (Esther)</span>" then
+            dialog_var_cleanup()
             wesnoth.wml_actions.esther_spell_menu()
-        elseif li==5 then
+        elseif spell_names[li]=="<span color='#8e44ad'>Spell Help (Yumi)</span>)" then
+            dialog_var_cleanup()
             wesnoth.wml_actions.esther_spell_help()
-        elseif li==10 then
+        elseif spell_names[li]=="<span color='#8e44ad'>Cast Spell (Yumi)</span>" then
+            dialog_var_cleanup()
             wesnoth.wml_actions.yumi_spell_menu()
-        elseif li==11 then
+        elseif spell_names[li]=="<span color='#8e44ad'>Spell Help (Yumi)</span>" then
+            dialog_var_cleanup()
             wesnoth.wml_actions.yumi_spell_help()
         end
     end
+    
+    dialog_var_cleanup()
 end
 
 -- refresh the spell menu every time you add a new spell
@@ -1253,6 +1330,53 @@ function wesnoth.wml_actions.add_malefice_aryel(cfg)
 
     wesnoth.wml_actions.refresh_spell_menu(cfg)
 end
+
+function wesnoth.wml_actions.add_blood_bind_aryel(cfg)
+    wesnoth.wml_actions.set_variables {name = "aryel_spell_params", mode = "append",
+        {"value",{aryel_spells = "Blood Bind",aryel_spell_images = "attacks/curse.png",
+        aryel_spell_radii = 5,aryel_spell_costs = 1}},
+    }
+
+    if 5 > wesnoth.get_variable("aryel_spell_params.aryel_spell_radius") then
+        wesnoth.set_variable("aryel_spell_params.aryel_spell_radius",5)
+    end
+
+    wesnoth.set_variable("aryel_spell_params.blood_bind_factor",0.5)
+    wesnoth.set_variable("aryel_spell_params.blood_bind_max_factor",2.5)
+
+    wesnoth.wml_actions.refresh_spell_menu(cfg)
+end
+
+function wesnoth.wml_actions.add_harvest_soul_aryel(cfg)
+    wesnoth.wml_actions.set_variables {name = "aryel_spell_params", mode = "append",
+        {"value",{aryel_spells = "Harvest Soul",aryel_spell_images = "attacks/touch-undead.png",
+        aryel_spell_radii = 3,aryel_spell_costs = 0}},
+    }
+
+    if 3 > wesnoth.get_variable("aryel_spell_params.aryel_spell_radius") then
+        wesnoth.set_variable("aryel_spell_params.aryel_spell_radius",3)
+    end
+    
+    wesnoth.wml_actions.refresh_spell_menu(cfg)
+end
+
+function wesnoth.wml_actions.add_eldritch_bolt_aryel(cfg)
+    wesnoth.wml_actions.set_variables {name = "aryel_spell_params", mode = "append",
+        {"value",{aryel_spells = "Eldritch Bolt",aryel_spell_images = "attacks/nightmare-bite.png",
+        aryel_spell_radii = 1,aryel_spell_costs = 6}},
+    }
+
+    if 1 > wesnoth.get_variable("aryel_spell_params.aryel_spell_radius") then
+        wesnoth.set_variable("aryel_spell_params.aryel_spell_radius",1)
+    end
+
+    wesnoth.set_variable("aryel_spell_params.eldritch_bonus",0)
+    wesnoth.set_variable("aryel_spell_params.eldritch_max_bonus",17)
+
+    wesnoth.wml_actions.refresh_spell_menu(cfg)
+end
+
+-- todo: plague, mind control
 
 ----------- ESTHER --------------
 
@@ -1334,6 +1458,8 @@ function wesnoth.wml_actions.add_blazing_star_esther(cfg)
 
     wesnoth.wml_actions.refresh_spell_menu(cfg)
 end
+
+-- todo: magma flow, phoenix
 
 ------------ YUMI ----------------
 
