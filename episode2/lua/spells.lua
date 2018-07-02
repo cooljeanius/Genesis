@@ -1376,7 +1376,7 @@ function wesnoth.wml_actions.add_eldritch_bolt_aryel(cfg)
     wesnoth.wml_actions.refresh_spell_menu(cfg)
 end
 
--- todo: plague, mind control
+-- todo: plague, mind control, mortal form
 
 ----------- ESTHER --------------
 
