@@ -9,7 +9,7 @@
 -- of action should be. However, scroll_to and scroll_to_unit can become warp
 -- actions.
 
--- written by ShikadiQueen
+-- written by Iris Morelle (ShikadiQueen)
 
 local warp_actions = {
 	"scroll_to",
@@ -28,6 +28,8 @@ local skippable_actions = {
 	-- The lack of pauses can turn [color_adjust] into a health hazard, so
 	-- skip that as well.
 	"color_adjust",
+	"fade_screen",
+	"unfade_screen",
 }
 
 local _WA_warp_actions = {}
