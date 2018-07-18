@@ -65,22 +65,8 @@ halo/xiael-full.png
 
 The next list of art images in the add-on's "images" directory are drawn by BTIssac and are licensed under CC BY-NC-SA v4.0
 
-portraits/demon-red.png
-portraits/demon-red-female.png
-portraits/demon-blue.png
-portraits/demon-blue-male.png
-portraits/demon-apparition.png
-portraits/demon-apparition-male.png
-portraits/demon-nightmare.png
-portraits/demon-nightmare-male.png
-portraits/demon-dreamwalker.png
-portraits/demon-dreamwalker-male.png
-portraits/demon-dreamweaver.png
-portraits/demon-dreamweaver-male.png
-portraits/demon-fiend-female.png
-portraits/demon-berserker-female.png
-portraits/demon-fiend.png
-portraits/demon-berserker.png
+all images in the directory 
+portraits/demons/
 
 The next art image in the add-on's "images" directory is drawn by Pinack and is licensed under CC BY-NC-ND v4.0
 story/moonlit-lake.png
