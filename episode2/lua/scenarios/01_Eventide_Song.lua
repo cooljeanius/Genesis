@@ -16,41 +16,6 @@ function wesnoth.wml_actions.unswap_starting_terrain(cfg)
 	wesnoth.set_variable("hexes",nil)
 end
 
-function wesnoth.wml_actions.initialize_sound_puzzle(cfg)
-	wesnoth.set_variable("puzzle_sound.counter",0)
-	wesnoth.wml_actions.item {x=10,y=7,image="items/crystal-glyph-message.png"}
-	wesnoth.wml_actions.item {x=8,y=3,image="items/crystal-glyph.png"}
-	wesnoth.wml_actions.item {x=10,y=3,image="items/crystal-glyph.png"}
-	wesnoth.wml_actions.item {x=12,y=3,image="items/crystal-glyph.png"}
-end
-
-function wesnoth.wml_actions.sound_hex_one(cfg)
-	wesnoth.play_sound("flute_g#_high.ogg")
-	wesnoth.wml_actions.item {x=10,y=3,image="items/crystal-glyph-dark-1.png"}
-	wesnoth.set_variable("puzzle_sound.counter",1)
-end
-
-function wesnoth.wml_actions.sound_hex_two(cfg)
-	wesnoth.play_sound("flute_d#.ogg")
-	if wesnoth.get_variable("puzzle_sound.counter") == 1 then
-		wesnoth.set_variable("puzzle_sound.counter",2)
-	else
-		wesnoth.set_variable("puzzle_sound.counter",0)
-	end
-end
-
-function wesnoth.wml_actions.sound_hex_three(cfg)
-	wesnoth.play_sound("flute_f#.ogg")
-	wesnoth.wml_actions.item {x=12,y=3,image="items/crystal-glyph-light.png"}
-	if wesnoth.get_variable("puzzle_sound.counter") == 2 then
-		wesnoth.set_variable("puzzle_sound.counter",3)
-		local experience=wesnoth.get_variable("small_puzzle_exp")
-		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Yumi"}}}
-	else
-		wesnoth.set_variable("puzzle_sound.counter",0)
-	end
-end
-
 function wesnoth.wml_actions.clear_sound_puzzle(cfg)
 	wesnoth.set_variable("puzzle_sound.counter",nil)
 	wesnoth.wml_actions.remove_item {x=10,y=7}
@@ -84,6 +49,54 @@ function wesnoth.wml_actions.initialize_puzzles(cfg)
 	wesnoth.set_variable("puzzle_life.chocolate",0)
 	wesnoth.set_variable("puzzle_life.vanilla",0)
 	wesnoth.set_variable("puzzle_life.sugar",0)
+end
+
+function wesnoth.wml_actions.initialize_sound_puzzle(cfg)
+	wesnoth.set_variable("puzzle_sound.counter",0)
+	wesnoth.set_variable("puzzle_sound.complete",0)
+	wesnoth.wml_actions.item {x=10,y=7,image="items/crystal-glyph-message.png"}
+	wesnoth.wml_actions.item {x=8,y=3,image="items/crystal-glyph.png"}
+	wesnoth.wml_actions.item {x=10,y=3,image="items/crystal-glyph.png"}
+	wesnoth.wml_actions.item {x=12,y=3,image="items/crystal-glyph.png"}
+end
+
+function wesnoth.wml_actions.sound_hex_one(cfg)
+    if wesnoth.get_variable("puzzle_sound.complete") == 0 then
+        wesnoth.play_sound("flute_g#_high.ogg")
+        wesnoth.wml_actions.item {x=10,y=3,image="items/crystal-glyph-message-dark-1.png"}
+        wesnoth.set_variable("puzzle_sound.counter",1)
+    end
+end
+
+function wesnoth.wml_actions.sound_hex_two(cfg)
+    if wesnoth.get_variable("puzzle_sound.complete") == 0 then 
+        wesnoth.play_sound("flute_d#.ogg")
+        if wesnoth.get_variable("puzzle_sound.counter") == 1 then
+            wesnoth.set_variable("puzzle_sound.counter",2)
+        else
+            wesnoth.set_variable("puzzle_sound.counter",0)
+        end
+    end
+end
+
+function wesnoth.wml_actions.sound_hex_three(cfg)
+    if wesnoth.get_variable("puzzle_sound.complete") == 0 then 
+        wesnoth.play_sound("flute_f#.ogg")
+        wesnoth.wml_actions.item {x=12,y=3,image="items/crystal-glyph-light.png"}
+        if wesnoth.get_variable("puzzle_sound.counter") == 2 then
+            wesnoth.set_variable("puzzle_sound.counter",3)
+            local experience=wesnoth.get_variable("small_puzzle_exp")
+            wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Yumi"}}}
+            
+            wesnoth.set_variable("puzzle_sound.complete",1)
+            wesnoth.wml_actions.unswap_starting_terrain()
+            wesnoth.wml_actions.clear_sound_puzzle()
+            wesnoth.wml_actions.initialize_puzzles()
+            wesnoth.wml_actions.fire_event {name = "transition"}
+        else
+            wesnoth.set_variable("puzzle_sound.counter",0)
+        end
+    end
 end
 
 function wesnoth.wml_actions.puzzle_earth_flower_hex(cfg)
@@ -234,6 +247,7 @@ function wesnoth.wml_actions.clear_all_vars(cfg)
 	wesnoth.set_variable("large_puzzle_exp",nil)
 	wesnoth.set_variable("small_puzzle_exp",nil)
 	
+	wesnoth.set_variable("puzzle_sound.complete",nil)
 	wesnoth.set_variable("puzzle_earth.complete",nil)
     wesnoth.set_variable("puzzle_ice.complete",nil)
     wesnoth.set_variable("puzzle_water_fire.complete",nil)
