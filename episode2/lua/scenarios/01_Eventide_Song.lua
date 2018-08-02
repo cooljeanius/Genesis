@@ -157,7 +157,6 @@ function wesnoth.wml_actions.puzzle_earth_fire_hex(cfg)
 	end
 end
 
-
 function wesnoth.wml_actions.puzzle_ice_fruit_hex(cfg)
 	if wesnoth.get_variable("puzzle_ice.fruit") == 0 then
 		wesnoth.wml_actions.message {speaker="narrator", message="There are some strawberries growing here."}
