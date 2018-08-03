@@ -59,6 +59,15 @@ function wesnoth.wml_actions.initialize_puzzles(cfg)
 	wesnoth.set_variable("puzzle_life.chocolate",0)
 	wesnoth.set_variable("puzzle_life.vanilla",0)
 	wesnoth.set_variable("puzzle_life.sugar",0)
+	
+	wesnoth.wml_actions.item {x=11,y=27,image="items/potion-white.png"} -- milk
+	wesnoth.wml_actions.item {x=13,y=30,image="items/flower1.png"} -- vanilla
+	wesnoth.wml_actions.item {x=30,y=24,image="scenery/nest-full.png"}
+	wesnoth.wml_actions.item {x=35,y=30,image="items/chocolate.png"}
+	wesnoth.wml_actions.item {x=21,y=34,image="items/sugar.png"}
+	wesnoth.wml_actions.item {x=24,y=27,image="items/crystal-glyph-message.png"}
+	-- pot at 23 26
+	-- fire 22 26
 end
 
 function wesnoth.wml_actions.initialize_sound_puzzle(cfg)
