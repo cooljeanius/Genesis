@@ -9,10 +9,13 @@ projectiles/icicles-ne-1.png
 projectiles/icicles-ne-1.png
 
 The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-ND v4.0
-All of the images in the directories:
+all images in the directories:
 units/demons/blue/
 units/demons/red/
 units/demons/fiend/
+units/demons/fighter/
+units/demons/void/
+units/faeries/healer/
 
 The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-SA v4.0
 units/demons/windlasher.png
@@ -35,38 +38,21 @@ units/demons/hellion.png
 units/demons/hellion-female.png
 units/demons/lamia.png
 units/demons/diviner.png
-units/faerie/shaman.png
-units/faerie/forest-nymph.png
-units/faerie/guardian.png
-units/faerie/warden.png
 
 The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-SA v4.0
 units/demons/winged.png
 units/demons/winged-female.png
-units/demons/sword-dancer.png
-units/demons/sword-dancer-female.png
-units/demons/bladestorm.png
-units/demons/bladestorm-female.png
 
 The next list of art images in the add-on's "images" directory are drawn by (or modified from, with permission) Iris Morelle (shadowm/ShikadiQueen) and are licensed under CC BY-NC-ND v4.0
-units/fae/yumi.png
-units/fae/esther.png
-units/fae/aryel.png
-units/fae/esther-wingless.png
-units/fae/aryel-wingless.png
-units/faerie/guardian-of-earth-xiael.png
-units/demons/merthiaal.png
-units/guardians/uria-silhouette3.png
-units/guardians/uria-silhouette4.png
-units/guardians/guardian-of-life-uria.png
-halo/uria-halo.png
-halo/merthiaal-halo.png
-halo/xiael-full.png
+all images in the directories:
+units/fae/
+units/guardians/
+halo/guardians/
 
 The next list of art images in the add-on's "images" directory are drawn by BTIssac and are licensed under CC BY-NC-SA v4.0
-
-all images in the directory 
+all images in the directories:
 portraits/demons/
+portraits/faeries/
 
 The next art image in the add-on's "images" directory is drawn by Pinack and is licensed under CC BY-NC-ND v4.0
 story/moonlit-lake.png
