@@ -16,6 +16,7 @@ units/demons/fiend/
 units/demons/fighter/
 units/demons/void/
 units/faeries/healer/
+units/humans/
 
 The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-SA v4.0
 all images in the directory:
