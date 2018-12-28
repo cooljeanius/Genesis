@@ -1,14 +1,4 @@
-The following art images in the add-on's "images" directory are borrowed with permission from Era of Magic, and are original work under
-the CC BY-SA v4 license. 
-
-projectiles/icicles1.png
-projectiles/icicles2.png
-projectiles/icicles3.png
-projectiles/icicles-ne-1.png
-projectiles/icicles-ne-1.png
-projectiles/icicles-ne-1.png
-
-The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-ND v4.0
+This list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-ND v4.0
 all images in the directories:
 units/demons/blue/
 units/demons/red/
@@ -16,6 +6,8 @@ units/demons/fiend/
 units/demons/fighter/
 units/demons/void/
 units/faeries/healer/
+units/humans/
+projectiles-new/
 
 The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-SA v4.0
 units/demons/windlasher.png
@@ -34,14 +26,8 @@ units/demons/voidhunter.png
 units/demons/voidhunter-male.png
 units/demons/reaper.png
 units/demons/reaper-male.png
-units/demons/hellion.png
-units/demons/hellion-female.png
 units/demons/lamia.png
 units/demons/diviner.png
-
-The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-SA v4.0
-units/demons/winged.png
-units/demons/winged-female.png
 
 The next list of art images in the add-on's "images" directory are drawn by (or modified from, with permission) Iris Morelle (shadowm/ShikadiQueen) and are licensed under CC BY-NC-ND v4.0
 all images in the directories:
