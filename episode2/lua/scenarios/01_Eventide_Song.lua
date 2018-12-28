@@ -47,7 +47,7 @@ function wesnoth.wml_actions.initialize_puzzles(cfg)
     wesnoth.set_variable("puzzle_water_fire.scepter",0)
     wesnoth.set_variable("puzzle_water_fire.grain",0)
 	
-	wesnoth.wml_actions.item {x=3,y=50,image="items/scepter-of-fire.png"}
+	wesnoth.wml_actions.item {x=3,y=50,image="items/sceptre-of-fire.png"}
 	wesnoth.wml_actions.item {x=29,y=47,image="scenery/windmill-01.png"}
 	wesnoth.wml_actions.item {x=28,y=47,image="scenery/whirlpool.png"}
 	wesnoth.wml_actions.item {x=24,y=44,image="items/straw-bale1.png"}
@@ -245,9 +245,9 @@ function wesnoth.wml_actions.puzzle_water_fire_whirlpool_hex(cfg)
 		wesnoth.wml_actions.message {speaker="narrator", message="Steam rises from the water."}
 		wesnoth.wml_actions.remove_item {x=28,y=47}
 		wesnoth.wml_actions.remove_item {x=29,y=47}
-		wesnoth.set_terrain(29,47,"Wwrg^Wm")
+		wesnoth.wml_actions.item {x=29,y=47,halo="scenery/windmill-[01~18].png:80"}
 		wesnoth.set_variable("puzzle_water_fire.scepter",4)
-	elseif wesnoth.get_variable("puzzle_water_fire.scepter") == 0 then
+	elseif wesnoth.get_variable("puzzle_water_fire.scepter") < 2 then
 		wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
 	end
 end
@@ -269,6 +269,7 @@ function wesnoth.wml_actions.puzzle_water_fire_windmill_hex(cfg)
 		wesnoth.wml_actions.message {speaker="narrator", message="You made some bread!"}
 		wesnoth.wml_actions.message {speaker="Yumi", message=string.format("(<i>nibbles</i>)")}
 		wesnoth.wml_actions.remove_item {x=31,y=45}
+		wesnoth.wml_actions.remove_item {x=20,y=47}
 		
 		local experience=wesnoth.get_variable("large_puzzle_exp")
 		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Yumi"}}}
