@@ -1,6 +1,9 @@
 function wesnoth.wml_actions.aryel_spell_setup()
     wesnoth.set_variable("aryel_spell_params.aryel_spell_radius",0)
-    wesnoth.set_variable("aryel_spell_params.aryel_spell_power",1)
+    wesnoth.set_variable("aryel_spell_params.aryel_spell_power",2)
+    wesnoth.set_variable("aryel_spell_params.aryel_intelligence",3)
+    wesnoth.set_variable("aryel_spell_params.aryel_insight",2)
+	
     wesnoth.set_variable("aryel_spell_params.aryel_mana_gain",2)
     wesnoth.set_variable("aryel_spell_params.aryel_max_mana",9)
     wesnoth.set_variable("aryel_spell_params.aryel_mana",9)
@@ -14,7 +17,10 @@ end
 
 function wesnoth.wml_actions.esther_spell_setup()
     wesnoth.set_variable("esther_spell_params.esther_spell_radius",0)
-    wesnoth.set_variable("esther_spell_params.esther_spell_power",1)
+    wesnoth.set_variable("esther_spell_params.esther_spell_power",3)
+    wesnoth.set_variable("esther_spell_params.esther_intelligence",2)
+    wesnoth.set_variable("esther_spell_params.esther_insight",1)
+	
     wesnoth.set_variable("esther_spell_params.esther_mana_gain",1)
     wesnoth.set_variable("esther_spell_params.esther_max_mana",7)
     wesnoth.set_variable("esther_spell_params.esther_mana",7)
@@ -29,6 +35,9 @@ end
 function wesnoth.wml_actions.kyoko_spell_setup()
     wesnoth.set_variable("kyoko_spell_params.kyoko_spell_radius",0)
     wesnoth.set_variable("kyoko_spell_params.kyoko_spell_power",1)
+    wesnoth.set_variable("kyoko_spell_params.kyoko_intelligence",1)
+    wesnoth.set_variable("kyoko_spell_params.kyoko_insight",1)
+	
     wesnoth.set_variable("kyoko_spell_params.kyoko_mana_gain",2)
     wesnoth.set_variable("kyoko_spell_params.kyoko_max_mana",10)
     wesnoth.set_variable("kyoko_spell_params.kyoko_mana",10)
@@ -43,6 +52,9 @@ end
 function wesnoth.wml_actions.talya_spell_setup()
     wesnoth.set_variable("talya_spell_params.talya_spell_radius",0)
     wesnoth.set_variable("talya_spell_params.talya_spell_power",1)
+    wesnoth.set_variable("talya_spell_params.talya_intelligence",1)
+    wesnoth.set_variable("talya_spell_params.talya_insight",1)
+	
     wesnoth.set_variable("talya_spell_params.talya_mana_gain",1)
     wesnoth.set_variable("talya_spell_params.talya_max_mana",5)
     wesnoth.set_variable("talya_spell_params.talya_mana",5)
@@ -56,7 +68,10 @@ end
 
 function wesnoth.wml_actions.yumi_spell_setup()
     wesnoth.set_variable("yumi_spell_params.yumi_spell_radius",0)
-    wesnoth.set_variable("yumi_spell_params.yumi_spell_power",1)
+    wesnoth.set_variable("yumi_spell_params.yumi_spell_power",3)
+    wesnoth.set_variable("yumi_spell_params.yumi_intelligence",3)
+    wesnoth.set_variable("yumi_spell_params.yumi_insight",3)
+	
     wesnoth.set_variable("yumi_spell_params.yumi_mana_gain",2)
     wesnoth.set_variable("yumi_spell_params.yumi_max_mana",11)
     wesnoth.set_variable("yumi_spell_params.yumi_mana",11)
@@ -76,8 +91,8 @@ on_event("new turn", function(context)
         if wesnoth.get_variable("spell_params.enable_aryel")==1 then
             local aryel_mana = wesnoth.get_variable("aryel_spell_params.aryel_mana")
             local aryel_max_mana = wesnoth.get_variable("aryel_spell_params.aryel_max_mana")
-            local aryel_mana_gain = wesnoth.get_variable("aryel_spell_params.aryel_mana_gain")
-
+            local aryel_mana_gain = math.floor(wesnoth.get_variable("aryel_spell_params.aryel_mana_gain")*(1+wesnoth.get_variable("aryel_spell_params.aryel_intelligence")/10))
+			
             if aryel_mana == aryel_max_mana then
                 wesnoth.set_variable("aryel_spell_params.aryel_mana", aryel_mana)
             elseif aryel_mana < aryel_max_mana-aryel_mana_gain then
@@ -95,7 +110,7 @@ on_event("new turn", function(context)
         if wesnoth.get_variable("spell_params.enable_esther")==1 then
             local esther_mana = wesnoth.get_variable("esther_spell_params.esther_mana")
             local esther_max_mana = wesnoth.get_variable("esther_spell_params.esther_max_mana")
-            local esther_mana_gain = wesnoth.get_variable("esther_spell_params.esther_mana_gain")
+            local esther_mana_gain = math.floor(wesnoth.get_variable("esther_spell_params.esther_mana_gain")*(1+wesnoth.get_variable("esther_spell_params.esther_intelligence")/10))
 
             if esther_mana == esther_max_mana then
                 wesnoth.set_variable("esther_spell_params.esther_mana", esther_mana)
@@ -114,7 +129,7 @@ on_event("new turn", function(context)
 		if wesnoth.get_variable("spell_params.enable_kyoko")==1 then
             local kyoko_mana = wesnoth.get_variable("kyoko_spell_params.kyoko_mana")
             local kyoko_max_mana = wesnoth.get_variable("kyoko_spell_params.kyoko_max_mana")
-            local kyoko_mana_gain = wesnoth.get_variable("kyoko_spell_params.kyoko_mana_gain")
+            local kyoko_mana_gain = math.floor(wesnoth.get_variable("kyoko_spell_params.kyoko_mana_gain")*(1+wesnoth.get_variable("kyoko_spell_params.kyoko_intelligence")/10))
 
             if kyoko_mana == kyoko_max_mana then
                 wesnoth.set_variable("kyoko_spell_params.kyoko_mana", kyoko_mana)
@@ -133,7 +148,7 @@ on_event("new turn", function(context)
 		if wesnoth.get_variable("spell_params.enable_talya")==1 then
             local talya_mana = wesnoth.get_variable("talya_spell_params.talya_mana")
             local talya_max_mana = wesnoth.get_variable("talya_spell_params.talya_max_mana")
-            local talya_mana_gain = wesnoth.get_variable("talya_spell_params.talya_mana_gain")
+            local talya_mana_gain = math.floor(wesnoth.get_variable("talya_spell_params.talya_mana_gain")*(1+wesnoth.get_variable("talya_spell_params.talya_intelligence")/10))
 
             if talya_mana == talya_max_mana then
                 wesnoth.set_variable("talya_spell_params.talya_mana", talya_mana)
@@ -152,7 +167,7 @@ on_event("new turn", function(context)
         if wesnoth.get_variable("spell_params.enable_yumi")==1 then
             local yumi_mana = wesnoth.get_variable("yumi_spell_params.yumi_mana")
             local yumi_max_mana = wesnoth.get_variable("yumi_spell_params.yumi_max_mana")
-            local yumi_mana_gain = wesnoth.get_variable("yumi_spell_params.yumi_mana_gain")
+            local yumi_mana_gain = math.floor(wesnoth.get_variable("yumi_spell_params.yumi_mana_gain")*(1+wesnoth.get_variable("yumi_spell_params.yumi_intelligence")/10))
 
             if yumi_mana == yumi_max_mana then
                 wesnoth.set_variable("yumi_spell_params.yumi_mana", yumi_mana)
@@ -299,9 +314,10 @@ end
 function wesnoth.wml_actions.malefice_spell()
     local aryel_spell_power = wesnoth.get_variable("aryel_spell_params.aryel_spell_power")
     local malefice_bonus = wesnoth.get_variable("aryel_spell_params.malefice_bonus")
+    local insight = wesnoth.get_variable("aryel_spell_params.aryel_insight")
 
     wesnoth.wml_actions.harm_unit {fire_event="yes",
-        animate="yes",amount=(3 + malefice_bonus)*aryel_spell_power,delay="50",experience="yes",damage_type="arcane",variable="damage",
+        animate="yes",amount=math.floor((3 + malefice_bonus)*(1+aryel_spell_power/10)),delay="50",experience="yes",damage_type="arcane",variable="damage",
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Aryel"}},
         {"primary_attack",{name="eviscerate"}},
@@ -318,35 +334,39 @@ function wesnoth.wml_actions.malefice_spell()
     wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") - 5)
 
     if not wesnoth.wml_conditionals.have_unit { x = "$x1", y = "$y1" } then
-        wesnoth.set_variable("aryel_spell_params.malefice_bonus", malefice_bonus + 0.2)
+        wesnoth.set_variable("aryel_spell_params.malefice_bonus", malefice_bonus + 0.2*(1+insight/10))
     end
 end
 
 function wesnoth.wml_actions.infuse_spell()
     local aryel_spell_power = wesnoth.get_variable("aryel_spell_params.aryel_spell_power")
     local infuse_bonus = wesnoth.get_variable("aryel_spell_params.infuse_bonus")
+	local insight = wesnoth.get_variable("aryel_spell_params.aryel_insight")
+	local intelligence = wesnoth.get_variable("aryel_spell_params.aryel_intelligence")
 
     wesnoth.wml_actions.heal_unit {
-        animate="yes",amount=(3 + infuse_bonus)*aryel_spell_power,
+        animate="yes",amount=math.floor((3 + infuse_bonus)*(1+aryel_spell_power/10)),
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Aryel"}}
     }
 
     wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") - 3)
 
-    if infuse_bonus < wesnoth.get_variable("aryel_spell_params.infuse_max_bonus") then
-        wesnoth.set_variable("aryel_spell_params.infuse_bonus", infuse_bonus + 0.1)
+    if infuse_bonus < math.floor(wesnoth.get_variable("aryel_spell_params.infuse_max_bonus")*(1+intelligence/20)) then
+        wesnoth.set_variable("aryel_spell_params.infuse_bonus", infuse_bonus + 0.1*(1+insight/10))
     end
 end
 
 function wesnoth.wml_actions.blood_bind_spell()
     local aryel_spell_power = wesnoth.get_variable("aryel_spell_params.aryel_spell_power")
     local aryel = wesnoth.get_unit("Aryel")
-    
+    local insight = wesnoth.get_variable("aryel_spell_params.aryel_insight")
+	local intelligence = wesnoth.get_variable("aryel_spell_params.aryel_intelligence")
+
     local blood_bind_factor = wesnoth.get_variable("aryel_spell_params.blood_bind_factor")
 
     wesnoth.wml_actions.harm_unit {fire_event="yes",
-        animate="yes",amount=6*blood_bind_factor*aryel_spell_power,delay="50",experience="yes",
+        animate="yes",amount=math.floor(6*blood_bind_factor*(1+aryel_spell_power/10)),delay="50",experience="yes",
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Aryel"}},
         {"primary_attack",{name="blood boil"}},
@@ -361,8 +381,8 @@ function wesnoth.wml_actions.blood_bind_spell()
     
     wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") - 1)
     
-    if blood_bind_factor < wesnoth.get_variable("aryel_spell_params.blood_bind_max_factor") then
-        wesnoth.set_variable("aryel_spell_params.blood_bind_factor", blood_bind_factor + 0.1)
+    if blood_bind_factor < math.floor(wesnoth.get_variable("aryel_spell_params.blood_bind_max_factor")*(1+intelligence/20)) then
+        wesnoth.set_variable("aryel_spell_params.blood_bind_factor", blood_bind_factor + 0.1*(1+insight/10))
     end
 end
 
@@ -393,11 +413,11 @@ function wesnoth.wml_actions.harvest_soul_spell()
     end
 
     wesnoth.wml_actions.heal_unit {
-        animate="yes",amount=HP*aryel_spell_power,
+        animate="yes",amount=math.floor(HP*(1+aryel_spell_power/10)),
         {"filter",{id="Aryel"}}
     }
     
-    wesnoth.float_label(aryel.x,aryel.y,string.format("<span color='#00ff00'>+%d HP</span>",math.floor(HP*aryel_spell_power)))
+    wesnoth.float_label(aryel.x,aryel.y,string.format("<span color='#00ff00'>+%d HP</span>",math.floor(HP*(1+aryel_spell_power/10))))
     wesnoth.float_label(aryel.x,aryel.y,string.format("<span color='#0000ff'>%d mana</span>",mana))
     
     wesnoth.wml_actions.kill { x=x,y=y,animate="yes" }
@@ -408,9 +428,10 @@ end
 function wesnoth.wml_actions.eldritch_bolt_spell()
     local aryel_spell_power = wesnoth.get_variable("aryel_spell_params.aryel_spell_power")
     local eldritch_bonus = wesnoth.get_variable("aryel_spell_params.eldritch_bonus")
+	local intelligence = wesnoth.get_variable("aryel_spell_params.aryel_intelligence")
 
     wesnoth.wml_actions.harm_unit {fire_event="yes",
-        animate="yes",amount=(7 + eldritch_bonus)*aryel_spell_power,delay="50",experience="yes",damage_type="arcane",
+        animate="yes",amount=math.floor(7*(1+aryel_spell_power/10)),delay="50",experience="yes",damage_type="arcane",
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Aryel"}},
         {"primary_attack",{name="blood boil"}},
@@ -419,9 +440,9 @@ function wesnoth.wml_actions.eldritch_bolt_spell()
 
     wesnoth.set_variable("aryel_spell_params.aryel_mana", wesnoth.get_variable("aryel_spell_params.aryel_mana") - 6)
 
-    if not wesnoth.wml_conditionals.have_unit { x = "$x1", y = "$y1" } and eldritch_bonus < wesnoth.get_variable("aryel_spell_params.eldritch_max_bonus") then
-        wesnoth.set_variable("aryel_spell_params.eldritch_bonus", eldritch_bonus + 1)
-        local unit = wesnoth.create_unit { type = "Eldritch Form", hitpoints=10+eldritch_bonus, max_hitpoints=10+eldritch_bonus}
+    if not wesnoth.wml_conditionals.have_unit { x = "$x1", y = "$y1" } and eldritch_bonus < math.floor(wesnoth.get_variable("aryel_spell_params.eldritch_max_bonus")*(1+intelligence/20)) then
+        wesnoth.set_variable("aryel_spell_params.eldritch_bonus", eldritch_bonus + 1*(1+insight/10))
+        local unit = wesnoth.create_unit { type = "Eldritch Form", hitpoints=math.floor(10+eldritch_bonus), max_hitpoints=math.floor(10+eldritch_bonus)}
         local x = wesnoth.get_variable("x1")
         local y = wesnoth.get_variable("y1")
         wesnoth.put_unit(x,y,unit)
@@ -432,9 +453,11 @@ end
 function wesnoth.wml_actions.firebolt_spell()
     local esther_spell_power = wesnoth.get_variable("esther_spell_params.esther_spell_power")
     local firebolt_bonus = wesnoth.get_variable("esther_spell_params.firebolt_bonus")
+	local insight = wesnoth.get_variable("esther_spell_params.esther_insight")
+	local intelligence = wesnoth.get_variable("esther_spell_params.esther_intelligence")
 
     wesnoth.wml_actions.harm_unit {fire_event="yes",
-        animate="yes",amount=(4 + firebolt_bonus)*esther_spell_power,delay="50",experience="yes",damage_type="fire",
+        animate="yes",amount=math.floor((4 + firebolt_bonus)*(1+esther_spell_power/10)),delay="50",experience="yes",damage_type="fire",
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Esther"}},
         {"primary_attack",{name="infernal blast"}},
@@ -443,33 +466,37 @@ function wesnoth.wml_actions.firebolt_spell()
 
     wesnoth.set_variable("esther_spell_params.esther_mana", wesnoth.get_variable("esther_spell_params.esther_mana") - 4)
 
-    if firebolt_bonus < wesnoth.get_variable("esther_spell_params.firebolt_max_bonus") then
-        wesnoth.set_variable("esther_spell_params.firebolt_bonus", firebolt_bonus + 0.1)
+    if firebolt_bonus < math.floor(wesnoth.get_variable("esther_spell_params.firebolt_max_bonus")*(1+intelligence/20)) then
+        wesnoth.set_variable("esther_spell_params.firebolt_bonus", firebolt_bonus + 0.1*(1+insight/10))
     end
 end
 
 function wesnoth.wml_actions.sunlight_spark_spell()
     local esther_spell_power = wesnoth.get_variable("esther_spell_params.esther_spell_power")
     local sunlight_spark_bonus = wesnoth.get_variable("esther_spell_params.sunlight_spark_bonus")
+	local insight = wesnoth.get_variable("esther_spell_params.esther_insight")
+	local intelligence = wesnoth.get_variable("esther_spell_params.esther_intelligence")
 
     wesnoth.wml_actions.heal_unit {
-        animate="yes",amount=(7 + sunlight_spark_bonus)*esther_spell_power,
+        animate="yes",amount=math.floor((7 + sunlight_spark_bonus)*(1+esther_spell_power/10)),
         {"filter",{id="Esther"}}
     }
 
     wesnoth.set_variable("esther_spell_params.esther_mana", wesnoth.get_variable("esther_spell_params.esther_mana") - 4)
 
-    if sunlight_spark_bonus < wesnoth.get_variable("esther_spell_params.sunlight_spark_max_bonus") then
-        wesnoth.set_variable("esther_spell_params.sunlight_spark_bonus", sunlight_spark_bonus + 0.5)
+    if sunlight_spark_bonus < math.floor(wesnoth.get_variable("esther_spell_params.sunlight_spark_max_bonus")*(1+intelligence/20)) then
+        wesnoth.set_variable("esther_spell_params.sunlight_spark_bonus", sunlight_spark_bonus + 0.5*(1+insight/10))
     end
 end
 
 function wesnoth.wml_actions.ember_spear_spell()
     local esther_spell_power = wesnoth.get_variable("esther_spell_params.esther_spell_power")
     local ember_bonus = wesnoth.get_variable("esther_spell_params.ember_bonus")
+	local insight = wesnoth.get_variable("esther_spell_params.esther_insight")
+	local intelligence = wesnoth.get_variable("esther_spell_params.esther_intelligence")
 
     wesnoth.wml_actions.harm_unit {fire_event="yes",
-        animate="yes",amount=(2 + ember_bonus)*esther_spell_power,delay="50",experience="yes",damage_type="fire",slowed="yes",
+        animate="yes",amount=math.floor((2 + ember_bonus)*(1+esther_spell_power/10)),delay="50",experience="yes",damage_type="fire",slowed="yes",
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Esther"}},
         {"primary_attack",{name="infernal blast"}},
@@ -478,8 +505,8 @@ function wesnoth.wml_actions.ember_spear_spell()
 
     wesnoth.set_variable("esther_spell_params.esther_mana", wesnoth.get_variable("esther_spell_params.esther_mana") - 3)
 
-    if ember_bonus < wesnoth.get_variable("esther_spell_params.ember_max_bonus") then
-        wesnoth.set_variable("esther_spell_params.ember_bonus", ember_bonus + 0.1)
+    if ember_bonus < math.floor(wesnoth.get_variable("esther_spell_params.ember_max_bonus")*(1+intelligence/20)) then
+        wesnoth.set_variable("esther_spell_params.ember_bonus", ember_bonus + 0.1*(1+insight/10))
     end
 end
 
@@ -491,7 +518,7 @@ function wesnoth.wml_actions.ardent_flare_spell()
         {"effect",{apply_to="new_ability",
             {"abilities",{
                 {"leadership",{affect_self="yes",affect_allies="no",affect_enemies="no",
-                    name="ardent flare",description="This unit has increased damage.",value=25*esther_spell_power
+                    name="ardent flare",description="This unit has increased damage.",value=math.floor(25*(1+esther_spell_power/10))
                 }}
             }}
         }}
@@ -508,7 +535,7 @@ function wesnoth.wml_actions.blazing_star_spell()
         {"effect",{apply_to="new_ability",
             {"abilities",{
                 {"leadership",{affect_self="no",affect_allies="no",affect_enemies="yes",
-                    name="blazing star",description="Nearby enemies have decreased damage.",value=-50*esther_spell_power,
+                    name="blazing star",description="Nearby enemies have decreased damage.",value=math.floor(-50*(1+esther_spell_power/10)),
                     {"affect_adjacent",{adjacent="n,ne,se,s,sw,nw"}}
                 }}
             }}
@@ -522,9 +549,11 @@ function wesnoth.wml_actions.lightning_bolt_spell()
     local esther_spell_power = wesnoth.get_variable("esther_spell_params.esther_spell_power")
     local lightning_bonus = wesnoth.get_variable("esther_spell_params.lightning_bonus")
     local lightning_shred = wesnoth.get_variable("esther_spell_params.lightning_shred")
+	local insight = wesnoth.get_variable("esther_spell_params.esther_insight")
+	local intelligence = wesnoth.get_variable("esther_spell_params.esther_intelligence")
 
     wesnoth.wml_actions.harm_unit {fire_event="yes",
-        animate="yes",amount=(9 + lightning_bonus)*esther_spell_power,delay="50",experience="yes",damage_type="fire",
+        animate="yes",amount=math.floor((9 + lightning_bonus)*(1+esther_spell_power/10)),delay="50",experience="yes",damage_type="fire",
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Esther"}},
         {"primary_attack",{name="tempest"}},
@@ -540,21 +569,23 @@ function wesnoth.wml_actions.lightning_bolt_spell()
 
     wesnoth.set_variable("esther_spell_params.esther_mana", wesnoth.get_variable("esther_spell_params.esther_mana") - 7)
 
-    if lightning_bonus < wesnoth.get_variable("esther_spell_params.lightning_max_bonus") then
-        wesnoth.set_variable("esther_spell_params.lightning_bonus", lightning_bonus + 0.3)
+    if lightning_bonus < math.floor(wesnoth.get_variable("esther_spell_params.lightning_max_bonus")*(1+intelligence/20)) then
+        wesnoth.set_variable("esther_spell_params.lightning_bonus", lightning_bonus + 0.3*(1+insight/10))
     end
     
     if lightning_shred < 50 then
-        wesnoth.set_variable("esther_spell_params.lightning_shred", lightning_shred + 1)
+        wesnoth.set_variable("esther_spell_params.lightning_shred", lightning_shred + 1*(1+insight/10))
     end
 end
 
 ------------- YUMI ------------
 function wesnoth.wml_actions.siphon_spell()
     local yumi_spell_power = wesnoth.get_variable("yumi_spell_params.yumi_spell_power")
+	local insight = wesnoth.get_variable("yumi_spell_params.yumi_insight")
+	local intelligence = wesnoth.get_variable("yumi_spell_params.yumi_intelligence")
 
     wesnoth.wml_actions.harm_unit {fire_event="yes",
-        animate="yes",amount=5*yumi_spell_power,delay="50",experience="yes",damage_type="arcane",variable="damage",
+        animate="yes",amount=math.floor(5*(1+yumi_spell_power/10)),delay="50",experience="yes",damage_type="arcane",variable="damage",
         {"filter",{x="$x1",y="$y1"}},
         {"filter_second",{id="Yumi"}},
         {"primary_attack",{name="faerie fire"}},
@@ -576,16 +607,18 @@ function wesnoth.wml_actions.siphon_spell()
 
     wesnoth.set_variable("yumi_spell_params.yumi_mana", wesnoth.get_variable("yumi_spell_params.yumi_mana") - 5)
 
-    if siphon_spell_healing < 1.00 then
-        wesnoth.set_variable("yumi_spell_params.siphon_spell_healing", siphon_spell_healing + 0.01)
+    if siphon_spell_healing < math.floor(1.00*(1+intelligence/20)) then
+        wesnoth.set_variable("yumi_spell_params.siphon_spell_healing", siphon_spell_healing + 0.01*(1+insight/10))
     end
 end
 
 function wesnoth.wml_actions.void_blast_spell()
     local yumi_spell_power = wesnoth.get_variable("yumi_spell_params.yumi_spell_power")
     local void_damage_bonus = wesnoth.get_variable("yumi_spell_params.void_damage_bonus")
+	local insight = wesnoth.get_variable("yumi_spell_params.yumi_insight")
+	local intelligence = wesnoth.get_variable("yumi_spell_params.yumi_intelligence")
 
-    local damage = (5 + void_damage_bonus)*yumi_spell_power
+    local damage = math.floor((5 + void_damage_bonus)*(1+yumi_spell_power/10))
     
     if wesnoth.wml_conditionals.have_unit { id="Yumi", ability = "shadowwalk"} then
         damage = damage * 2
@@ -601,8 +634,8 @@ function wesnoth.wml_actions.void_blast_spell()
 
     wesnoth.set_variable("yumi_spell_params.yumi_mana", wesnoth.get_variable("yumi_spell_params.yumi_mana") - 4)
 
-    if void_damage_bonus < wesnoth.get_variable("yumi_spell_params.yumi_void_max_bonus") then
-        wesnoth.set_variable("yumi_spell_params.void_damage_bonus", void_damage_bonus + 0.1)
+    if void_damage_bonus < math.floor(wesnoth.get_variable("yumi_spell_params.yumi_void_max_bonus")*(1+intelligence/20)) then
+        wesnoth.set_variable("yumi_spell_params.void_damage_bonus", void_damage_bonus + 0.1*(1+insight/10))
     end
 end
 
@@ -640,8 +673,10 @@ end
 function wesnoth.wml_actions.null_flare_spell()
     local yumi_spell_power = wesnoth.get_variable("yumi_spell_params.yumi_spell_power")
     local null_damage_bonus = wesnoth.get_variable("yumi_spell_params.null_damage_bonus")
+	local insight = wesnoth.get_variable("yumi_spell_params.yumi_insight")
+	local intelligence = wesnoth.get_variable("yumi_spell_params.yumi_intelligence")
 
-    local damage = (4 + null_damage_bonus)*yumi_spell_power
+    local damage = math.floor((4 + null_damage_bonus)*(1+yumi_spell_power/10))
     
     if wesnoth.wml_conditionals.have_unit { id="Yumi", ability = "shadowwalk"} then
         damage = damage * 2
@@ -663,8 +698,8 @@ function wesnoth.wml_actions.null_flare_spell()
     
     wesnoth.set_variable("yumi_spell_params.yumi_mana", wesnoth.get_variable("yumi_spell_params.yumi_mana") - 5)
 
-    if null_damage_bonus < wesnoth.get_variable("yumi_spell_params.yumi_null_max_bonus") then
-        wesnoth.set_variable("yumi_spell_params.null_damage_bonus", null_damage_bonus + 0.2)
+    if null_damage_bonus < math.floor(wesnoth.get_variable("yumi_spell_params.yumi_null_max_bonus")*(1+intelligence/20)) then
+        wesnoth.set_variable("yumi_spell_params.null_damage_bonus", null_damage_bonus + 0.2*(1+insight/10))
     end
 end
 
@@ -680,7 +715,7 @@ function wesnoth.wml_actions.shadow_walk_spell()
         }}
     }
     
-    wesnoth.wml_actions.modify_unit {moves=2*yumi.max_moves,
+    wesnoth.wml_actions.modify_unit {moves=2*yumi.max_moves,attacks_left=0,
         {"filter",{id="Yumi"}}
     }
 
@@ -899,41 +934,45 @@ function wesnoth.wml_actions.aryel_spell_help()
     
     --wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
 
+	local insight = wesnoth.get_variable("aryel_spell_params.aryel_insight")
+	local intelligence = wesnoth.get_variable("aryel_spell_params.aryel_intelligence")	
+	local aryel_spell_power = wesnoth.get_variable("aryel_spell_params.aryel_spell_power")
+	
     if r == -1 then
         if li == 1 then
             wesnoth.show_message_dialog({
                  title = "Character Statistics",
-                 message = string.format("<span color='#0000ff'>Current Mana: %d</span> \n<span color='#00ffff'>Maximum Mana: %d</span> \n<span color='#85C1E9'>Mana Regen: %d</span>\n<span color='#F000FF'>Spell Power: %d</span>",wesnoth.get_variable("aryel_spell_params.aryel_mana"),wesnoth.get_variable("aryel_spell_params.aryel_max_mana"),wesnoth.get_variable("aryel_spell_params.aryel_mana_gain"),wesnoth.get_variable("aryel_spell_params.aryel_spell_power")),
+                 message = string.format("<span color='#0000ff'>Current Mana: %d</span> \n<span color='#00ffff'>Maximum Mana: %d</span>\n<span color='#85C1E9'>Mana Regen: %d</span>\n<span color='#DC143C'>Spell Power: %d</span>\n<span color='#1E90FF'>Intelligence: %d</span>\n<span color='#DA70D6'>Insight: %d</span>",wesnoth.get_variable("aryel_spell_params.aryel_mana"),wesnoth.get_variable("aryel_spell_params.aryel_max_mana"),math.floor(wesnoth.get_variable("aryel_spell_params.aryel_mana_gain")*(1+wesnoth.get_variable("aryel_spell_params.aryel_intelligence")/10)),wesnoth.get_variable("aryel_spell_params.aryel_spell_power"),wesnoth.get_variable("aryel_spell_params.aryel_intelligence"),wesnoth.get_variable("aryel_spell_params.aryel_insight")),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(units/fae/aryel.png~SCALE(144,144), 144, 200)",
             })
         elseif spell_names[li]=="Infuse" then
             wesnoth.show_message_dialog({
                  title = "Infuse",
-                 message = string.format("<span color='#0000ff'>Mana cost: 3</span> \n<span color='#008000'>Cast radius: 3</span> \nHeals <span color='#ff0000'>%d</span> hitpoints to target ally. Each cast increases the healing of this spell by <span color='#ff0000'>0.1</span>, up to a maximum of <span color='#ff0000'>%d</span>.",math.floor(wesnoth.get_variable("aryel_spell_params.infuse_bonus")+3.4),math.floor(wesnoth.get_variable("aryel_spell_params.infuse_max_bonus")+3)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 3</span> \n<span color='#008000'>Cast radius: 3</span> \nHeals <span color='#00ff00'>%d</span> hitpoints to target ally. Each cast increases the healing of this spell by <span color='#00ff00'>%f</span>, up to a maximum of <span color='#00ff00'>%d</span>.",math.floor((3 + wesnoth.get_variable("aryel_spell_params.infuse_bonus"))*(1+aryel_spell_power/10)),0.1*(1+insight/10),math.floor((3+wesnoth.get_variable("aryel_spell_params.infuse_max_bonus")*(1+intelligence/20))*(1+aryel_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/touch-faerie.png~SCALE(120,120), 168, 212)",
             })
         elseif spell_names[li]=="Malefice" then
             wesnoth.show_message_dialog({
                  title = "Malefice",
-                 message = string.format("<span color='#0000ff'>Mana cost: 5</span> \n<span color='#008000'>Cast radius: 1</span> \nDeals <span color='#ff0000'>%d</span> <span color='#00f2ff'>arcane</span> damage to target enemy. Killing an enemy unit with this spell increases its damage by <span color='#ff0000'>0.2</span>.",math.floor(wesnoth.get_variable("aryel_spell_params.malefice_bonus")+3.4)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 5</span> \n<span color='#008000'>Cast radius: 1</span> \nDeals <span color='#ff0000'>%d</span> <span color='#00f2ff'>arcane</span> damage to target enemy. Killing an enemy unit with this spell increases its damage by <span color='#ff0000'>%f</span>.",math.floor((3 + wesnoth.get_variable("aryel_spell_params.malefice_bonus"))*(1+aryel_spell_power/10)),0.2*(1+insight/10)),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/wail.png~SCALE(120,120), 168, 212)",
             })
         elseif spell_names[li]=="Blood Bind" then
             wesnoth.show_message_dialog({
                  title = "Blood Bind",
-                 message = string.format("<span color='#0000ff'>Mana cost: 1</span> \n<span color='#008000'>Cast radius: 5</span> \nDrains <span color='#ff0000'>6</span> health from Aryel to deal <span color='#ff0000'>%d</span> damage to target enemy. Each cast increases the amount of damage dealt, up to <span color='#ff0000'>%d</span>.",math.floor(wesnoth.get_variable("aryel_spell_params.blood_bind_factor")*6),math.floor(wesnoth.get_variable("aryel_spell_params.blood_bind_max_factor")*6)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 1</span> \n<span color='#008000'>Cast radius: 5</span> \nDrains <span color='#ff0000'>6</span> health from Aryel to deal <span color='#ff0000'>%d</span> damage to target enemy. Each cast increases the amount of damage dealt, up to <span color='#ff0000'>%d</span>.",math.floor(6*wesnoth.get_variable("aryel_spell_params.blood_bind_factor")*(1+aryel_spell_power/10)),math.floor(wesnoth.get_variable("aryel_spell_params.blood_bind_max_factor")*(1+intelligence/20)*6*(1+aryel_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/curse.png~SCALE(120,120), 168, 212)",
             })
         elseif spell_names[li]=="Harvest Soul" then
             wesnoth.show_message_dialog({
                  title = "Harvest Soul",
-                 message = string.format("<span color='#0000ff'>Mana cost: -</span> \n<span color='#008000'>Cast radius: 3</span> \nConsumes an allied spirit, regaining health and mana.\nEldritch Form: <span color='#0000ff'>2 mana</span>\nLevel 1: <span color='#00ff00'>8 health</span>\nLevel 2: <span color='#00ff00'>16 health</span> and <span color='#0000ff'>1 mana</span>\nLevel 3: <span color='#00ff00'>24 health</span> and <span color='#0000ff'>2 mana</span>\n"),
+                 message = string.format("<span color='#0000ff'>Mana cost: -</span> \n<span color='#008000'>Cast radius: 3</span> \nConsumes an allied spirit, regaining health and mana.\nEldritch Form: <span color='#0000ff'>2 mana</span>\nLevel 1: <span color='#00ff00'>%d health</span>\nLevel 2: <span color='#00ff00'>%d health</span> and <span color='#0000ff'>1 mana</span>\nLevel 3: <span color='#00ff00'>%d health</span> and <span color='#0000ff'>2 mana</span>\n",math.floor(8*(1+aryel_spell_power/10)),math.floor(16*(1+aryel_spell_power/10)),math.floor(24*(1+aryel_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/wail.png~SCALE(120,120), 168, 148)",
             })
         elseif spell_names[li]=="Eldritch Bolt" then
             wesnoth.show_message_dialog({
                  title = "Eldritch Bolt",
-                 message = string.format("<span color='#0000ff'>Mana cost: 6</span> \n<span color='#008000'>Cast radius: 1</span> \nDeals <span color='#ff0000'>7</span> <span color='#00f2ff'>arcane</span> damage to target enemy. Killing an enemy unit with this spell spawns an Eldritch Form with <span color='#ff0000'>%d</span> hitpoints.",math.floor(wesnoth.get_variable("aryel_spell_params.eldritch_bonus")+10)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 6</span> \n<span color='#008000'>Cast radius: 1</span> \nDeals <span color='#ff0000'>%d</span> <span color='#00f2ff'>arcane</span> damage to target enemy. Killing an enemy unit with this spell spawns an Eldritch Form with <span color='#00ff00'>%d</span> hitpoints. Each subsequent Eldritch Form will have <span color='#00ff00'>%f</span> additional hitpoints, up to a maximum of <span color='#00ff00'>%d</span> hitpoints.",math.floor(7*(1+aryel_spell_power/10)),math.floor(10+wesnoth.get_variable("aryel_spell_params.eldritch_bonus")),1*(1+insight/10),math.floor(wesnoth.get_variable("aryel_spell_params.eldritch_max_bonus")*(1+intelligence/20)+10)),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/nightmare-bite.png~SCALE(120,120), 168, 212)",
             })
         end
@@ -1007,48 +1046,51 @@ function wesnoth.wml_actions.esther_spell_help()
     local r = wesnoth.show_dialog(dialog, preshow, postshow)
     
     --wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
-
+	
+	local esther_spell_power = wesnoth.get_variable("esther_spell_params.esther_spell_power")
+	local insight = wesnoth.get_variable("esther_spell_params.esther_insight")
+	local intelligence = wesnoth.get_variable("esther_spell_params.esther_intelligence")
     if r == -1 then
         if li == 1 then
             wesnoth.show_message_dialog({
                  title = "Character Statistics",
-                 message = string.format("<span color='#0000ff'>Current Mana: %d</span> \n<span color='#00ffff'>Maximum Mana: %d</span> \n<span color='#85C1E9'>Mana Regen: %d</span>\n<span color='#F000FF'>Spell Power: %d</span>",wesnoth.get_variable("esther_spell_params.esther_mana"),wesnoth.get_variable("esther_spell_params.esther_max_mana"),wesnoth.get_variable("esther_spell_params.esther_mana_gain"),wesnoth.get_variable("esther_spell_params.esther_spell_power")),
+                 message = string.format("<span color='#0000ff'>Current Mana: %d</span> \n<span color='#00ffff'>Maximum Mana: %d</span>\n<span color='#85C1E9'>Mana Regen: %d</span>\n<span color='#DC143C'>Spell Power: %d</span>\n<span color='#1E90FF'>Intelligence %d</span>\n<span color='#DA70D6'>Insight: %d</span>",wesnoth.get_variable("esther_spell_params.esther_mana"),wesnoth.get_variable("esther_spell_params.esther_max_mana"),math.floor(wesnoth.get_variable("esther_spell_params.esther_mana_gain")*(1+wesnoth.get_variable("esther_spell_params.esther_intelligence")/10)),wesnoth.get_variable("esther_spell_params.esther_spell_power"),wesnoth.get_variable("esther_spell_params.esther_intelligence"),wesnoth.get_variable("esther_spell_params.esther_insight")),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(units/fae/esther.png~SCALE(144,144), 144, 200)",
             })
         elseif spell_names[li]=="Firebolt" then
             wesnoth.show_message_dialog({
                  title = "Firebolt",
-                 message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: 3</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy. Each cast increases the damage of this spell by <span color='#ff0000'>0.1</span>, up to a maximum of <span color='#ff0000'>%d</span>.",math.floor(wesnoth.get_variable("esther_spell_params.firebolt_bonus")+4.4),math.floor(wesnoth.get_variable("esther_spell_params.firebolt_max_bonus")+4)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: 3</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy. Each cast increases the damage of this spell by <span color='#ff0000'>%f</span>, up to a maximum of <span color='#ff0000'>%d</span>.",math.floor((4 + wesnoth.get_variable("esther_spell_params.firebolt_bonus"))*(1+esther_spell_power/10)),0.1*(1+insight/10),math.floor((wesnoth.get_variable("esther_spell_params.firebolt_max_bonus")*(1+intelligence/20)+4)*(1+esther_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/fireball.png~SCALE(120,120), 168, 212)",
             })
 		elseif spell_names[li]=="Sunlight Spark" then
             wesnoth.show_message_dialog({
                  title = "Sunlight Spark",
-                 message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: -</span> \nEsther heals <span color='#ff0000'>%d</span> hitpoints. Each cast increases the healing from this spell by <span color='#ff0000'>0.5</span>, up to a maximum of <span color='#ff0000'>%d</span>. Can only be cast during the day.",math.floor(wesnoth.get_variable("esther_spell_params.sunlight_spark_bonus")+7.4),math.floor(wesnoth.get_variable("esther_spell_params.sunlight_spark_max_bonus")+7)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: -</span> \nEsther heals <span color='#00ff00'>%d</span> hitpoints. Each cast increases the healing from this spell by <span color='#00ff00'>%f</span>, up to a maximum of <span color='#00ff00'>%d</span>. Can only be cast during the day.",math.floor((7 + wesnoth.get_variable("esther_spell_params.sunlight_spark_bonus"))*(1+esther_spell_power/10)),0.5*(1+insight/10),math.floor((wesnoth.get_variable("esther_spell_params.sunlight_spark_max_bonus")*(1+intelligence/20)+7)*(1+esther_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/magic-missile.png~SCALE(120,120), 168, 212)",
             })
         elseif spell_names[li]=="Ember Spear" then
             wesnoth.show_message_dialog({
                  title = "Ember Spear",
-                 message = string.format("<span color='#0000ff'>Mana cost: 3</span> \n<span color='#008000'>Cast radius: 2</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy and slows it. Each cast increases the damage of this spell by <span color='#ff0000'>0.1</span>, up to a maximum of <span color='#ff0000'>%d</span>.",math.floor(wesnoth.get_variable("esther_spell_params.ember_bonus")+2.4),math.floor(wesnoth.get_variable("esther_spell_params.ember_max_bonus")+2)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 3</span> \n<span color='#008000'>Cast radius: 2</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy and slows it. Each cast increases the damage of this spell by <span color='#ff0000'>%f</span>, up to a maximum of <span color='#ff0000'>%d</span>.",math.floor((2 + wesnoth.get_variable("esther_spell_params.ember_bonus"))*(1+esther_spell_power/10)),0.1*(1+insight/10),math.floor((wesnoth.get_variable("esther_spell_params.ember_max_bonus")*(1+intelligence/20)+2)*(1+esther_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/thunderstick.png~SCALE(120,120), 168, 212)",
             })
         elseif spell_names[li]=="Ardent Flare" then
             wesnoth.show_message_dialog({
                  title = "Sunlight Spark",
-                 message = string.format("<span color='#0000ff'>Mana cost: 6</span> \n<span color='#008000'>Cast radius: -</span> \nEsther gains <span color='#ff0000'>+25%%</span> damage for one turn."),
+                 message = string.format("<span color='#0000ff'>Mana cost: 6</span> \n<span color='#008000'>Cast radius: -</span> \nEsther gains <span color='#ff0000'>+%d%%</span> damage for one turn.",math.floor(25*(1+esther_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/flash-cannon.png~SCALE(120,120), 168, 224)",
             })
         elseif spell_names[li]=="Blazing Star" then
             wesnoth.show_message_dialog({
                  title = "Blazing Star",
-                 message = string.format("<span color='#0000ff'>Mana cost: 6</span> \n<span color='#008000'>Cast radius: -</span> \nDecreases the damage of adjacent enemies by <span color='#ff0000'>-50%%</span> for one turn."),
+                 message = string.format("<span color='#0000ff'>Mana cost: 6</span> \n<span color='#008000'>Cast radius: -</span> \nDecreases the damage of adjacent enemies by <span color='#ff0000'>-%d%%</span> for one turn.",math.floor(50*(1+esther_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/blazing-star.png~SCALE(120,120), 168, 224)",
             })
         elseif spell_names[li]=="Lightning Bolt" then
             wesnoth.show_message_dialog({
                  title = "Lightning Bolt",
-                 message = string.format("<span color='#0000ff'>Mana cost: 7</span> \n<span color='#008000'>Cast radius: 4</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy and shocks it, reducing its resistances to magical attacks by <span color='#ff0000'>%d%%</span>. Each cast increases the damage of this spell by <span color='#ff0000'>0.3</span> and the resistance shredded by <span color='#ff0000'>1%%</span>, up to a maximum of <span color='#ff0000'>%d</span> damage and <span color='#ff0000'>50%%</span> resistance reduction.",math.floor(wesnoth.get_variable("esther_spell_params.lightning_bonus")+9.4),wesnoth.get_variable("esther_spell_params.lightning_shred"),math.floor(wesnoth.get_variable("esther_spell_params.lightning_max_bonus")+9)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 7</span> \n<span color='#008000'>Cast radius: 4</span> \nDeals <span color='#ff0000'>%d</span> <span color='#ff5500'>fire</span> damage to target enemy and shocks it, reducing its resistances to magical attacks by <span color='#ff0000'>%d%%</span>. Each cast increases the damage of this spell by <span color='#ff0000'>%f</span> and the resistance shredded by <span color='#ff0000'>%f%%</span>, up to a maximum of <span color='#ff0000'>%d</span> damage and <span color='#ff0000'>50%%</span> resistance reduction.",math.floor((9 + wesnoth.get_variable("esther_spell_params.lightning_bonus"))*(1+esther_spell_power/10)),wesnoth.get_variable("esther_spell_params.lightning_shred"),0.3*(1+insight/10),1*(1+insight/10),math.floor((wesnoth.get_variable("esther_spell_params.lightning_max_bonus")*(1+intelligence/20)+9)*(1+esther_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/lightning.png~SCALE(120,120), 168, 200)",
             })
         end
@@ -1121,24 +1163,26 @@ function wesnoth.wml_actions.yumi_spell_help()
     local r = wesnoth.show_dialog(dialog, preshow, postshow)
     
     --wesnoth.message(string.format("Button %d pressed. Item %d selected.", r, li))
-
+    local yumi_spell_power = wesnoth.get_variable("yumi_spell_params.yumi_spell_power")
+	local insight = wesnoth.get_variable("yumi_spell_params.yumi_insight")
+	local intelligence = wesnoth.get_variable("yumi_spell_params.yumi_intelligence")
     if r == -1 then
         if li == 1 then
             wesnoth.show_message_dialog({
                  title = "Character Statistics",
-                 message = string.format("<span color='#0000ff'>Current Mana: %d</span> \n<span color='#00ffff'>Maximum Mana: %d</span> \n<span color='#85C1E9'>Mana Regen: %d</span>\n<span color='#F000FF'>Spell Power: %d</span>",wesnoth.get_variable("yumi_spell_params.yumi_mana"),wesnoth.get_variable("yumi_spell_params.yumi_max_mana"),wesnoth.get_variable("yumi_spell_params.yumi_mana_gain"),wesnoth.get_variable("yumi_spell_params.yumi_spell_power")),
+                 message = string.format("<span color='#0000ff'>Current Mana: %d</span> \n<span color='#00ffff'>Maximum Mana: %d</span>\n<span color='#85C1E9'>Mana Regen: %d</span>\n<span color='#DC143C'>Spell Power: %d</span>\n<span color='#1E90FF'>Intelligence: %d</span>\n<span color='#DA70D6'>Insight: %d</span>",wesnoth.get_variable("yumi_spell_params.yumi_mana"),wesnoth.get_variable("yumi_spell_params.yumi_max_mana"),math.floor(wesnoth.get_variable("yumi_spell_params.yumi_mana_gain")*(1+wesnoth.get_variable("yumi_spell_params.yumi_intelligence")/10)),wesnoth.get_variable("yumi_spell_params.yumi_spell_power"),wesnoth.get_variable("yumi_spell_params.yumi_intelligence"),wesnoth.get_variable("yumi_spell_params.yumi_insight")),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(units/fae/yumi.png~SCALE(144,144), 144, 200)",
             })
         elseif spell_names[li]=="Siphon" then
             wesnoth.show_message_dialog({
                  title = "Siphon",
-                 message = string.format("<span color='#0000ff'>Mana cost: 5</span> \n<span color='#008000'>Cast radius: 2</span> \nDeals <span color='#ff0000'>5</span> <span color='#00bfff'>arcane</span> damage to target enemy and heals for <span color='#008000'>%d%%</span> of the damage dealt. Each cast increases healing proportion by <span color='#008000'>1%%</span>, up to <span color='#008000'>100%%</span>.",wesnoth.get_variable("yumi_spell_params.siphon_spell_healing")*100),
+                 message = string.format("<span color='#0000ff'>Mana cost: 5</span> \n<span color='#008000'>Cast radius: 2</span> \nDeals <span color='#ff0000'>%d</span> <span color='#00bfff'>arcane</span> damage to target enemy and heals for <span color='#008000'>%d%%</span> of the damage dealt. Each cast increases healing proportion by <span color='#008000'>%f%%</span>, up to <span color='#008000'>%f%%</span>.",math.floor(5*(1+yumi_spell_power/10)),wesnoth.get_variable("yumi_spell_params.siphon_spell_healing")*100,1*(1+insight/10),100*(1+intelligence/20)),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/faerie-fire.png~SCALE(120,120), 168, 212)",
             })
         elseif spell_names[li]=="Void Blast" then
             wesnoth.show_message_dialog({
                  title = "Void Blast",
-                 message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: 4</span> \nDeals <span color='#ff0000'>%d</span> damage to target enemy. Each cast increases the damage of this spell by <span color='#ff0000'>0.1</span>, up to a maximum of <span color='#ff0000'>%d</span>. Damage doubled by Shadow Walk.",math.floor(wesnoth.get_variable("yumi_spell_params.void_damage_bonus")+5.4),math.floor(wesnoth.get_variable("yumi_spell_params.yumi_void_max_bonus")+5)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 4</span> \n<span color='#008000'>Cast radius: 4</span> \nDeals <span color='#ff0000'>%d</span> damage to target enemy. Each cast increases the damage of this spell by <span color='#ff0000'>%f</span>, up to a maximum of <span color='#ff0000'>%d</span>. Damage doubled by Shadow Walk.",math.floor((5 + wesnoth.get_variable("yumi_spell_params.void_damage_bonus"))*(1+yumi_spell_power/10)),0.1*(1+insight/10),math.floor((5+wesnoth.get_variable("yumi_spell_params.yumi_void_max_bonus")*(1+intelligence/20))*(1+yumi_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/dark-missile.png~SCALE(120,120), 168, 212)",
             })
         elseif spell_names[li]=="Ethereal Form" then
@@ -1156,7 +1200,7 @@ function wesnoth.wml_actions.yumi_spell_help()
         elseif spell_names[li]=="Null Flare" then
             wesnoth.show_message_dialog({
                  title = "Null Flare",
-                 message = string.format("<span color='#0000ff'>Mana cost: 5</span> \n<span color='#008000'>Cast radius: 3</span> \nDeals <span color='#ff0000'>%d</span> <span color='#0000ff'>cold</span> damage to target enemy and prevents them from moving or attacking for one turn. Each cast increases the damage of this spell by <span color='#ff0000'>0.2</span>, up to a maximum of <span color='#ff0000'>%d</span>. Damage doubled by Shadow Walk.",math.floor(wesnoth.get_variable("yumi_spell_params.null_damage_bonus")+4.4),math.floor(wesnoth.get_variable("yumi_spell_params.yumi_null_max_bonus")+4)),
+                 message = string.format("<span color='#0000ff'>Mana cost: 5</span> \n<span color='#008000'>Cast radius: 3</span> \nDeals <span color='#ff0000'>%d</span> <span color='#0000ff'>cold</span> damage to target enemy and prevents them from moving or attacking for one turn. Each cast increases the damage of this spell by <span color='#ff0000'>%f</span>, up to a maximum of <span color='#ff0000'>%d</span>. Damage doubled by Shadow Walk.",math.floor((4 + wesnoth.get_variable("yumi_spell_params.null_damage_bonus"))*(1+yumi_spell_power/10)),0.2*(1+insight/10),math.floor((4+wesnoth.get_variable("yumi_spell_params.yumi_null_max_bonus")*(1+intelligence/20))*(1+yumi_spell_power/10))),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/forest-chill.png~SCALE(120,120), 168, 200)",
             })
         elseif spell_names[li]=="Shadow Walk" then
@@ -1244,7 +1288,7 @@ function wesnoth.wml_actions.spell_menu()
         if li==1 then
             wesnoth.show_message_dialog({
                  title = "Spell Help",
-                 message = string.format("Right click on hexes close to hero units to cast spells. Each hero has a set amount of <span color='#0000ff'>mana</span> available to cast spells with, and regains some <span color='#0000ff'>mana</span> every turn. Only spells that are available to be cast on the selected location will appear. Spell effects are modified from their displayed base values by each hero's <span color='#F000FF'>spell power</span>. For more help, click on each hero's respective help menu."),
+                 message = string.format("Right click on hexes close to hero units to cast spells. Most spells are improved with repeated spell casts, up to an <span color='#1E90ff'>intelligence</span> dependent limit. Each hero has a set amount of <span color='#0000ff'>mana</span> available to cast spells with, and regains some <span color='#0000ff'>mana</span> every turn. Only spells that are available to be cast on the selected location will appear.\n\nSpell effects are modified from their displayed base values by each hero's <span color='#DC143C'>spell power</span>; most spells gain 100%% damage for every <span color='#DC143C'>10 spell power</span>. Every <span color='#1E90ff'>10 intelligence</span> increases mana regeneration by 100%% and every <span color='#1E90ff'>20 intelligence</span> and increases the spell mastery limit by 100%%. Every <span color='#DA70D6'>10 insight</span> increases experience gain and spell leveling rates by 100%%.\n\nFor more help, click on each hero's respective help menu."),
                  portrait = "misc/blank-hex.png~SCALE(360,360)~BLIT(attacks/staff-elven-star.png~SCALE(120,120), 168, 200)",
             })
         elseif spell_names[li]=="<span color='#f08080'>Cast Spell (Aryel)</span>" then
@@ -1256,7 +1300,7 @@ function wesnoth.wml_actions.spell_menu()
         elseif spell_names[li]=="<span color='#ff5500'>Cast Spell (Esther)</span>" then
             dialog_var_cleanup()
             wesnoth.wml_actions.esther_spell_menu()
-        elseif spell_names[li]=="<span color='#8e44ad'>Spell Help (Yumi)</span>)" then
+        elseif spell_names[li]=="<span color='#ff5500'>Spell Help (Esther)</span>" then
             dialog_var_cleanup()
             wesnoth.wml_actions.esther_spell_help()
         elseif spell_names[li]=="<span color='#8e44ad'>Cast Spell (Yumi)</span>" then
