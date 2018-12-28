@@ -1,33 +1,9 @@
 This list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-ND v4.0
 all images in the directories:
-units/demons/blue/
-units/demons/red/
-units/demons/fiend/
-units/demons/fighter/
-units/demons/void/
 units/faeries/healer/
 units/humans/
 projectiles-new/
-
-The next list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-SA v4.0
-units/demons/windlasher.png
-units/demons/windlasher-female.png
-units/demons/galerunner.png
-units/demons/galerunner-female.png
-units/demons/stormbringer.png
-units/demons/stormbringer-female.png
-units/demons/black.png
-units/demons/black-male.png
-units/demons/voidreaver.png
-units/demons/voidreaver-male.png
-units/demons/voidwatcher.png
-units/demons/voidwatcher-male.png
-units/demons/voidhunter.png
-units/demons/voidhunter-male.png
-units/demons/reaper.png
-units/demons/reaper-male.png
-units/demons/lamia.png
-units/demons/diviner.png
+units/demons/
 
 The next list of art images in the add-on's "images" directory are drawn by (or modified from, with permission) Iris Morelle (shadowm/ShikadiQueen) and are licensed under CC BY-NC-ND v4.0
 all images in the directories:
