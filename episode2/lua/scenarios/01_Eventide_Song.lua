@@ -280,6 +280,60 @@ function wesnoth.wml_actions.puzzle_water_fire_windmill_hex(cfg)
 	end
 end
 
+function wesnoth.wml_actions.puzzle_life_fire_hex(cfg)
+	if wesnoth.get_variable("puzzle_life.fire") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You got some fire."}
+		wesnoth.set_terrain(22,26,"Brym")
+		wesnoth.set_variable("puzzle_life.fire",1)
+	end
+end
+
+function wesnoth.wml_actions.puzzle_life_brazier_hex(cfg)
+	if wesnoth.get_variable("puzzle_life.fire") == 1 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You lit the brazier."}
+		wesnoth.set_terrain(23,26,"Brym^Ebn")
+		wesnoth.set_variable("puzzle_life.fire",2)
+	elseif wesnoth.get_variable("puzzle_life.fire") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
+	end
+	if wesnoth.get_variable("puzzle_life.fire") == 2 then
+		if wesnoth.get_variable("puzzle_life.milk") == 1 then
+			wesnoth.wml_actions.message {speaker="narrator", message="You added some milk."}
+			wesnoth.set_variable("puzzle_life.milk",2)
+		elseif wesnoth.get_variable("puzzle_life.milk") == 0 then
+			wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
+		end
+		if wesnoth.get_variable("puzzle_life.milk") == 2 and wesnoth.get_variable("puzzle_life.eggs") == 1 then
+			wesnoth.wml_actions.message {speaker="narrator", message="You put in some eggs."}
+			wesnoth.set_variable("puzzle_life.eggs",2)
+		elseif wesnoth.get_variable("puzzle_life.milk") == 2 and wesnoth.get_variable("puzzle_life.eggs") == 0 then
+			wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
+		end
+		if wesnoth.get_variable("puzzle_life.milk") == 2 and wesnoth.get_variable("puzzle_life.eggs") == 2 then
+			if wesnoth.get_variable("puzzle_life.chocolate") == 1 then
+				wesnoth.wml_actions.message {speaker="narrator", message="You added some chocolate."}
+				wesnoth.set_variable("puzzle_life.chocolate",2)
+			end
+			if wesnoth.get_variable("puzzle_life.vanilla") == 1 then
+				wesnoth.wml_actions.message {speaker="narrator", message="You added some vanilla."}
+				wesnoth.set_variable("puzzle_life.vanilla",2)
+			end
+			if wesnoth.get_variable("puzzle_life.sugar") == 1 then
+				wesnoth.wml_actions.message {speaker="narrator", message="You added some sugar."}
+				wesnoth.set_variable("puzzle_life.sugar",2)
+			end
+			if wesnoth.get_variable("puzzle_life.chocolate") == 2 and wesnoth.get_variable("puzzle_life.vanilla") == 2 and wesnoth.get_variable("puzzle_life.sugar") == 2 then
+				wesnoth.wml_actions.message {speaker="narrator", message="You made a pudding!"}
+			elseif wesnoth.get_variable("puzzle_life.chocolate") ~= 1 and wesnoth.get_variable("puzzle_life.vanilla") ~= 1 and wesnoth.get_variable("puzzle_life.sugar") ~= 1 then
+				wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
+			end
+		end
+	else 
+		wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
+	end
+end
+
+
 function wesnoth.wml_actions.clear_all_vars(cfg)
 	wesnoth.set_variable("large_puzzle_exp",nil)
 	wesnoth.set_variable("small_puzzle_exp",nil)
