@@ -333,6 +333,55 @@ function wesnoth.wml_actions.puzzle_life_brazier_hex(cfg)
 	end
 end
 
+function wesnoth.wml_actions.puzzle_life_milk_hex(cfg)
+	if wesnoth.get_variable("puzzle_life.fire") == 2 and wesnoth.get_variable("puzzle_life.milk") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You got some milk."}
+		wesnoth.wml_actions.remove_item {x=11,y=27}
+		wesnoth.set_variable("puzzle_life.milk",1)
+	elseif wesnoth.get_variable("puzzle_life.fire") == 1 or wesnoth.get_variable("puzzle_life.fire") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You need to do something else first."}
+	end
+end
+
+function wesnoth.wml_actions.puzzle_life_eggs_hex(cfg)
+	if wesnoth.get_variable("puzzle_life.milk") == 2 and wesnoth.get_variable("puzzle_life.eggs") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You picked up some eggs."}
+		wesnoth.wml_actions.remove_item {x=30,y=24}
+		wesnoth.set_variable("puzzle_life.eggs",1)
+	elseif wesnoth.get_variable("puzzle_life.milk") == 1 or wesnoth.get_variable("puzzle_life.milk") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You need to do something else first."}
+	end
+end
+
+function wesnoth.wml_actions.puzzle_life_chocolate_hex(cfg)
+	if wesnoth.get_variable("puzzle_life.eggs") == 2 and wesnoth.get_variable("puzzle_life.chocolate") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You got some chocolate."}
+		wesnoth.wml_actions.remove_item {x=35,y=30}
+		wesnoth.set_variable("puzzle_life.chocolate",1)
+	elseif wesnoth.get_variable("puzzle_life.eggs") == 1 or wesnoth.get_variable("puzzle_life.eggs") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You need to do something else first."}
+	end
+end
+
+function wesnoth.wml_actions.puzzle_life_vanilla_hex(cfg)
+	if wesnoth.get_variable("puzzle_life.eggs") == 2 and wesnoth.get_variable("puzzle_life.vanilla") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You got some vanilla."}
+		wesnoth.wml_actions.remove_item {x=13,y=30}
+		wesnoth.set_variable("puzzle_life.vanilla",1)
+	elseif wesnoth.get_variable("puzzle_life.eggs") == 1 or wesnoth.get_variable("puzzle_life.eggs") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You need to do something else first."}
+	end
+end
+
+function wesnoth.wml_actions.puzzle_life_sugar_hex(cfg)
+	if wesnoth.get_variable("puzzle_life.eggs") == 2 and wesnoth.get_variable("puzzle_life.sugar") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You got some sugar."}
+		wesnoth.wml_actions.remove_item {x=21,y=34}
+		wesnoth.set_variable("puzzle_life.sugar",1)
+	elseif wesnoth.get_variable("puzzle_life.eggs") == 1 or wesnoth.get_variable("puzzle_life.eggs") == 0 then
+		wesnoth.wml_actions.message {speaker="narrator", message="You need to do something else first."}
+	end
+end
 
 function wesnoth.wml_actions.clear_all_vars(cfg)
 	wesnoth.set_variable("large_puzzle_exp",nil)
