@@ -295,21 +295,21 @@ function wesnoth.wml_actions.puzzle_life_brazier_hex(cfg)
 		wesnoth.set_variable("puzzle_life.fire",2)
 	elseif wesnoth.get_variable("puzzle_life.fire") == 0 then
 		wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
-	end
-	if wesnoth.get_variable("puzzle_life.fire") == 2 then
+	elseif wesnoth.get_variable("puzzle_life.fire") == 2 then
 		if wesnoth.get_variable("puzzle_life.milk") == 1 then
 			wesnoth.wml_actions.message {speaker="narrator", message="You added some milk."}
 			wesnoth.set_variable("puzzle_life.milk",2)
 		elseif wesnoth.get_variable("puzzle_life.milk") == 0 then
 			wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
-		end
-		if wesnoth.get_variable("puzzle_life.milk") == 2 and wesnoth.get_variable("puzzle_life.eggs") == 1 then
+		elseif wesnoth.get_variable("puzzle_life.milk") == 2 and wesnoth.get_variable("puzzle_life.eggs") == 1 then
 			wesnoth.wml_actions.message {speaker="narrator", message="You put in some eggs."}
 			wesnoth.set_variable("puzzle_life.eggs",2)
 		elseif wesnoth.get_variable("puzzle_life.milk") == 2 and wesnoth.get_variable("puzzle_life.eggs") == 0 then
 			wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
-		end
-		if wesnoth.get_variable("puzzle_life.milk") == 2 and wesnoth.get_variable("puzzle_life.eggs") == 2 then
+		elseif wesnoth.get_variable("puzzle_life.milk") == 2 and wesnoth.get_variable("puzzle_life.eggs") == 2 then
+			if wesnoth.get_variable("puzzle_life.chocolate") ~= 1 and wesnoth.get_variable("puzzle_life.vanilla") ~= 1 and wesnoth.get_variable("puzzle_life.sugar") ~= 1 and wesnoth.get_variable("puzzle_life.vanilla") ~= 3 then
+				wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
+			end
 			if wesnoth.get_variable("puzzle_life.chocolate") == 1 then
 				wesnoth.wml_actions.message {speaker="narrator", message="You added some chocolate."}
 				wesnoth.set_variable("puzzle_life.chocolate",2)
@@ -324,8 +324,18 @@ function wesnoth.wml_actions.puzzle_life_brazier_hex(cfg)
 			end
 			if wesnoth.get_variable("puzzle_life.chocolate") == 2 and wesnoth.get_variable("puzzle_life.vanilla") == 2 and wesnoth.get_variable("puzzle_life.sugar") == 2 then
 				wesnoth.wml_actions.message {speaker="narrator", message="You made a pudding!"}
-			elseif wesnoth.get_variable("puzzle_life.chocolate") ~= 1 and wesnoth.get_variable("puzzle_life.vanilla") ~= 1 and wesnoth.get_variable("puzzle_life.sugar") ~= 1 then
-				wesnoth.wml_actions.message {speaker="narrator", message="Something is missing."}
+				
+				local experience=wesnoth.get_variable("large_puzzle_exp")
+				wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Yumi"}}}
+				wesnoth.wml_actions.message {speaker="Yumi", message=string.format("<i>Tasty.</i>")}
+				
+				wesnoth.set_terrain(23,26,"Brym")
+				wesnoth.wml_actions.remove_item {x=24,y=27}
+				
+				wesnoth.set_variable("puzzle_life.vanilla",3)
+				wesnoth.set_variable("puzzle_life.chocolate",3)
+				wesnoth.set_variable("puzzle_life.sugar",3)
+				wesnoth.set_variable("puzzle_life.complete",1)
 			end
 		end
 	else 
@@ -409,4 +419,20 @@ function wesnoth.wml_actions.clear_all_vars(cfg)
 	wesnoth.set_variable("puzzle_life.chocolate",nil)
 	wesnoth.set_variable("puzzle_life.vanilla",nil)
 	wesnoth.set_variable("puzzle_life.sugar",nil)
+end
+
+function wesnoth.wml_actions.set_ethea_variables(cfg)
+    wesnoth.set_variable("ethea.prev_scenario","")
+    wesnoth.set_variable("ethea.lake",0)
+    wesnoth.set_variable("ethea.vale",0)
+    wesnoth.set_variable("ethea.gorge",0)
+    wesnoth.set_variable("ethea.bells",0)
+    wesnoth.set_variable("ethea.bakery",0)
+    wesnoth.set_variable("ethea.summit",0)
+	
+    wesnoth.set_variable("ethea.bat",0)
+    wesnoth.set_variable("ethea.river",0)
+    wesnoth.set_variable("ethea.scorpion",0)
+    wesnoth.set_variable("ethea.fishing",0)
+    wesnoth.set_variable("ethea.mushroom",0)
 end
