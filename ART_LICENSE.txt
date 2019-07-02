@@ -1,20 +1,14 @@
 This list of art images in the add-on's "images" directory are drawn by nemaara and are licensed under CC BY-NC-ND v4.0
 all images in the directories (and any subdirectories):
-units/faeries/healer/
+units/demons/
 units/humans/
 projectiles-new/
-units/demons/
 
 The next list of art images in the add-on's "images" directory are drawn by (or modified from, with permission) Iris Morelle (shadowm/ShikadiQueen) and are licensed under CC BY-NC-ND v4.0
 all images in the directories:
 units/fae/
 units/guardians/
 halo/guardians/
-
-The next list of art images in the add-on's "images" directory are drawn by BTIssac and are licensed under CC BY-NC-SA v4.0
-all images in the directories:
-portraits/demons/
-portraits/faeries/
 
 The next art image in the add-on's "images" directory is drawn by Pinack and is licensed under CC BY-NC-ND v4.0
 story/moonlit-lake.png
