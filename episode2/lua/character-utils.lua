@@ -25,6 +25,22 @@ function wesnoth.wml_actions.add_exp(cfg)
 	wesnoth.float_label(units[1].x,units[1].y, string.format("<span color='#ff00ff'>+%d XP</span>",experience))
 end
 
+function wesnoth.wml_actions.add_hp(cfg)
+    local suf = helper.get_child(cfg, "filter") or
+        helper.wml_error("[add_exp] Missing unit filter")
+
+    local units = wesnoth.get_units(suf) or
+        helper.wml_error("[add_exp] Could not match any on-map units with [filter]")
+
+	local hitpoints = cfg.hitpoints
+
+    units[1].max_hitpoints = units[1].max_hitpoints + hitpoints
+    units[1].hitpoints = units[1].hitpoints + hitpoints
+    wesnoth.extract_unit(units[1])
+    wesnoth.put_unit(units[1])
+	wesnoth.float_label(units[1].x,units[1].y, string.format("<span color='#008000'>+%d XP</span>",hitpoints))
+end
+
 local on_event = wesnoth.require("lua/on_event.lua")
 on_event("die", function(context)
 	

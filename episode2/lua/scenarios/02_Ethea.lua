@@ -115,71 +115,21 @@ end
 
 function wesnoth.wml_actions.chicken_dialogue_hex(cfg)
 	if wesnoth.get_variable("ethea.chicken") == 0 then
-		wesnoth.wml_actions.message {speaker="Kadishi", message="Oh no! The chickens escaped! They're all out there in the cold, dangerous wild, my poor babies!"}
-		wesnoth.wml_actions.message {speaker="Aryel", message=string.format("<i>Is this girl crazy?</i>")}
-		wesnoth.wml_actions.message {speaker="Esther", message=string.format("<i>Come on, Aryel, be nice.</i>")}
-		wesnoth.wml_actions.message {speaker="Esther", message="That's terrible! We'll help you find your chickens."}
-		wesnoth.wml_actions.message {speaker="Aryel", message=string.format("<i>We will?</i>")}
-		wesnoth.wml_actions.message {speaker="Kadishi", message="You will? Oh, thank you thank you!"}
-		wesnoth.wml_actions.message {speaker="Aryel", message=string.format("<i>Damn it, Esther?</i>")}
-		wesnoth.wml_actions.message {speaker="Esther", message=string.format("<i>Oh, shush. Can't be that hard to find a few chickens.</i>")}
+		wesnoth.wml_actions.message {speaker="Kadishi", message="(<i>squints</i>) Well hello! Y'all are faeries, aren't ya?"}
+		wesnoth.wml_actions.message {speaker="Aryel", message=string.format("Erm, yeah. Why do you ask?")}
+		wesnoth.wml_actions.message {speaker="Kadishi", message="Well it's not just every day ya see a faerie wanderin' around here. Yer from Irdya, aren't ya?"}
+		wesnoth.wml_actions.message {speaker="Esther", message="Yup, we're just visiting for a while. Heard the food here is really good, you know."}
+		wesnoth.wml_actions.message {speaker="Kadishi", message="Yeah, we're famous for our eggs! You wanna try one? Your friend over there looks like she might like a taste."}
+		wesnoth.wml_actions.message {speaker="Yumi", message=string.format("<i>fidgets</i>")}
+		wesnoth.wml_actions.message {speaker="Esther", message="Haha, don't be shy, you glutton. Go for it."}
+		wesnoth.wml_actions.message {speaker="Yumi", message=string.format("<i>rolls eyes</i>")}
 		
+		wesnoth.wml_actions.add_exp {hitpoints=1,{"filter",{id="Yumi"}}}
 		wesnoth.set_variable("ethea.chicken",1)
 	elseif wesnoth.get_variable("ethea.chicken") == 1 then
-		wesnoth.wml_actions.message {speaker="Kadishi", message="My chickens!"}
-	elseif wesnoth.get_variable("ethea.chicken") == 2 then
-		wesnoth.wml_actions.message {speaker="Kadishi", message="Yay! You found all my chickens!"}
-		wesnoth.wml_actions.message {speaker="Esther", message="Yup. Wasn't too hard after all."}
-		wesnoth.wml_actions.message {speaker="Kadishi", message="Hard or not, you gals definitely deserve something in return. I know! I'll give you some of my eggs! Promise they're really tasty!"}
-		wesnoth.wml_actions.message {speaker="Esther", message="Ooh, sounds yummy."}
-		wesnoth.wml_actions.message {speaker="Aryel", message=string.format("<i>Crazy chicken queen.</i>")}
-		
-		local experience=wesnoth.get_variable("puzzle_exp")
-		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Aryel"}}}
-		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Esther"}}}
-		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Yumi"}}}
-		
-		wesnoth.set_variable("ethea.chicken",3)
-	elseif wesnoth.get_variable("ethea.chicken") == 3 then
-		wesnoth.wml_actions.message {speaker="Kadishi", message="Look at all the chickens!"}
+		wesnoth.wml_actions.message {speaker="Kadishi", message="Look at all the chickens! Aren't they cute?"}
 	end
 end
-
-function wesnoth.wml_actions.pig_dialogue_hex(cfg)
-	if wesnoth.get_variable("ethea.mushroom") == 0 then
-		wesnoth.wml_actions.message {speaker="Peggy", message="Oh, hey, you're faeries! Not a lot of us around here."}
-		wesnoth.wml_actions.message {speaker="Aryel", message=string.format("<i>Ermm....</i>")}
-		wesnoth.wml_actions.message {speaker="Esther", message="Actually, we're from Irdya. Just visiting Ethea for a bit. How do you like it here?"}
-		wesnoth.wml_actions.message {speaker="Peggy", message="It's nice, usually. Though, my pet piggy got sick the other day, so I've been having to take care of her. There's some weird diseases here that I don't really know how to cure, so it's a bit of trouble sometimes."}
-		wesnoth.wml_actions.message {speaker="Esther", message=string.format("<i>I guess I never thought of that. Different worlds have different ailments, huh.</i>")}
-		wesnoth.wml_actions.message {speaker="Aryel", message=string.format("<i>Makes sense. You never see a demon from Yrathid have nyctophobia, for example. Each world's different.</i>")}
-		wesnoth.wml_actions.message {speaker="Esther", message=string.format("<i>Mhmm.</i> Any way we can help?")}
-		wesnoth.wml_actions.message {speaker="Peggy", message="Hmm. Well, supposedly there are some mushrooms that grow around here that act as natural remedies. I tried looking for them, but all I found were the poisonous kind of mushrooms. Maybe you could help me?"}
-		wesnoth.wml_actions.message {speaker="Esther", message="Sure, we'll take a look."}
-		
-		wesnoth.set_variable("ethea.mushroom",1)
-	elseif wesnoth.get_variable("ethea.mushroom") == 1 then
-		wesnoth.wml_actions.message {speaker="Peggy", message="Those mushrooms are pretty hard to find, aren't they."}
-	elseif wesnoth.get_variable("ethea.mushroom") == 2 then
-		wesnoth.wml_actions.message {speaker="Peggy", message="Those are the poisonous kind of mushroom."}
-	elseif wesnoth.get_variable("ethea.mushroom") == 3 then
-		wesnoth.wml_actions.message {speaker="Peggy", message="Oooh. Those look like the mushrooms I was looking for."}
-		wesnoth.wml_actions.message {speaker="Aryel", message="Are you sure? Those don't really look... edible."}
-		wesnoth.wml_actions.message {speaker="Peggy", message="Not for faeries, but pigs can eat them. Thanks for finding them for me!"}
-		wesnoth.wml_actions.message {speaker="Esther", message="You're welcome."}
-		
-		local experience=wesnoth.get_variable("puzzle_exp")
-		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Aryel"}}}
-		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Esther"}}}
-		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Yumi"}}}
-		
-		wesnoth.set_variable("ethea.mushroom",4)
-	elseif wesnoth.get_variable("ethea.mushroom") == 4 then
-		wesnoth.wml_actions.message {speaker="Peggy", message="My piggy's all better!"}
-		wesnoth.wml_actions.message {speaker="Lena", message="Oink oink!"}
-	end
-end
-
 
 function wesnoth.wml_actions.fisherman_dialogue_hex(cfg)
 	if wesnoth.get_variable("ethea.fishing") == 0 then
