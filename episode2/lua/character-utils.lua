@@ -32,13 +32,14 @@ function wesnoth.wml_actions.add_hp(cfg)
     local units = wesnoth.get_units(suf) or
         helper.wml_error("[add_exp] Could not match any on-map units with [filter]")
 
-	local hitpoints = cfg.hitpoints
-
-    units[1].max_hitpoints = units[1].max_hitpoints + hitpoints
-    units[1].hitpoints = units[1].hitpoints + hitpoints
+	local hp = cfg.hp
+	local ev = wesnoth.current.event_context
+	local u = wesnoth.get_units{x=ev.x1, y=ev.y1}[1]
+    u.hitpoints = u.hitpoints + hp
+	u.max_hitpoints = u.max_hitpoints + hp
     wesnoth.extract_unit(units[1])
     wesnoth.put_unit(units[1])
-	wesnoth.float_label(units[1].x,units[1].y, string.format("<span color='#008000'>+%d XP</span>",hitpoints))
+	wesnoth.float_label(units[1].x,units[1].y, string.format("<span color='#008000'>+%d XP</span>",hp))
 end
 
 local on_event = wesnoth.require("lua/on_event.lua")

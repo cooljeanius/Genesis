@@ -1,24 +1,59 @@
 local helper = wesnoth.require "lua/helper.lua"
 
 function wesnoth.wml_actions.initialize_puzzles(cfg)
-	if wesnoth.get_variable("ethea.bat") == 0 then
-	
+	if wesnoth.get_variable("ethea.bat") < 3 then
+		wesnoth.put_unit(29, 11, { type = "Vampire Bat", side = 2 })
+		wesnoth.put_unit(24, 10, { type = "Vampire Bat", side = 2 })
+		wesnoth.put_unit(24, 13, { type = "Vampire Bat", side = 2 })
+		wesnoth.put_unit(28, 14, { type = "Vampire Bat", side = 2 })
+		wesnoth.put_unit(30, 12, { type = "Vampire Bat", side = 2 })
 	else
-	
+		wesnoth.put_unit(29, 11, { type = "Vampire Bat", side = 2 })
+		wesnoth.put_unit(24, 10, { type = "Vampire Bat", side = 2 })
+		wesnoth.put_unit(24, 13, { type = "Vampire Bat", side = 2 })
+		wesnoth.put_unit(28, 14, { type = "Vampire Bat", side = 2 })
+		wesnoth.put_unit(26, 13, { type = "Blood Bat", side = 2, name = "Eksi" })
 	end
-	if wesnoth.get_variable("river.complete") == 0 then
-	
+	if wesnoth.get_variable("ethea.river") < 4 then
+		wesnoth.set_terrain(53,18,"Gd^Dr")
+		wesnoth.set_terrain(50,16,"Wwg")
+		wesnoth.set_terrain(51,16,"Wwg")
+		wesnoth.set_terrain(49,17,"Ss")
+		wesnoth.set_terrain(48,17,"Ss")
+		wesnoth.set_terrain(48,18,"Sm")
+		wesnoth.set_terrain(47,19,"Sm")
+		wesnoth.set_terrain(46,19,"Ss")
+		wesnoth.set_terrain(45,20,"Ss")
+		wesnoth.set_terrain(45,19,"Sm")
+		wesnoth.set_terrain(46,20,"Ss")
+		wesnoth.set_terrain(46,21,"Ss")
+		wesnoth.set_terrain(45,22,"Sm")
+		wesnoth.set_terrain(44,22,"Sm")
+		wesnoth.set_terrain(42,21,"Sm")
+		wesnoth.set_terrain(41,22,"Sm")
+		wesnoth.set_terrain(42,22,"Sm")
+		wesnoth.set_terrain(40,23,"Sm")
+		wesnoth.set_terrain(41,24,"Sm")
+		wesnoth.set_terrain(41,23,"Sm")
+		wesnoth.set_terrain(44,25,"Sm")
+		wesnoth.set_terrain(45,25,"Sm")
+		wesnoth.set_terrain(45,24,"Sm")
+		wesnoth.set_terrain(44,23,"Ss")
+		wesnoth.set_terrain(44,24,"Ss")
+		wesnoth.set_terrain(43,24,"Ss")
+		wesnoth.set_terrain(43,23,"Ss")
+		wesnoth.set_terrain(42,23,"Ss")
+		wesnoth.set_terrain(42,24,"Ss")
+		wesnoth.set_terrain(41,25,"Ss")
 	else
-	
+		wesnoth.set_terrain(49,18,"Wwt")
+		wesnoth.set_terrain(48,17,"Gd^Dr")
 	end
 	if wesnoth.get_variable("scorpion.complete") == 0 then
 	
 	else
 	end
 	if wesnoth.get_variable("fishing.complete") == 0 then
-	else
-	end
-	if wesnoth.get_variable("mushroom.complete") == 0 then
 	else
 	end
 end
@@ -64,7 +99,7 @@ function wesnoth.wml_actions.river_dialogue_hex(cfg)
 		wesnoth.set_variable("ethea.river",1)
 	elseif wesnoth.get_variable("ethea.river") == 1 then
 		wesnoth.wml_actions.message {speaker="Villager", message="Please help us clean tha water!"}
-	elseif wesnoth.get_variable("ethea.river") == 2 then
+	elseif wesnoth.get_variable("ethea.river") == 3 then
 		wesnoth.wml_actions.message {speaker="Villager", message="Tha water be clean again! Many thanks and blessings for ye faeries!"}
 		wesnoth.wml_actions.message {speaker="Aryel", message="Yup, yup, no problem."}
 		
@@ -73,15 +108,78 @@ function wesnoth.wml_actions.river_dialogue_hex(cfg)
 		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Esther"}}}
 		wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Yumi"}}}
 		
-		wesnoth.set_variable("ethea.river",3)
-	elseif wesnoth.get_variable("ethea.river") == 3 then
+		wesnoth.set_variable("ethea.river",4)
+	elseif wesnoth.get_variable("ethea.river") == 4 then
 		wesnoth.wml_actions.message {speaker="Villager", message="Tha water be crystal clear!"}
 	end
 end
 
+function wesnoth.wml_actions.river_stone_hex(cfg)
+	if wesnoth.get_variable("ethea.river") == 0 then
+		wesnoth.wml_actions.message {speaker="Aryel", message="I wonder what this rock is for."}
+	elseif wesnoth.get_variable("ethea.river") == 1 then
+		wesnoth.wml_actions.message {speaker="Aryel", message="I guess this rock could be useful."}
+		wesnoth.set_terrain(53,18,"Gd")
+		wesnoth.set_variable("ethea.river",2)
+	end
+end
+
 function wesnoth.wml_actions.river_puzzle_hex(cfg)
-	if wesnoth.get_variable("river.river") == 0 then
-	
+	if wesnoth.get_variable("ethea.river") == 2 then
+		wesnoth.wml_actions.message {speaker="Aryel", message="Hey, looks like we can block the river here and make the water flow around the rock to keep it from being corrupted."}
+		wesnoth.delay(300)
+		wesnoth.set_terrain(48,17,"Gd^Dr")
+		wesnoth.fire("redraw")
+		wesnoth.delay(850)
+		wesnoth.set_terrain(51,16,"Wwt")
+		wesnoth.set_terrain(50,16,"Wwt")
+		wesnoth.set_terrain(49,17,"Wwt")
+		wesnoth.fire("redraw")
+		wesnoth.delay(350)
+		wesnoth.set_terrain(49,18,"Wwt")
+		wesnoth.fire("redraw")
+		wesnoth.delay(350)
+		wesnoth.set_terrain(48,18,"Wwt")
+		wesnoth.set_terrain(47,19,"Wwt")
+		wesnoth.set_terrain(46,19,"Wwt")
+		wesnoth.fire("redraw")
+		wesnoth.delay(350)
+		wesnoth.set_terrain(45,20,"Wwt")
+		wesnoth.set_terrain(45,19,"Wwt")
+		wesnoth.set_terrain(46,20,"Wwt")
+		wesnoth.fire("redraw")
+		wesnoth.delay(350)
+		wesnoth.set_terrain(46,21,"Wwt")
+		wesnoth.set_terrain(45,22,"Wwt")
+		wesnoth.fire("redraw")
+		wesnoth.delay(350)
+		wesnoth.set_terrain(44,22,"Wwt")
+		wesnoth.set_terrain(44,23,"Wwt")
+		wesnoth.set_terrain(43,23,"Wwt")
+		wesnoth.fire("redraw")
+		wesnoth.delay(350)
+		wesnoth.set_terrain(42,22,"Wwt")
+		wesnoth.set_terrain(42,23,"Wwt")
+		wesnoth.set_terrain(43,24,"Wwt")
+		wesnoth.set_terrain(44,24,"Wwt")
+		wesnoth.set_terrain(45,24,"Wwt")
+		wesnoth.fire("redraw")
+		wesnoth.delay(350)
+		wesnoth.set_terrain(45,25,"Wwt")
+		wesnoth.set_terrain(44,25,"Wwt")
+		wesnoth.set_terrain(41,24,"Wwt")
+		wesnoth.set_terrain(42,24,"Wwt")
+		wesnoth.set_terrain(41,22,"Wwt")
+		wesnoth.set_terrain(41,23,"Wwt")
+		wesnoth.fire("redraw")
+		wesnoth.delay(350)
+		wesnoth.set_terrain(40,23,"Wwt")
+		wesnoth.set_terrain(42,21,"Wwt")
+		wesnoth.set_terrain(41,25,"Wwt")
+		wesnoth.fire("redraw")
+		wesnoth.delay(700)
+		wesnoth.wml_actions.message {speaker="Aryel", message="Piece of cake."}
+		wesnoth.set_variable("ethea.river",3)
 	end
 end
 
@@ -124,7 +222,7 @@ function wesnoth.wml_actions.chicken_dialogue_hex(cfg)
 		wesnoth.wml_actions.message {speaker="Esther", message="Haha, don't be shy, you glutton. Go for it."}
 		wesnoth.wml_actions.message {speaker="Yumi", message=string.format("<i>rolls eyes</i>")}
 		
-		wesnoth.wml_actions.add_exp {hitpoints=1,{"filter",{id="Yumi"}}}
+		wesnoth.wml_actions.add_hp {hp=1,{"filter",{id="Yumi"}}}
 		wesnoth.set_variable("ethea.chicken",1)
 	elseif wesnoth.get_variable("ethea.chicken") == 1 then
 		wesnoth.wml_actions.message {speaker="Kadishi", message="Look at all the chickens! Aren't they cute?"}
