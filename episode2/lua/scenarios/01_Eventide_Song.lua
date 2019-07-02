@@ -433,7 +433,6 @@ function wesnoth.wml_actions.set_ethea_variables(cfg)
     wesnoth.set_variable("ethea.river",0)
     wesnoth.set_variable("ethea.scorpion",0)
     wesnoth.set_variable("ethea.fishing",0)
-    wesnoth.set_variable("ethea.mushroom",0)
     wesnoth.set_variable("ethea.chicken",0)
     wesnoth.set_variable("ethea.temple",0)
 end
