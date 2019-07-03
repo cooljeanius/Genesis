@@ -17,7 +17,7 @@ end
 
 function wesnoth.wml_actions.esther_spell_setup()
     wesnoth.set_variable("esther_spell_params.esther_spell_radius",0)
-    wesnoth.set_variable("esther_spell_params.esther_spell_power",3)
+    wesnoth.set_variable("esther_spell_params.esther_spell_power",2)
     wesnoth.set_variable("esther_spell_params.esther_intelligence",2)
     wesnoth.set_variable("esther_spell_params.esther_insight",1)
 	
