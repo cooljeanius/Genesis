@@ -62,6 +62,10 @@ function wesnoth.wml_actions.initialize_puzzles(cfg)
     if wesnoth.get_variable("ethea.fishing") > 1 then
         wesnoth.set_terrain(55,32,"Wwt")
     end
+    if wesnoth.get_variable("ethea.temple") > 0 then
+        wesnoth.set_terrain(48,5,"Dd")
+        wesnoth.set_terrain(48,6,"Drt")
+    end
 end
 
 function wesnoth.wml_actions.bat_dialogue_hex(cfg)
@@ -311,38 +315,55 @@ function wesnoth.wml_actions.temple_lights(cfg)
     local t6 = wesnoth.get_terrain(43,13)
     local t7 = wesnoth.get_terrain(42,11)
     local t8 = wesnoth.get_terrain(43,10)
-    if t1 == "Uzw^Ii" then
-        wesnoth.set_terrain(45,9,"Uzw")
-        wesnoth.set_terrain(47,10,"Uzw^Ii")
+    if t1 == "Bryd^Ii" then
+        wesnoth.set_terrain(45,9,"Bryd")
+        wesnoth.set_terrain(47,10,"Bryd^Ii")
         wesnoth.fire("redraw")
-    elseif t2 == "Uzw^Ii" then
-        wesnoth.set_terrain(47,10,"Uzw")
-        wesnoth.set_terrain(48,11,"Uzw^Ii")
+    elseif t2 == "Bryd^Ii" then
+        wesnoth.set_terrain(47,10,"Bryd")
+        wesnoth.set_terrain(48,11,"Bryd^Ii")
         wesnoth.fire("redraw")
-    elseif t3 == "Uzw^Ii" then
-        wesnoth.set_terrain(48,11,"Uzw")
-        wesnoth.set_terrain(47,13,"Uzw^Ii")
+    elseif t3 == "Bryd^Ii" then
+        wesnoth.set_terrain(48,11,"Bryd")
+        wesnoth.set_terrain(47,13,"Bryd^Ii")
         wesnoth.fire("redraw")
-    elseif t4 == "Uzw^Ii" then
-        wesnoth.set_terrain(47,13,"Uzw")
-        wesnoth.set_terrain(45,14,"Uzw^Ii")
+    elseif t4 == "Bryd^Ii" then
+        wesnoth.set_terrain(47,13,"Bryd")
+        wesnoth.set_terrain(45,14,"Bryd^Ii")
         wesnoth.fire("redraw")
-    elseif t5 == "Uzw^Ii" then
-        wesnoth.set_terrain(45,14,"Uzw")
-        wesnoth.set_terrain(43,13,"Uzw^Ii")
+    elseif t5 == "Bryd^Ii" then
+        wesnoth.set_terrain(45,14,"Bryd")
+        wesnoth.set_terrain(43,13,"Bryd^Ii")
         wesnoth.fire("redraw")
-    elseif t6 == "Uzw^Ii" then
-        wesnoth.set_terrain(43,13,"Uzw")
-        wesnoth.set_terrain(42,11,"Uzw^Ii")
+    elseif t6 == "Bryd^Ii" then
+        wesnoth.set_terrain(43,13,"Bryd")
+        wesnoth.set_terrain(42,11,"Bryd^Ii")
         wesnoth.fire("redraw")
-    elseif t7 == "Uzw^Ii" then
-        wesnoth.set_terrain(42,11,"Uzw")
-        wesnoth.set_terrain(43,10,"Uzw^Ii")
+    elseif t7 == "Bryd^Ii" then
+        wesnoth.set_terrain(42,11,"Bryd")
+        wesnoth.set_terrain(43,10,"Bryd^Ii")
         wesnoth.fire("redraw")
-    elseif t8 == "Uzw^Ii" then
-        wesnoth.set_terrain(43,10,"Uzw")
-        wesnoth.set_terrain(45,9,"Uzw^Ii")
+    elseif t8 == "Bryd^Ii" then
+        wesnoth.set_terrain(43,10,"Bryd")
+        wesnoth.set_terrain(45,9,"Bryd^Ii")
         wesnoth.fire("redraw")
+    end
+end
+
+function wesnoth.wml_actions.temple_puzzle_hex(cfg)
+    local t = wesnoth.get_terrain(45,9)
+    if t == "Bryd^Ii" and wesnoth.get_variable("ethea.temple") == 0 then
+        wesnoth.delay(200)
+        wesnoth.play_sound("rumble.ogg")
+        wesnoth.play_sound("rumble.ogg")
+        wesnoth.delay(500)
+        wesnoth.set_terrain(48,5,"Dd")
+        wesnoth.set_terrain(48,6,"Drt")
+        wesnoth.fire("redraw")
+        wesnoth.delay(500)
+        wesnoth.wml_actions.message {speaker="Esther", message="Whoa. Those mountains just... disappeared. Looks like there's some kind of temple inside?"}
+        wesnoth.wml_actions.message {speaker="Aryel", message="Might be worth checking out."}
+        wesnoth.set_variable("ethea.temple",1)
     end
 end
 
