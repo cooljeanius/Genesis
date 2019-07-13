@@ -578,6 +578,8 @@ function wesnoth.wml_actions.lightning_bolt_spell()
     end
 end
 
+-- phoenix: defies all regular damage for one turn (except for fatal hits)
+
 ------------- YUMI ------------
 function wesnoth.wml_actions.siphon_spell()
     local yumi_spell_power = wesnoth.get_variable("yumi_spell_params.yumi_spell_power")
