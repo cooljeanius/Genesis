@@ -2,6 +2,7 @@ This list of art images in the add-on's "images" directory are drawn by nemaara 
 all images in the directories (and any subdirectories):
 units/demons/
 units/humans/
+buildings/
 projectiles-new/
 items-new/
 
