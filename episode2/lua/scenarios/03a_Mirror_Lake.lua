@@ -29,9 +29,9 @@ function wesnoth.wml_actions.water_puzzle_hex(cfg)
         
         wesnoth.set_variable("lake.water_puzzle",4)
     elseif wesnoth.get_variable("lake.water_puzzle") == 4 then
-        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Water and fire together, like the push and pull of the mighty tide. The deep current and the searing flame - we are mortal enemies persisting on one plane, locked in a dance of eternal combat.</i>")}
+        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Water and fire flow together like the push and pull of the mighty tide. The deep current and the searing flame - we are mortal enemies persisting on a single plane, locked in a dance of eternal combat.</i>")}
         wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Relish the terror, relish the blood! Don thy macabre masque and lock thy arms with mine! The steel that drives our bellicose dance demands the presence of both; water and fire, without one, the other is lost.</i>")}
-        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Opposed, but kindred spirits, we bear that hatred which is a second instinct to necessity. It is an antipathy that binds us, whether you like it or not.</i>")}
+        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Opposed, but kindred spirits, we bear that hatred which is a second instinct to necessity. It is an antipathy that binds us, whether you like it or not...</i>")}
         wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Shardia...</i>")}
     end
 end
@@ -85,10 +85,9 @@ function wesnoth.wml_actions.fire_puzzle_hex(cfg)
         
         wesnoth.set_variable("lake.fire_puzzle",6)
     elseif wesnoth.get_variable("lake.fire_puzzle") == 6 then
-        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Water and fire together, like the push and pull of the mighty tide. The deep current and the searing flame - we are mortal enemies persisting on one plane, locked in a dance of eternal combat.</i>")}
-        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Relish the terror, relish the blood! Don thy macabre masque and lock thy arms with mine! The steel that drives our bellicose dance demands the presence of both; water and fire, without one, the other is lost.</i>")}
-        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Opposed, but kindred spirits, we bear that hatred which is a second instinct to necessity. It is an antipathy that binds us, whether you like it or not.</i>")}
-        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Shardia...</i>")}
+        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>A shining star in the darkness, the keeper of the sacred flame needed to spark all Life... that is Shardia. A staunch protector against the savage beast hordes that hail from the depths of Norsula's oceans. That... is Shardia.</i>")}
+        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>But you know as well as I do, don't you? The fire that burns the brightest is also the one that consumes the most. Yours is but a facade of warmth. In truth, you embrace carnage as much as I do, so long as it suits your means. Don't you?</i>")}
+        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Flame both is the spark of life and that which burns it to ashen cinders. Isn't that right, Shardia?</i>")}
     end
 end
 function wesnoth.wml_actions.fire_puzzle_tree_hex(cfg)
@@ -114,6 +113,52 @@ function wesnoth.wml_actions.fire_puzzle_brick_hex(cfg)
     end
 end
 -------------------------- ICE PUZZLE -------------------------------
+function wesnoth.wml_actions.ice_puzzle_hex(cfg)
+    if wesnoth.get_variable("lake.ice_puzzle") == 1 then
+        wesnoth.play_sound("gate-fall.ogg")
+        wesnoth.set_terrain(34,28,"Ayb^Pyg")
+        wesnoth.fire("redraw")
+        wesnoth.set_variable("lake.ice_puzzle",2)
+    elseif wesnoth.get_variable("lake.ice_puzzle") == 3 then
+        wesnoth.play_sound("mace.wav")
+        wesnoth.set_terrain(34,28,"Ctym")
+        wesnoth.fire("redraw")
+        wesnoth.delay(1000)
+        wesnoth.play_sound("magic-faeriefire.ogg")
+        wesnoth.delay(500)
+        wesnoth.wml_actions.item {x=34,y=28,image="items/crystal-glyph-message.png"}
+        wesnoth.wml_actions.remove_item {x=37,y=26}
+        
+        local experience=wesnoth.get_variable("puzzle_exp")
+        wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Aryel"}}}
+        wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Esther"}}}
+        wesnoth.wml_actions.add_exp {experience=experience,{"filter",{id="Yumi"}}}
+        
+        wesnoth.set_variable("lake.ice_puzzle",4)
+    elseif wesnoth.get_variable("lake.ice_puzzle") == 4 then
+        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Water and fire together, like the push and pull of the mighty tide. The deep current and the searing flame - we are mortal enemies persisting on one plane, locked in a dance of eternal combat.</i>")}
+        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Relish the terror, relish the blood! Don thy macabre masque and lock thy arms with mine! The steel that drives our bellicose dance demands the presence of both; water and fire, without one, the other is lost.</i>")}
+        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Opposed, but kindred spirits, we bear that hatred which is a second instinct to necessity. It is an antipathy that binds us, whether you like it or not.</i>")}
+        wesnoth.wml_actions.message {speaker="narrator", message=string.format("<i>Shardia...</i>")}
+    end
+end
+function wesnoth.wml_actions.ice_puzzle_grid_hex(cfg)
+    if wesnoth.get_variable("lake.ice_puzzle") == 0 then
+        wesnoth.play_sound("gate.ogg")
+        wesnoth.set_terrain(40,28,"Ai")
+        wesnoth.fire("redraw")
+        wesnoth.set_variable("lake.ice_puzzle",1)
+    end
+end
+function wesnoth.wml_actions.ice_puzzle_metal_hex(cfg)
+    if wesnoth.get_variable("lake.ice_puzzle") == 2 then
+        wesnoth.play_sound("mace.ogg")
+        wesnoth.set_terrain(35,32,"Ai")
+        wesnoth.fire("redraw")
+        wesnoth.set_variable("lake.ice_puzzle",3)
+    end
+end
+
 function wesnoth.wml_actions.temple_puzzle_hex(cfg)
     local t = wesnoth.get_terrain(45,9)
     if t == "Bryd^Ii" and wesnoth.get_variable("ethea.temple") == 0 then
