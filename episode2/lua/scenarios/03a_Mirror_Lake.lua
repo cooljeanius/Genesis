@@ -4,6 +4,8 @@ function wesnoth.wml_actions.init_puzzles(cfg)
     wesnoth.set_variable("lake.water_puzzle",0)
     wesnoth.set_variable("lake.fire_puzzle",0)
     wesnoth.set_variable("lake.ice_puzzle",0)
+    wesnoth.set_variable("lake.scenario_stage",0)
+    wesnoth.set_variable("lake.counter",0)
 end
 -------------------------- WATER PUZZLE -------------------------------
 function wesnoth.wml_actions.water_puzzle_hex(cfg)
@@ -156,22 +158,5 @@ function wesnoth.wml_actions.ice_puzzle_metal_hex(cfg)
         wesnoth.set_terrain(35,32,"Ai")
         wesnoth.fire("redraw")
         wesnoth.set_variable("lake.ice_puzzle",3)
-    end
-end
-
-function wesnoth.wml_actions.temple_puzzle_hex(cfg)
-    local t = wesnoth.get_terrain(45,9)
-    if t == "Bryd^Ii" and wesnoth.get_variable("ethea.temple") == 0 then
-        wesnoth.delay(200)
-        wesnoth.play_sound("rumble.ogg")
-        wesnoth.play_sound("rumble.ogg")
-        wesnoth.delay(500)
-        wesnoth.set_terrain(48,5,"Dd")
-        wesnoth.set_terrain(48,6,"Drt")
-        wesnoth.fire("redraw")
-        wesnoth.delay(500)
-        wesnoth.wml_actions.message {speaker="Esther", message="Whoa. Those mountains just... disappeared. Looks like there's some kind of temple inside?"}
-        wesnoth.wml_actions.message {speaker="Aryel", message="Might be worth checking out."}
-        wesnoth.set_variable("ethea.temple",1)
     end
 end
