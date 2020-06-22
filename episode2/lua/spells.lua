@@ -465,10 +465,18 @@ function wesnoth.wml_actions.firebolt_spell()
     }
 
     wesnoth.set_variable("esther_spell_params.esther_mana", wesnoth.get_variable("esther_spell_params.esther_mana") - 4)
-
     if firebolt_bonus < math.floor(wesnoth.get_variable("esther_spell_params.firebolt_max_bonus")*(1+intelligence/20)) then
         wesnoth.set_variable("esther_spell_params.firebolt_bonus", firebolt_bonus + 0.1*(1+insight/10))
     end
+    
+    local u = wesnoth.get_unit("Esther")
+    local x1 = wesnoth.get_variable("x1")
+    local y1 = wesnoth.get_variable("y1")
+    wesnoth.set_variable("spell_target.x", x1)
+    wesnoth.set_variable("spell_target.y", y1)
+    wesnoth.set_variable("spell_caster.x", u.x)
+    wesnoth.set_variable("spell_caster.y", u.y)
+    wesnoth.wml_actions.fire_event {name="firebolt spell"}
 end
 
 function wesnoth.wml_actions.sunlight_spark_spell()
