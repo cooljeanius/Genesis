@@ -1,6 +1,3 @@
-border_size=1
-usage=map
-
 Brym, Btym, Btym, Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Btyb, Brym, Brym, Wwt^Oasy, Brym, Brym, Btyb, Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym
 Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btym, Wwt^Oasy, Wwt^Oasy, Wwt^Oasy, Wwt^Oasy, Wwt^Oasy, Btym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym
 Brym, Btym, Btym, Btym, Btym, Btym, Brym, Brym^Vymb, Brym, Brym, Brym, Brym, Brym, Btyb, Brym, Wwt^Oasy, Wwt^Oasy, Wwt^Oasy, Wwt^Oasy, Wwt^Oasy, Wwt^Oasy, Wwt^Oasy, Brym, Btyb, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Brym, Btym, Btym, Btym, Btym, Btym, Brym
@@ -21,8 +18,8 @@ Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Btym, Brym, Brym, Br
 Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Brym, Btym, Brym, Btym, Brym, Brym, Brym, Btym, Brym, Btym, Brym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym
 Xomy, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btym^Sy|, Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Btym^Sy|, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym
 Xomy, Xomy, Xomy, Brym^Bryb, Brym, Brym^Vymb, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btym, Brym, Btym, Brym, Btym, Btym^Sy|, Btym, Brym, Btym, Brym, Btym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btyb, Brym, Brym
-Xomy, Xomy, Xomy, Brym, Brym, Brym, Brym, Btyb, Brym^Bryb, Btyb, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym^Lymp, Brym, Btyb, Btym, Btyb, Brym
-Xomy, Xomy, Xomy, Brym, Brym, Brym, Brym, Btym, Rrc, Btym, Brym, Brym, Brym, Brym, Kmy, Cmy, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btym, Btym^Bydc, Btym, Brym
+Xomy, Xomy, Xomy, Brym, Brym, Brym, Brym, Btyb, Brym^Bryb, Btyb, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Brym, Btyb, Brym, Brym, Brym^Vymb, Brym, Brym^Lymp, Brym, Btyb, Btym, Btyb, Brym
+Xomy, Xomy, Xomy, Brym, Brym, Brym, Brym, Btym, Rrc, Btym, Brym, Brym, Brym, Brym, Kmy, Cmy, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btym, Brym, Brym, Brym, Brym, Brym, Brym, Btym, Btym^Bydc, Btym, Brym
 Brym, Xomy, Brym, Brym^Bryb, Brym, Brym, Btyb, Btym, Btym^Sy|, Btym, Brym, Brym, Brym, Cmy, Cmy, Cmy, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btyb, Brym^Lymp, Brym, Brym, Brym, Brym, Brym
 Brym, Brym, Brym, Brym, Brym, Brym, Btym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Btym, Brym, Brym, Brym, Brym^Lymp, Brym, Brym
 Brym, Brym, Brym, Brym, Brym, Brym, Btym, Brym, Brym, Brym, Brym, Brym, Brym, Btyb, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btyb, Brym, Brym, Brym, Brym, Brym, Brym, Btym, Brym, Brym, Brym, Brym, Brym, Brym
