@@ -27,7 +27,6 @@ local skippable_actions = {
 	"delay",
 	-- The lack of pauses can turn [color_adjust] into a health hazard, so
 	-- skip that as well.
-	"color_adjust",
 	"fade_screen",
 	"unfade_screen",
 }
