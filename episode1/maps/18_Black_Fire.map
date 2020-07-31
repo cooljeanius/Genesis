@@ -1,23 +1,20 @@
-border_size=1
-usage=map
-
 Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Brym, Brym, Brym, Brym^Bryl, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Kmy^Xo, Brym, Cmy, Cmy, Cmy
 Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Brym, Cmy^Xo, Brym^Vymb, Cmy, Kmy, Cmy
 Brym, Btym, Btym, Btym, Btym, Btym, Brym, Brym, Cmy, Cmy, Cmy, Brym, Brym, Brym, Brym^Fynt, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Cmy^Xo, Brym, Brym, Cmy, Cmy
 Brym, Btym, Btym, Btym, Brym, Brym, Brym, Brym, Cmy, Kmy, Cmy, Brym, Brym, Brym, Brym, Brym, Btyb, Brym, Brym, Brym, Brym, Brym, Brym, Cmy^Xo, Cmy^Xo, Brym^Vymb, Brym
 Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Brym, Brym, Cmy, Brym, Brym, Btyb, Brym, Brym, Brym, Btym, Brym, Btyb, Brym, Btyb, Brym, Btyb, Brym, Brym, Cmy^Xo, Kmy^Xo
 Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btyb, Brym, Brym, Brym, Btym, Brym, Brym^Vymb, Brym, Btym, Brym, Btym, Btyb, Btym, Brym, Btym, Brym, Brym, Brym, Brym
-Btym, Brym, Btym^Sy|, Brym, Brym, Btyb, Brym^Bryl, Brym, Btym, Brym, Brym^Lymp, Brym, Btym, Brym, Brym^Lymp, Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym^Bryl, Brym
-Btym, Btym, Btym^Sy|, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym
-Brym, Btym, Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym^Lymp, Brym, Btyb, Btym, Btyb, Brym, Brym, Brym^Bryl, Brym, Btym, Btym
+Btym, Brym, Btym, Brym, Brym, Btyb, Brym^Bryl, Brym, Btym, Brym, Brym^Lymp, Brym, Btym, Brym, Brym^Lymp, Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym^Bryl, Brym
+Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym^Sy|, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym
+Brym, Btym, Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym^Sy|, Btym, Btym, Btym, Btym, Brym^Lymp, Brym, Btyb, Btym, Btyb, Brym, Brym, Brym^Bryl, Brym, Btym, Btym
 Brym, Brym, Brym, Brym, Brym, Btym, Brym, Brym^Bryl, Brym^Vymb, Brym, Brym, Brym, Brym, Brym^Bryl, Brym, Brym, Brym, Brym, Btym, Brym^Bryl, Btym, Brym, Brym, Brym, Brym, Brym, Brym
 Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Btym, Cmy, Btym, Brym, Brym, Brym^Vymb, Brym, Brym, Brym
 Brym, Brym, Brym, Brym, Brym, Brym, Cmy, Cmy, Cmy, Brym, Brym, Brym, Brym, Cmy, Cmy, Brym, Brym, Brym, Brym, Btym^Sy|, Brym, Brym, Brym, Brym, Brym, Brym, Brym
 Brym, Brym, Brym, Brym, Brym, Brym, Cmy, Kmy, Cmy, Brym, Brym, Brym^Vymb, Brym, Cmy, Brym, Brym, Brym, Brym, Brym, Btym^Sy|, Brym, Brym, Brym, Brym, Brym, Brym, Btyb^Bryl
 Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Brym, Cmy, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btyb, Brym, Cmy, Brym, Brym^Lymp, Btyb^Bryl, Brym^Bryl, Cmy, Brym^Sy|, Brym, Btym
-Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btyb, Brym, Cmy, Brym^Bryl, Btym, Brym, Btym, Cmy, Btym, Btym, Btym, Btym, Brym^Sy|, Btym, Btym
-Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Cmy, Brym, Btym, Brym^Bryl, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Btym, Btym
-Brym, Btyb^Bryl, Brym, Brym, Brym, Btyb, Brym, Brym, Cmy, Brym^Lymp, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym^Vymb, Btym, Brym^Bryl, Btym, Brym, Brym, Brym, Brym, Brym
+Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Btyb, Brym, Cmy, Brym, Btym, Brym, Btym, Cmy, Btym, Btym, Btym, Btym, Brym^Sy|, Btym, Btym
+Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym, Brym, Cmy, Brym, Btym, Brym^Bryl, Btym, Brym^Sy|, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Btym, Btym
+Brym, Btyb^Bryl, Brym, Brym, Brym, Btyb, Brym, Brym, Cmy, Brym^Lymp, Btym, Btym, Btym, Btym, Btym, Brym^Sy|, Btym, Btym, Brym^Vymb, Btym, Brym^Bryl, Btym, Brym, Brym, Brym, Brym, Brym
 Brym, Btym, Brym, Brym, Brym, Btym, Brym, Cmy, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Brym^Vymb, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym
 Brym, Btym, Btym, Brym^Lymp, Btym, Btym, Btym, Btym, Btym, Btym, Brym, Brym^Vymb, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym, Brym^Vymb, Brym^Bryl, Brym, Brym
 Brym, Btym, Btym, Btym, Btym, Btym, Btym, Btym, Brym^Bryl, Brym, Brym, Brym, Brym, Brym, Btyb, Btyb, Btyb, Brym, Cmy, Cmy, Cmy, Brym, Brym, Brym, Brym, Brym, Brym
