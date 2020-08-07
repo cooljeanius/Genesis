@@ -14,3 +14,6 @@ halo/guardians/
 
 The next art image in the add-on's "images" directory is drawn by Pinack and is licensed under CC BY-NC-ND v4.0
 story/moonlit-lake.png
+
+The next art image in the add-on's "images" directory is drawn by duwi and is licensed under CC BY-NC-ND v4.0
+portraits/luna.png
