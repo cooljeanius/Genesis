@@ -57,8 +57,8 @@ end
 -- [/store_direction]
 ---
 function wesnoth.wml_actions.store_direction(cfg)
-    local from_slf = helper.get_child(cfg, "from")
-    local to_slf = helper.get_child(cfg, "to")
+    local from_slf = wml.get_child(cfg, "from")
+    local to_slf = wml.get_child(cfg, "to")
 
     local a = { x = cfg.from_x, y = cfg.from_y }
     local b = { x = cfg.to_x  , y = cfg.to_y   }
@@ -115,18 +115,18 @@ end
 -- [/set_facing]
 ---
 function wesnoth.wml_actions.set_facing(cfg)
-    local suf = helper.get_child(cfg, "filter") or
+    local suf = wml.get_child(cfg, "filter") or
         helper.wml_error("[set_facing] Missing unit filter")
 
     local facing = cfg.facing
-    local target_suf = helper.get_child(cfg, "filter_second")
-    local target_slf = helper.get_child(cfg, "filter_location")
+    local target_suf = wml.get_child(cfg, "filter_second")
+    local target_slf = wml.get_child(cfg, "filter_location")
 
     local target_loc, target_u
 
     if not facing then
         if target_suf then
-            target_u = wesnoth.get_units(target_suf)[1] or
+            target_u = wesnoth.units.find_on_map(target_suf)[1] or
                 helper.wml_error("[set_facing] Could not match the specified [filter_second] unit")
         elseif target_slf then
             target_loc = wesnoth.get_locations(target_slf)[1] or
@@ -134,7 +134,7 @@ function wesnoth.wml_actions.set_facing(cfg)
         end
     end
 
-    local units = wesnoth.get_units(suf) or
+    local units = wesnoth.units.find_on_map(suf) or
         helper.wml_error("[set_facing] Could not match any on-map units with [filter]")
 
     for i, u in ipairs(units) do
@@ -164,8 +164,8 @@ function wesnoth.wml_actions.set_facing(cfg)
             -- display accordingly. Against what one would normally expect, calling
             -- [redraw] does *not* work as an alternative.
 
-            wesnoth.extract_unit(u)
-            wesnoth.put_unit(u)
+            wesnoth.units.extract(u)
+            wesnoth.units.to_map(u)
         end
     end
 end
@@ -193,7 +193,7 @@ function wesnoth.wml_actions.setup_doors(cfg)
     local locs = wesnoth.get_locations(cfg)
 
     for k, loc in ipairs(locs) do
-        wesnoth.put_unit(loc[1], loc[2], {
+        wesnoth.units.to_map(loc[1], loc[2], {
             type = "Door",
             side = owner_side,
             id = ("__door_X%dY%d"):format(loc[1], loc[2]),
@@ -215,7 +215,7 @@ end
 -- [/store_unit_ids]
 ---
 function wesnoth.wml_actions.store_unit_ids(cfg)
-    local filter = helper.get_child(cfg, "filter") or
+    local filter = wml.get_child(cfg, "filter") or
         helper.wml_error "[store_unit_ids] missing required [filter] tag"
     local var = cfg.variable or "units"
     local idx = 0
@@ -225,7 +225,7 @@ function wesnoth.wml_actions.store_unit_ids(cfg)
         wesnoth.set_variable(var)
     end
 
-    for i, u in ipairs(wesnoth.get_units(filter)) do
+    for i, u in ipairs(wesnoth.units.find_on_map(filter)) do
         wesnoth.set_variable(string.format("%s[%d].id", var, idx), u.id)
         idx = idx + 1
     end
@@ -302,7 +302,7 @@ function wesnoth.wml_actions.hidden_unit(cfg)
     -- this smarter than [unit].
     u.x, u.y = wesnoth.find_vacant_tile(u.x, u.y)
     u.hidden = true
-    wesnoth.put_unit(u)
+    wesnoth.units.to_map(u)
 end
 
 ---
@@ -315,7 +315,7 @@ end
 ---
 
 function wesnoth.wml_actions.count_units(cfg)
-    local units = wesnoth.get_units(cfg)
+    local units = wesnoth.units.find_on_map(cfg)
     local varname = cfg.variable or "unit_count"
 
     if units == nil then

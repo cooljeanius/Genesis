@@ -55,8 +55,8 @@ end
 local engine_msg = wesnoth.wml_actions.message
 
 function wesnoth.wml_actions.message(cfg)
-	local fback_if_cfg = helper.get_child(cfg, "fallback_if")
-	local fback_to_cfg = helper.get_child(cfg, "fallback_to")
+	local fback_if_cfg = wml.get_child(cfg, "fallback_if")
+	local fback_to_cfg = wml.get_child(cfg, "fallback_to")
 
 	if not fback_if_cfg or not fback_to_cfg then
 		engine_msg(cfg)
@@ -89,7 +89,7 @@ function wesnoth.wml_actions.message(cfg)
 		minisuf.speaker = cfg.speaker
 	end
 
-	local u = wesnoth.get_units(minisuf)[1]
+	local u = wesnoth.units.find_on_map(minisuf)[1]
 
 	if not u then
 		wprintf(W_ERR, "[message] root mini SUF in fallback check mode did not match anything, cannot show message (SUF too complex?)")
@@ -98,7 +98,7 @@ function wesnoth.wml_actions.message(cfg)
 
 	if wesnoth.match_unit(u, fback_if_cfg) then
 		wprintf(W_DBG, "[message] fallback triggered")
-		u = wesnoth.get_units(fback_to_cfg)[1]
+		u = wesnoth.units.find_on_map(fback_to_cfg)[1]
 
 		if not u then
 			wprintf(W_ERR, "[message] fallback SUF did not match anything, cannot show message")

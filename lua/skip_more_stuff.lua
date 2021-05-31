@@ -39,7 +39,7 @@ for i, action_id in ipairs(warp_actions) do
 
 	_WA_warp_actions[action_id] = wesnoth.wml_actions[action_id]
 	wesnoth.wml_actions[action_id] = function(cfg)
-		if wesnoth.is_skipping_messages() then
+		if wesnoth.interface.is_skipping_messages() then
 			wprintf(W_INFO, "Ignoring timing or scrolling delay for [%s] while skipping [message]", action_id)
 
 			if action_id == "fade_out_music" then
@@ -71,7 +71,7 @@ for i, action_id in ipairs(skippable_actions) do
 
 	_WA_skip_actions[action_id] = wesnoth.wml_actions[action_id]
 	wesnoth.wml_actions[action_id] = function(cfg)
-		if wesnoth.is_skipping_messages() then
+		if wesnoth.interface.is_skipping_messages() then
 			wprintf(W_INFO, "Ignoring [%s] while skipping [message]", action_id)
 			return
 		end

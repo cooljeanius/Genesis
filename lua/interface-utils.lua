@@ -17,12 +17,12 @@ function invert_direction(dir)
 end
 
 function wesnoth.wml_actions.multi_turn_unit(cfg)
-    local suf = helper.get_child(cfg, "filter") or
+    local suf = wml.get_child(cfg, "filter") or
         helper.wml_error("[multi_turn_unit] Missing unit filter")
 
     local facing = cfg.facing
 
-    local units = wesnoth.get_units(suf) or
+    local units = wesnoth.units.find_on_map(suf) or
         helper.wml_error("[multi_turn_unit] Could not match any on-map units with [filter]")
 
     facing=units[1].facing
@@ -33,8 +33,8 @@ function wesnoth.wml_actions.multi_turn_unit(cfg)
         do
             facing = invert_direction(facing)
             units[1].facing = facing
-            wesnoth.extract_unit(units[1])
-            wesnoth.put_unit(units[1])
+            wesnoth.units.extract(units[1])
+            wesnoth.units.to_map(units[1])
             wesnoth.delay(350)
     end
 end
