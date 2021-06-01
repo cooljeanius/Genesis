@@ -35,7 +35,7 @@ function wesnoth.wml_actions.multi_turn_unit(cfg)
             units[1].facing = facing
             wesnoth.units.extract(units[1])
             wesnoth.units.to_map(units[1])
-            wesnoth.delay(350)
+            wesnoth.interface.delay(350)
     end
 end
 
@@ -43,52 +43,52 @@ end
 function wesnoth.wml_actions.fade_screen(cfg)
 
 	wesnoth.wml_actions.color_adjust {red=-25,green=-25,blue=-25}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-50,green=-50,blue=-50}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-75,green=-75,blue=-75}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-100,green=-100,blue=-100}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-125,green=-125,blue=-125}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	
 	wesnoth.wml_actions.hide_unit {{"filter",{}}}
 	
 	wesnoth.wml_actions.color_adjust {red=-150,green=-150,blue=-150}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-175,green=-175,blue=-175}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-200,green=-200,blue=-200}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-225,green=-225,blue=-225}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-255,green=-255,blue=-255}
 end
 
 function wesnoth.wml_actions.unfade_screen(cfg)
 
 	wesnoth.wml_actions.color_adjust {red=-225,green=-225,blue=-225}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-200,green=-200,blue=-200}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-175,green=-175,blue=-175}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-150,green=-150,blue=-150}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-125,green=-125,blue=-125}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	
 	wesnoth.wml_actions.unhide_unit {{"filter",{}}}
 	
 	wesnoth.wml_actions.color_adjust {red=-100,green=-100,blue=-100}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-75,green=-75,blue=-75}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-50,green=-50,blue=-50}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=-25,green=-25,blue=-25}
-	wesnoth.delay(60)
+	wesnoth.interface.delay(60)
 	wesnoth.wml_actions.color_adjust {red=0,green=0,blue=0}
 end
 
@@ -103,7 +103,7 @@ function alpha_print(text, size, alpha)
         duration=1000
     })
 
-    wesnoth.delay(20)
+    wesnoth.interface.delay(20)
 
     wesnoth.wml_actions.redraw({})
 end
@@ -134,7 +134,7 @@ function wesnoth.wml_actions.credits_text(cfg)
         alpha_print(text, 20, alpha)
     end
 
-    wesnoth.delay(duration)
+    wesnoth.interface.delay(duration)
 
     for alpha = 1.0, 0.0, -0.1 do
         alpha_print(text, 20, alpha)
@@ -147,5 +147,5 @@ function wesnoth.wml_actions.credits_text(cfg)
         duration=10
     })
 
-    wesnoth.delay(750)
+    wesnoth.interface.delay(750)
 end

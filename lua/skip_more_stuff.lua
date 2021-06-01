@@ -50,7 +50,7 @@ for i, action_id in ipairs(warp_actions) do
 				}
 				-- HACK: give the new track a chance to start playing silently before
 				--       resetting to full volume.
-				wesnoth.delay(10)
+				wesnoth.interface.delay(10)
 				wesnoth.music_list.volume = 100.0
 			elseif action_id == "fade_out_sound_effects" then
 				wesnoth.sound_volume(0)
