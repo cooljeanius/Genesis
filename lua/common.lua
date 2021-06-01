@@ -183,7 +183,7 @@ function wesnoth.wml_actions.setup_doors(cfg)
     local owner_side = cfg.side or
         helper.wml_error("[setup_doors] No owner side= specified")
 
-    cfg = helper.parsed(cfg)
+    cfg = wml.parsed(cfg)
 
     if cfg.terrain == nil then
         cfg["terrain"] = "*^Z\\,*^Z/"

@@ -55,7 +55,7 @@ for i, action_id in ipairs(warp_actions) do
 			elseif action_id == "fade_out_sound_effects" then
 				wesnoth.sound_volume(0)
 			else -- scroll_to* actions
-				local p = helper.parsed(cfg)
+				local p = wml.parsed(cfg)
 				p.immediate = true
 				_WA_warp_actions[action_id](p)
 			end
