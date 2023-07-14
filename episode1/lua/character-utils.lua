@@ -1,9 +1,9 @@
 function wesnoth.wml_actions.add_exp(cfg)
     local suf = wml.get_child(cfg, "filter") or
-        helper.wml_error("[add_exp] Missing unit filter")
+        wml.error("[add_exp] Missing unit filter")
 
     local units = wesnoth.units.find_on_map(suf) or
-        helper.wml_error("[add_exp] Could not match any on-map units with [filter]")
+        wml.error("[add_exp] Could not match any on-map units with [filter]")
 
 	local experience = cfg.experience
 	
