@@ -11,3 +11,6 @@ The iron crescent reaps all lives,
 In dreams of darkness, spirit dies.*
 
 (Expert level - 23 scenarios)
+
+Note that development on this campaign is currently on hiatus, and its code may be difficult to read.
+Browse only at your own discretion.
