@@ -73,7 +73,7 @@ function wesnoth.wml_actions.store_direction(cfg)
     end
 
     if not a.x or not a.y or not b.x or not b.y then
-        helper.wml_error "[store_direction] missing coordinate!"
+        wml.error "[store_direction] missing coordinate!"
     end
 
     local variable = cfg.variable or "direction"
@@ -116,7 +116,7 @@ end
 ---
 function wesnoth.wml_actions.set_facing(cfg)
     local suf = wml.get_child(cfg, "filter") or
-        helper.wml_error("[set_facing] Missing unit filter")
+        wml.error("[set_facing] Missing unit filter")
 
     local facing = cfg.facing
     local target_suf = wml.get_child(cfg, "filter_second")
@@ -127,15 +127,15 @@ function wesnoth.wml_actions.set_facing(cfg)
     if not facing then
         if target_suf then
             target_u = wesnoth.units.find_on_map(target_suf)[1] or
-                helper.wml_error("[set_facing] Could not match the specified [filter_second] unit")
+                wml.error("[set_facing] Could not match the specified [filter_second] unit")
         elseif target_slf then
             target_loc = wesnoth.get_locations(target_slf)[1] or
-                helper.wml_error("[set_facing] Could not match the specified [filter_location] location")
+                wml.error("[set_facing] Could not match the specified [filter_location] location")
         end
     end
 
     local units = wesnoth.units.find_on_map(suf) or
-        helper.wml_error("[set_facing] Could not match any on-map units with [filter]")
+        wml.error("[set_facing] Could not match any on-map units with [filter]")
 
     for i, u in ipairs(units) do
         local new_facing
@@ -153,7 +153,7 @@ function wesnoth.wml_actions.set_facing(cfg)
                 { x = target_loc[1], y = target_loc[2] }
             )
         else
-            helper.wml_error("[set_facing] Missing facing or [filter_second] or [filter_location]")
+            wml.error("[set_facing] Missing facing or [filter_second] or [filter_location]")
         end
 
         if new_facing ~= u.facing then
@@ -181,7 +181,7 @@ end
 ---
 function wesnoth.wml_actions.setup_doors(cfg)
     local owner_side = cfg.side or
-        helper.wml_error("[setup_doors] No owner side= specified")
+        wml.error("[setup_doors] No owner side= specified")
 
     cfg = wml.parsed(cfg)
 
@@ -216,7 +216,7 @@ end
 ---
 function wesnoth.wml_actions.store_unit_ids(cfg)
     local filter = wml.get_child(cfg, "filter") or
-        helper.wml_error "[store_unit_ids] missing required [filter] tag"
+        wml.error "[store_unit_ids] missing required [filter] tag"
     local var = cfg.variable or "units"
     local idx = 0
     if cfg.mode == "append" then
@@ -250,8 +250,8 @@ function wesnoth.wml_actions.remove_terrain_overlays(cfg)
 
     for i, loc in ipairs(locs) do
         local locstr = wesnoth.get_terrain(loc[1], loc[2])
-		local newstr = string.gsub(locstr, "%^.*$", "")
-		wesnoth.set_terrain(loc[1], loc[2], newstr)
+        local newstr = string.gsub(locstr, "%^.*$", "")
+        wesnoth.set_terrain(loc[1], loc[2], newstr)
     end
 end
 
@@ -365,7 +365,7 @@ function wesnoth.wml_actions.fade_out_music(cfg)
     --wesnoth.message(string.format("%d steps", steps))
 
     for k = 1, steps do
-        local v = helper.round(100 - (100*k / steps))
+        local v = mathx.round(100 - (100*k / steps))
         --wesnoth.message(string.format("step %d, volume %d", k, v))
         set_music_volume(v)
         wesnoth.interface.delay(delay_granularity)
@@ -401,9 +401,9 @@ local function wml_sfx_volume_fade_internal(duration, is_fade_out)
         local v = 0
 
         if is_fade_out then
-            v = helper.round(100 - (100*k / steps))
+            v = mathx.round(100 - (100*k / steps))
         else
-            v = helper.round(100*k / steps)
+            v = mathx.round(100*k / steps)
         end
 
         --wesnoth.message(string.format("step %d, volume %d", k, v))
@@ -462,7 +462,7 @@ end
 -- [/highlight_goal]
 ---
 function wesnoth.wml_actions.highlight_goal(cfg)
-    cfg = helper.literal(cfg)
+    cfg = wml.literal(cfg)
 
     if cfg.image == nil then
         cfg.image = "misc/goal-highlight.png"
@@ -489,7 +489,7 @@ end
 ---
 function wesnoth.wml_actions.scatter_images(cfg)
     local locs = wesnoth.get_locations(cfg) or
-        helper.wml_error("[scatter_images] No suitable locations found.")
+        wml.error("[scatter_images] No suitable locations found.")
 
     local count = cfg.limit
     if count == nil or count == -1 then
@@ -497,8 +497,8 @@ function wesnoth.wml_actions.scatter_images(cfg)
     end
 
     for i = 1, count do
-        local loc = locs[helper.rand(("1..%d"):format(#locs))]
-        local img = helper.rand(cfg.image)
+        local loc = locs[mathx.random(("1..%d"):format(#locs))]
+        local img = mathx.random(cfg.image)
 
         wesnoth.wml_actions.item {
             x = loc[1],
@@ -517,7 +517,7 @@ end
 ---
 if wesnoth.wml_actions.remove_event == nil then
     function wesnoth.wml_actions.remove_event(cfg)
-        local id = cfg.id or helper.wml_error("[remove_event] missing required id= key")
+        local id = cfg.id or wml.error("[remove_event] missing required id= key")
 
         for w in split(id) do
             wesnoth.wml_actions.event { id = w, remove = true }

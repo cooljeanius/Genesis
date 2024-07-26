@@ -6,7 +6,7 @@
 -- TODO: use utils.split() on 1.13.x instead
 ---
 function split(s)
-	return tostring(s):gmatch("[^%s,][^,]*")
+    return tostring(s):gmatch("[^%s,][^,]*")
 end
 
 ---
@@ -19,7 +19,7 @@ end
 -- Do NOT use this for gamestate-altering actions. You've been warned.
 ---
 function unsynced_random(a, b)
-	return math.random(a, b)
+    return math.random(a, b)
 end
 
 ---
@@ -40,10 +40,10 @@ local loglvl_map = { "error", "warning", "info", "debug" }
 -- msg: Line contents.
 ---
 function wput(lvl, msg)
-	wesnoth.wml_actions.wml_message({
-		logger = loglvl_map[math.max(1, math.min(lvl, #loglvl_map))],
-		message = "[IftU] " .. msg
-	})
+    wesnoth.wml_actions.wml_message({
+        logger = loglvl_map[math.max(1, math.min(lvl, #loglvl_map))],
+        message = "[IftU] " .. msg
+    })
 end
 
 ---
@@ -54,7 +54,7 @@ end
 -- ...: Parameters for line formatting.
 ---
 function wprintf(lvl, fmt, ...)
-	wput(lvl, string.format(fmt, ...))
+    wput(lvl, string.format(fmt, ...))
 end
 
 ---
@@ -65,36 +65,33 @@ end
 -- needed so that wmlxgettext can catch and add the new strings.
 ---
 function wgettext(str, domain)
-	if domain == nil then
-		domain = "wesnoth"
-	end
+    if domain == nil then
+        domain = "wesnoth"
+    end
 
-	return wesnoth.textdomain(domain)(str)
+    return wesnoth.textdomain(domain)(str)
 end
 
 ---
 -- Shuffles a table.
---
--- This is helper.shuffle from 1.13.1+dev, backported to 1.12.x sans the RNG
--- function parameter.
 ---
 function safe_shuffle(t)
-	local function random_func(a, b)
-		return helper.rand(("%d..%d"):format(a, b))
-	end
-	-- since tables are passed by reference, this is an in-place shuffle
-	-- it uses the Fisher-Yates algorithm, also known as Knuth shuffle
-	assert( type( t ) == "table", string.format( "helper.shuffle expects a table as parameter, got %s instead", type( t ) ) )
-	local length = #t
-	for index = length, 2, -1 do
-		local random = random_func( 1, index )
-		t[index], t[random] = t[random], t[index]
-	end
+    local function random_func(a, b)
+        return mathx.random(("%d..%d"):format(a, b))
+    end
+    -- since tables are passed by reference, this is an in-place shuffle
+    -- it uses the Fisher-Yates algorithm, also known as Knuth shuffle
+    assert( type( t ) == "table", string.format( "shuffle expects a table as parameter, got %s instead", type( t ) ) )
+    local length = #t
+    for index = length, 2, -1 do
+        local random = random_func( 1, index )
+        t[index], t[random] = t[random], t[index]
+    end
 end
 
 ---
 -- Returns a value restricted to a range [minval, maxval].
 ---
 function in_range(value, minval, maxval)
-	return math.max(minval, math.min(value, maxval))
+    return math.max(minval, math.min(value, maxval))
 end
